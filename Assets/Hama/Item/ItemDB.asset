@@ -1,0 +1,303 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1ff5a19bf788be479d366e467d6d686, type: 3}
+  m_Name: ItemDB
+  m_EditorClassIdentifier: 
+  datas:
+  - ID: 1
+    Name: "\uFF21\u7D75\u753B"
+    Explanation: "\u4E0D\u601D\u8B70\u306A\u7D75\u753B\u3060\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 1
+  - ID: 2
+    Name: "A\u7D75\u753B(\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8\u7167\u5C04\u5F8C)"
+    Explanation: "\u306A\u3093\u304B\u6D6E\u304B\u3073\u4E0A\u304C\u3063\u3066\u304D\u305F\u2026\uFF01"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 3
+    Name: "\u8896\u673A(\u4E2D\u306B\u7D75\u5177)"
+    Explanation: "\u958B\u304D\u305D\u3046\u3067\u958B\u304B\u306A\u3044\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 4
+    Name: "\u8896\u673A(\u7A7A\u3044\u305F\u72B6\u614B)"
+    Explanation: "\u4E2D\u306B\u4F55\u304B\u5165\u3063\u3066\u308B\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 5
+    Name: "\u30D1\u30BA\u30EB"
+    Explanation: "\u3053\u308C\u306F\u306A\u3093\u3060\u308D\u3046\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 6
+    Name: "\u30D1\u30BA\u30EB(\u89E3\u7B54\u5F8C)"
+    Explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 7
+    Name: "\uFF21\u51FA\u53E3\u30C9\u30A2"
+    Explanation: "\u958B\u304B\u306A\u3044\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 8
+    Name: "\uFF21\u51FA\u53E3\u30C9\u30A2(\u9375\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u5916\u306B\u51FA\u3089\u308C\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 9
+    Name: "\uFF21\u9375\u5DEE\u8FBC\u53E3"
+    Explanation: "\u9375\u7A74\u304C\u3042\u308B"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 10
+    Name: "\uFF21\u9375\u5DEE\u8FBC\u53E3(\u9375\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 11
+    Name: "\u30A2\u30C3\u30D7\u30E9\u30A4\u30C8\u30D4\u30A2\u30CE"
+    Explanation: "\u5F3E\u3044\u3066\u307F\u3088\u3046\u304B\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 12
+    Name: "\u30B7\u30EA\u30F3\u30C0\u30FC"
+    Explanation: "\u4F55\u304B\u306B\u4F7F\u3048\u308B\u304B\u306A\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 1
+  - ID: 13
+    Name: "\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8"
+    Explanation: "\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 1
+  - ID: 14
+    Name: "\u53F0\u5EA7\u30DC\u30BF\u30F3"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 15
+    Name: "\u53F0\u5EA7"
+    Explanation: "\u3053\u308C\u306F\u4F55\u3060\u308D\u3046\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 16
+    Name: "\u53F0\u5EA7(\u7269\u4E57\u3063\u3051\u3066\u308B)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 17
+    Name: "\u6C34\u69FD(\u6C34\u6709\u308A)"
+    Explanation: "\u6C34\u304C\u6E9C\u307E\u3063\u3066\u3044\u3066\u4E2D\u304C\u826F\u304F\u898B\u3048\u306A\u3044"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 18
+    Name: "\u6C34\u69FD(\u6C34\u7121\u3057)"
+    Explanation: "\u6C34\u304C\u629C\u3051\u305F\u3088\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 19
+    Name: "\u6C34\u69FD(\u30B7\u30EA\u30F3\u30C0\u30FC\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 20
+    Name: "\u6C34\u69FD\u306E\u7A74"
+    Explanation: "\u3053\u308C\u306F\u4F55\u3060\u308D\u3046\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 21
+    Name: "\u6C34\u69FD\u306E\u7A74(\u30B7\u30EA\u30F3\u30C0\u30FC\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u30B7\u30EA\u30F3\u30C0\u30FC\u304C\u523A\u3055\u3063\u3066\u3044\u308B"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 22
+    Name: "\u30B4\u30FC\u30EB\u9375\uFF21"
+    Explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 0
+  - ID: 23
+    Name: "\uFF22\u7D75\u753B"
+    Explanation: "\u7537\u5973\u306E\u7D75\u753B\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 24
+    Name: "\u8B0E\uFF11\u30D2\u30F3\u30C8"
+    Explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 25
+    Name: "\uFF22\u51FA\u53E3\u30C9\u30A2"
+    Explanation: "\u958B\u304B\u306A\u3044\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 26
+    Name: "\uFF22\u51FA\u53E3\u30C9\u30A2(\u9375\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u5916\u306B\u51FA\u3089\u308C\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 27
+    Name: "\uFF22\u9375\u5DEE\u8FBC\u53E3"
+    Explanation: "\u9375\u7A74\u304C\u3042\u308B"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 28
+    Name: "\uFF22\u9375\u5DEE\u8FBC\u53E3(\u9375\u5DEE\u8FBC\u5F8C)"
+    Explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 29
+    Name: "\u82B1\u74F6"
+    Explanation: "\u82B1\u304C\u751F\u3051\u3066\u3042\u308B"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 30
+    Name: "\u82B1\u74F6(\u67D3\u8272\u5F8C)"
+    Explanation: "\u5225\u306E\u8272\u306B\u67D3\u307E\u3063\u305F\u3088\u3046\u3060\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 31
+    Name: "\u30B4\u30FC\u30EB\u9375\uFF22"
+    Explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 0
+  - ID: 32
+    Name: "\u9752\u30E9\u30F3\u30D7(\u6D88\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 33
+    Name: "\u9752\u30E9\u30F3\u30D7(\u70B9\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 34
+    Name: "\u6C34\u629C\u304D\u30B9\u30A4\u30C3\u30C1"
+    Explanation: "\u4F55\u306E\u30B9\u30A4\u30C3\u30C1\u3060\u308D\u3046\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 35
+    Name: "\u6D44\u6C34\u5668"
+    Explanation: "\u6C34\u3092\u7DBA\u9E97\u306B\u3059\u308B\u88C5\u7F6E\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 36
+    Name: "\u6D44\u6C34\u5668(\u7D75\u5177\u6D41\u3057\u8FBC\u307F\u5F8C)"
+    Explanation: "\u4E2D\u306E\u6C34\u304C\u7D75\u306E\u5177\u3067\u67D3\u8272\u3055\u308C\u3066\u308B"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 37
+    Name: "\u30E9\u30F3\u30D7\u30D2\u30F3\u30C8(\u7D19)"
+    Explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
+    Image: {fileID: 0}
+    OwnerFlag: 1
+    InteractFlag: 0
+  - ID: 38
+    Name: "\u9EC4\u30E9\u30F3\u30D7(\u6D88\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 39
+    Name: "\u9EC4\u30E9\u30F3\u30D7(\u70B9\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 40
+    Name: "\u8B0E\uFF11\u6B63\u89E3\u30A2\u30A4\u30C6\u30E0"
+    Explanation: "\u4F5C\u308A\u7269\u306E\u308A\u3093\u3054\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 41
+    Name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u306A\u3057)"
+    Explanation: "\u30AA\u30EB\u30B4\u30FC\u30EB\u304C\u3042\u308B\u3000\u97F3\u306F\u9CF4\u3089\u306A\u3044\u307F\u305F\u3044\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 1
+  - ID: 42
+    Name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u3042\u308A)"
+    Explanation: "\u7DBA\u9E97\u306A\u97F3\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 43
+    Name: "\u8D64\u30E9\u30F3\u30D7(\u6D88\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 44
+    Name: "\u8D64\u30E9\u30F3\u30D7(\u70B9\u706F)"
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 45
+    Name: "\u9375\uFF11"
+    Explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 46
+    Name: "\u9375\uFF12"
+    Explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 47
+    Name: 
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
+  - ID: 48
+    Name: 
+    Explanation: 
+    Image: {fileID: 0}
+    OwnerFlag: 0
+    InteractFlag: 0
