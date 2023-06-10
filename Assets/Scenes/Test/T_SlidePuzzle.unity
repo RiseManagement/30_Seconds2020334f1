@@ -1138,7 +1138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x_MoveCount: 1
-  z_MoveCount: 1
+  y_MoveCount: 1
   thisObjPosition: {x: 0, y: 0}
   saveThisObjPosition: {x: 0, y: 0}
 --- !u!61 &1592134794
@@ -1412,7 +1412,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2141380631}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: SildePuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

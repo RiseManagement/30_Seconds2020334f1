@@ -7,7 +7,7 @@ public class SlidePuzzle : MonoBehaviour
     //判定
     bool isCol;
     public int x_MoveCount = 1;
-    public int z_MoveCount = 1;
+    public int y_MoveCount = 1;
     public Vector2 thisObjPosition;
     public Vector2 saveThisObjPosition;
 
@@ -45,22 +45,22 @@ public class SlidePuzzle : MonoBehaviour
             x_MoveCount += 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && z_MoveCount < 1)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && y_MoveCount < 1)
         {
             isCol = true;
             saveThisObjPosition = this.gameObject.transform.position;
             thisObjPosition.y += 1.05f;
             this.gameObject.transform.position = thisObjPosition;
-            z_MoveCount += 1;
+            y_MoveCount += 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.DownArrow) && z_MoveCount > -1)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && y_MoveCount > -1)
         {
             isCol = true;
             saveThisObjPosition = this.gameObject.transform.position;
             thisObjPosition.y -= 1.05f;
             this.gameObject.transform.position = thisObjPosition;
-            z_MoveCount -= 1;
+            y_MoveCount -= 1;
         }
     }
 
