@@ -200,9 +200,8 @@ GameObject:
   - component: {fileID: 1094092602}
   - component: {fileID: 1094092604}
   - component: {fileID: 1094092603}
-  - component: {fileID: 1094092605}
   m_Layer: 5
-  m_Name: PlayerNameB
+  m_Name: PlayerName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -260,7 +259,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PlayerNameB
+  m_Text: 
 --- !u!222 &1094092604
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -269,18 +268,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094092601}
   m_CullTransparentMesh: 1
---- !u!114 &1094092605
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1094092601}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7327a76aa31aadf45aade3d6b2cd6817, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1658868738
 GameObject:
   m_ObjectHideFlags: 0
