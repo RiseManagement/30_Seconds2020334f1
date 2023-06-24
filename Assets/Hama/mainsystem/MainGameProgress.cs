@@ -1,0 +1,125 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MainGameProgress : MonoBehaviour
+{
+    public static GameStaus gameStaus = GameStaus.GameStrat;
+
+    public enum GameStaus
+    {
+        GameStrat,  //ゲーム開始
+        Wait,       //待機
+        PlayerTurn, //プレイヤーターン
+        Interval,   //インターバル
+        GameClear,  //ゲームクリア
+        GameOver,   //ゲームオーバー
+    }
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        switch (gameStaus)
+        {
+            case GameStaus.GameStrat:
+                GameStartProgress();
+                break;
+
+            case GameStaus.Wait:
+                WaitProgress();
+                break;
+
+            case GameStaus.PlayerTurn:
+                PlayerTurnProgress();
+                break;
+
+            case GameStaus.Interval:
+                IntervalProgress();
+                break;
+
+            case GameStaus.GameClear:
+                GameClearProgress();
+                break;
+
+            case GameStaus.GameOver:
+                GameOverProgress();
+                break;
+
+        }
+    }
+
+    void GameStartProgress()
+    {
+        Debug.Log("【進行】ゲームスタート");
+
+        //変更予定
+        if (Input.GetMouseButtonDown(1))
+        {
+            gameStaus = GameStaus.Wait;
+        }
+    }
+
+    void WaitProgress()
+    {
+        Timer.CountReset();
+        Debug.Log("【進行】待ち");
+
+        //変更予定
+        if (Input.GetMouseButtonDown(1))
+        {
+            gameStaus = GameStaus.PlayerTurn;
+        }
+    }
+
+    void PlayerTurnProgress()
+    {
+        Debug.Log("【進行】プレイヤーのターン");
+        Timer.CountDown();
+
+        //変更予定
+        if (Input.GetMouseButtonDown(1))
+        {
+            gameStaus = GameStaus.GameClear;
+        }
+        if (Input.GetMouseButtonDown(2))
+        {
+            gameStaus = GameStaus.GameOver;
+        }
+    }
+
+    void IntervalProgress()
+    {
+        Debug.Log("【進行】インターバル");
+
+        //プレイヤー変更
+        gameStaus = GameStaus.Wait;
+    }
+
+    void GameClearProgress()
+    {
+        Debug.Log("【進行】ゲームクリア");
+
+        //変更予定
+        if (Input.GetMouseButtonDown(0))
+        {
+            gameStaus = GameStaus.GameStrat;
+        }
+    }
+
+    void GameOverProgress()
+    {
+        Debug.Log("【進行】ゲームオーバ");
+
+        //変更予定
+        if (Input.GetMouseButtonDown(0))
+        {
+            gameStaus = GameStaus.GameStrat;
+        }
+    }
+}
