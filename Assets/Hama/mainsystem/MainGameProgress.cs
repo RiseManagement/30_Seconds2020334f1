@@ -86,6 +86,7 @@ public class MainGameProgress : MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             gameStaus = GameStaus.GameClear;
+            SceneManager.SceneLaod(SceneManager.SceneName.CLEAR);
         }
         if (Input.GetMouseButtonDown(2))
         {
@@ -96,6 +97,8 @@ public class MainGameProgress : MonoBehaviour
     void IntervalProgress()
     {
         Debug.Log("【進行】インターバル");
+
+        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
 
         //プレイヤー変更
         gameStaus = GameStaus.Wait;
@@ -109,6 +112,7 @@ public class MainGameProgress : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             gameStaus = GameStaus.GameStrat;
+            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_A);
         }
     }
 

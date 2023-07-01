@@ -22,7 +22,7 @@ public class SceneManager : MonoBehaviour
         MAINGAME_A,
         MAINGAME_B,
     }
-
+    
     void Awake()
     {
         if (instance == null)
@@ -40,7 +40,7 @@ public class SceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        oldscenename = scenename;     
+        oldscenename = scenename;
     }
 
     // Update is called once per frame

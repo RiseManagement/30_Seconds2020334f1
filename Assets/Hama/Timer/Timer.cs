@@ -32,6 +32,7 @@ public class Timer : MonoBehaviour
         if(count < 0)
         {
             MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
+            SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
         }
     }
 
