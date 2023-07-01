@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class ScreenManager : MonoBehaviour
+public class SceneManager : MonoBehaviour
 {
     static SceneName scene;
     public enum SceneName
@@ -19,7 +18,6 @@ public class ScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        DontDestroyOnLoad(this);       
     }
 
     // Update is called once per frame
@@ -36,9 +34,10 @@ public class ScreenManager : MonoBehaviour
     {
         string sceneName = scene.ToString().ToLower();
 
-        if (!SceneManager.GetSceneByName(sceneName).IsValid())
+        if (!UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())
         {
-            SceneManager.LoadScene(sceneName);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
         }
     }
 }
+
