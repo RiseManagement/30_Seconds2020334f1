@@ -5,20 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class User : MonoBehaviour
 {
-    string name;
-    string Scenename;
+    protected string username;
+    public string User_name() { return username; }
     // Start is called before the first frame update
     void Start()
     {
-        Scenename=SceneManager.GetActiveScene().name;
-        if(Scenename=="maingame_A")
-        {
-            Debug.Log("name=PlayerA");
-        }
-        else if(Scenename=="maingame_B")
-        {
-            Debug.Log("name=PlayerB");
-        }
+        
     }
 
     // Update is called once per frame
