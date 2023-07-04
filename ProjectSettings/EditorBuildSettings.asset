@@ -21,10 +21,10 @@ EditorBuildSettings:
     path: Assets/Scenes/interval.unity
     guid: f664eb8342cff62459b37e8ae907a742
   - enabled: 1
-    path: Assets/Scenes/maingame_A.unity
+    path: Assets/Scenes/maingame_a.unity
     guid: 15c41cbaffef93847a377a592d7f1353
   - enabled: 1
-    path: Assets/Scenes/maingame_B.unity
+    path: Assets/Scenes/maingame_b.unity
     guid: 6ea2a9909d21540429f354a4548eed33
   - enabled: 1
     path: Assets/Scenes/story.unity

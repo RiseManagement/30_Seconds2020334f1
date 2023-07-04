@@ -16,7 +16,7 @@ public class Timer : MonoBehaviour
     static float count;
 
     //カウント最大値
-    [SerializeField] static float countmax = 30.0f;
+    [SerializeField] static float countmax = 5.0f;
 
     // Start is called before the first frame update
     void Start()

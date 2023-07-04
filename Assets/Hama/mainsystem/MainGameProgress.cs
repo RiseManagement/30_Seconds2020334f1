@@ -5,6 +5,7 @@ using UnityEngine;
 public class MainGameProgress : MonoBehaviour
 {
     public static GameStaus gameStaus = GameStaus.GameStrat;
+    static public MainGameProgress instance;
 
     public enum GameStaus
     {
@@ -14,6 +15,20 @@ public class MainGameProgress : MonoBehaviour
         Interval,   //インターバル
         GameClear,  //ゲームクリア
         GameOver,   //ゲームオーバー
+    }
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Start is called before the first frame update
@@ -97,11 +112,6 @@ public class MainGameProgress : MonoBehaviour
     void IntervalProgress()
     {
         Debug.Log("【進行】インターバル");
-
-        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
-
-        //プレイヤー変更
-        gameStaus = GameStaus.Wait;
     }
 
     void GameClearProgress()

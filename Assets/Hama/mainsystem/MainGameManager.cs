@@ -5,7 +5,7 @@ using UnityEngine;
 public class MainGameManager : MonoBehaviour
 {
     //現在ターン数
-    int nowTurn = 1;
+    static int nowTurn = 1;
 
     //最大ターン数
     int maxTurn = 16;
