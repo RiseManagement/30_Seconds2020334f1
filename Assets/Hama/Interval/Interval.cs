@@ -14,7 +14,6 @@ public class Interval : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(MainGameProgress.gameStaus);
     }
 
     public void MainGameSceneChange()

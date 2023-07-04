@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class User : MonoBehaviour
 {
     protected string username;
-    public string User_name() { return username; }
+    public string User_name{ get { return username; } }
     // Start is called before the first frame update
     void Start()
     {
