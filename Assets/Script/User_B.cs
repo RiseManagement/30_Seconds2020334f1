@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class User_B : User
 {
+    private void Awake()
+    {
+        username = "Player_B";
+    }
     // Start is called before the first frame update
     void Start()
     {
-        username = "Player_B";
     }
 
     // Update is called once per frame

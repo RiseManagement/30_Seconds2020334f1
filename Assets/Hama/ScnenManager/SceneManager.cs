@@ -23,6 +23,7 @@ public class SceneManager : MonoBehaviour
         MAINGAME_B,
     }
     
+
     void Awake()
     {
         if (instance == null)
@@ -47,7 +48,8 @@ public class SceneManager : MonoBehaviour
     void Update()
     {
         scenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
+        Debug.Log("現在のシーン:" +  scenename);
+        Debug.Log("過去のシーン:" + oldscenename);
     }
 
     /// <summary>
