@@ -7,9 +7,20 @@ using UnityEngine.UI;
 /// <summary>
 /// アイテムデータベース
 /// </summary>
-public class Item : ScriptableObject
+public class ItemDataBase : ScriptableObject
 {
     public ItemData[] datas;
+
+    //Load処理
+
+
+    public static void Get(ItemDataBase item)
+    {
+        EditorUtility.SetDirty(item);
+
+        //保存する
+        AssetDatabase.SaveAssets();
+    }
 }
 
 /// <summary>
@@ -44,10 +55,10 @@ public class ItemInportDataSet : AssetPostprocessor
                 TextAsset textasset = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
                 //　同名のScriptableObjectファイルを読み込む。ない場合は新たに作る。
                 string assetfile = str.Replace(".csv", ".asset");
-                Item cd = AssetDatabase.LoadAssetAtPath<Item>(assetfile);
+                ItemDataBase cd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(assetfile);
                 if (cd == null)
                 {
-                    cd = new Item();
+                    cd = new ItemDataBase();
                     AssetDatabase.CreateAsset(cd, assetfile);
                 }
 
