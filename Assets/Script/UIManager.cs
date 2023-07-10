@@ -11,11 +11,11 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         string name;
-        name = user.User_name();
-        Debug.Log(name);
+        name = user.User_name;
+        //Debug.Log(name);
         this.Playername = GameObject.Find("PlayerName");
         this.Playername.GetComponent<Text>().text = (name);
-        Debug.Log("成功");
+        //Debug.Log("成功");
     }
 
     // Update is called once per frame
