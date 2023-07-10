@@ -9,17 +9,75 @@ using UnityEngine.UI;
 /// </summary>
 public class ItemDataBase : ScriptableObject
 {
-    public ItemData[] datas;
+    [SerializeField] ItemData[] datas;
 
-    //Load処理
+    //MyScriptableObjectが保存してある場所のパス
+    public const string PATH = "ItemDB";
 
-
-    public static void Get(ItemDataBase item)
+    //MyScriptableObjectの実体
+    private static ItemDataBase _entity;
+    public static ItemDataBase Entity
     {
-        EditorUtility.SetDirty(item);
+        get
+        {
+            //初アクセス時にロードする
+            if (_entity == null)
+            {
+                _entity = Resources.Load<ItemDataBase>(PATH);
 
-        //保存する
-        AssetDatabase.SaveAssets();
+                //ロード出来なかった場合はエラーログを表示
+                if (_entity == null)
+                {
+                    Debug.LogError(PATH + " not found");
+                }
+            }
+            return _entity;
+        }
+    }
+
+    /// <summary>
+    /// CSVファイルインポート後アイテムデータ設定
+    /// </summary>
+#if UNITY_EDITOR
+    public class ItemInportDataSet : AssetPostprocessor
+    {
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+        {
+            foreach (string str in importedAssets)
+            {
+                //　IndexOfの引数は"/(読み込ませたいファイル名)"とする。
+                if (str.IndexOf("/ItemDB.csv") != -1)
+                {
+                    Debug.Log("CSVファイルがあった!!!");
+                    //　Asset直下から読み込む（Resourcesではないので注意）
+                    TextAsset textasset = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
+                    //　同名のScriptableObjectファイルを読み込む。ない場合は新たに作る。
+                    string assetfile = str.Replace(".csv", ".asset");
+                    ItemDataBase cd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(assetfile);
+                    if (cd == null)
+                    {
+                        cd = new ItemDataBase();
+                        AssetDatabase.CreateAsset(cd, assetfile);
+                    }
+
+                    cd.datas = CSVSerializer.Deserialize<ItemData>(textasset.text);
+                    EditorUtility.SetDirty(cd);
+                    AssetDatabase.SaveAssets();
+                }
+            }
+        }
+    }
+#endif
+
+    /// <summary>
+    /// 保存されているデータ
+    /// </summary>
+    /// <param name="id">id</param>
+    /// <returns>idのデータ</returns>
+    public ItemData GetData(int id)
+    {
+        id -= 1;
+        return datas[id];
     }
 }
 
@@ -29,44 +87,45 @@ public class ItemDataBase : ScriptableObject
 [System.Serializable]
 public class ItemData
 {
-    public int ID;
-    public string Name;
-    public string Explanation;
-    public Image Image;
-    public int OwnerFlag;
-    public int InteractFlag;
-}
-
-/// <summary>
-/// CSVファイルインポート後アイテムデータ設定
-/// </summary>
-#if UNITY_EDITOR
-public class ItemInportDataSet : AssetPostprocessor
-{
-    static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+    [SerializeField] int id;
+    public int Id
     {
-        foreach (string str in importedAssets)
-        {
-            //　IndexOfの引数は"/(読み込ませたいファイル名)"とする。
-            if (str.IndexOf("/ItemDB.csv") != -1)
-            {
-                Debug.Log("CSVファイルがあった!!!");
-                //　Asset直下から読み込む（Resourcesではないので注意）
-                TextAsset textasset = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
-                //　同名のScriptableObjectファイルを読み込む。ない場合は新たに作る。
-                string assetfile = str.Replace(".csv", ".asset");
-                ItemDataBase cd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(assetfile);
-                if (cd == null)
+        get{ return id; }
+    }
+    [SerializeField] string name;
+    public string Name
+    {
+        get { return name; }
+    }
+    [SerializeField] string explanation;
+    public string Explanation
+    {
+        get { return explanation; }
+    }
+    [SerializeField] Image image;
+    public Image Image
+    {
+        get { return image; }
+    }
+    [SerializeField] int ownerFlag;
+    public int OwnerFlag
+    {
+        get { return ownerFlag; }
+        set { if(value <= 2 && value <= 0)
                 {
-                    cd = new ItemDataBase();
-                    AssetDatabase.CreateAsset(cd, assetfile);
+                    ownerFlag = value;
+                } 
+        }
+    }
+    [SerializeField] int interactFlag;
+    public int InteractFlag
+    {
+        get { return interactFlag; }
+        set { if (value == 0 || value == 1)
+                {
+                    interactFlag = value;
                 }
-
-                cd.datas = CSVSerializer.Deserialize<ItemData>(textasset.text);
-                EditorUtility.SetDirty(cd);
-                AssetDatabase.SaveAssets();
-            }
         }
     }
 }
-#endif
+
