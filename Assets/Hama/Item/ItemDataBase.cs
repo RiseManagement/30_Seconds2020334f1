@@ -43,6 +43,7 @@ public class ItemDataBase : ScriptableObject
     {
         static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
+            string assetfile = "";
             foreach (string str in importedAssets)
             {
                 //　IndexOfの引数は"/(読み込ませたいファイル名)"とする。
@@ -52,7 +53,8 @@ public class ItemDataBase : ScriptableObject
                     //　Asset直下から読み込む（Resourcesではないので注意）
                     TextAsset textasset = AssetDatabase.LoadAssetAtPath<TextAsset>(str);
                     //　同名のScriptableObjectファイルを読み込む。ない場合は新たに作る。
-                    string assetfile = str.Replace(".csv", ".asset");
+                    assetfile = str.Replace(".csv", ".asset");
+                    Debug.Log(assetfile);
                     ItemDataBase cd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(assetfile);
                     if (cd == null)
                     {
@@ -64,6 +66,25 @@ public class ItemDataBase : ScriptableObject
                     EditorUtility.SetDirty(cd);
                     AssetDatabase.SaveAssets();
                 }
+            }
+
+            //ファイル存在確認
+            var result = System.IO.File.Exists("Assets/Hama/Resources/ItemDB.asset");
+            if (!result)
+            {
+                result = AssetDatabase.CopyAsset("Assets/Hama/Item/ItemDB.asset", "Assets/Hama/Resources/ItemDB.asset");
+                if (result)
+                {
+                    //コピー成功
+                    Debug.Log("コピー成功");
+
+                }
+                else
+                {
+                    //コピー失敗
+                    Debug.Log("コピー失敗");
+                }
+                AssetDatabase.SaveAssets();
             }
         }
     }
@@ -111,7 +132,7 @@ public class ItemData
     public int OwnerFlag
     {
         get { return ownerFlag; }
-        set { if(value <= 2 && value <= 0)
+        set { if(value <= 2 && value >= 0)
                 {
                     ownerFlag = value;
                 } 
