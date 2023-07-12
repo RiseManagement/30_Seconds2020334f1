@@ -46,6 +46,8 @@ public class CSVSerializer
                     id2 += ((char)(id[j] - 'A' + 'a')).ToString();
             }
 
+            table.Remove(id2);
+
             table.Add(id, i);
             if (!table.ContainsKey(id2))
                 table.Add(id2, i);
