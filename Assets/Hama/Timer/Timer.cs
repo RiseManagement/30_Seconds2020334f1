@@ -13,10 +13,10 @@ public class Timer : MonoBehaviour
     public Text UIText;
 
     //現在のカウント
-    float count;
+    static float count;
 
     //カウント最大値
-    [SerializeField] float countmax = 30.0f;
+    [SerializeField] static float countmax = 30.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,19 +28,24 @@ public class Timer : MonoBehaviour
     void Update()
     {
         UIText.text = count.ToString("f0");
-        CountDown();
 
         if(count < 0)
         {
-            Debug.Log("インターバル画面に遷移");
+            MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
+            SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
         }
     }
 
     //カウントダウン
-    void CountDown()
+    public static void CountDown()
     {
         count -= Time.deltaTime;
 
-        Debug.Log(count);
+        //Debug.Log(count);
+    }
+
+    public static void CountReset()
+    {
+        count = countmax;
     }
 }
