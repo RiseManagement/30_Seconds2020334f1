@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6de85d7b7449f044aa5a5606afa5050a, type: 3}
   m_Name: Cube 1
   m_EditorClassIdentifier: 
-  name: "\u30DC\u30FC\u30EB"
-  icon: {fileID: 21300000, guid: a3ced8f7044b9de4787602a9e9b20ea7, type: 3}
+  id: 2

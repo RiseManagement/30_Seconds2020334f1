@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Slot1 : MonoBehaviour
+public class Slot : MonoBehaviour
 {
     
     public Image icon;
     TItem item;
+    [SerializeField] string explanation;
 
     public void AddItem(TItem newItem)
     {
-
-        item = newItem;
-        icon.sprite = newItem.icon;
-        
+        var itemdata = ItemDataBase.Entity.GetData(newItem.id);
+        icon.sprite = itemdata.Image;
+        explanation = itemdata.Explanation;
     }
 
     public void ClearSlot()

@@ -19,6 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
         Debug.Log(a.OwnerFlag);
         a.OwnerFlag = 2;
         Debug.Log(a.OwnerFlag);
+        Debug.Log(a.Image);
     }
 
     // Update is called once per frame

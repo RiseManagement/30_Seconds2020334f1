@@ -10,11 +10,9 @@ public class DeopItem : MonoBehaviour
 
     public void Pickup()
     {
-        Debug.Log("OK");
+        //Debug.Log("OK");
         Inventry.instance.Add(item);
         Destroy(gameObject);
-
-
     }
 
 

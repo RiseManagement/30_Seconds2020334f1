@@ -123,8 +123,8 @@ public class ItemData
     {
         get { return explanation; }
     }
-    [SerializeField] Image image;
-    public Image Image
+    [SerializeField] Sprite image;
+    public Sprite Image
     {
         get { return image; }
     }

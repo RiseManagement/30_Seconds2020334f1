@@ -16,7 +16,7 @@ MonoBehaviour:
   - id: 1
     name: "\uFF21\u7D75\u753B"
     explanation: "\u4E0D\u601D\u8B70\u306A\u7D75\u753B\u3060\u2026"
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
     ownerFlag: 0
     interactFlag: 0
   - id: 2

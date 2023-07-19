@@ -1,5 +1,5 @@
 ﻿ID,Name,Explanation,Image,OwnerFlag,InteractFlag,,,
-1,Ａ絵画,不思議な絵画だ…,,0,0,,,
+1,Ａ絵画,不思議な絵画だ…,Assets\Scripts\tacagi\scripts\Item\1024px-Multiplication_Sign.svg.png,0,0,,,
 2,A絵画(ブラックライト照射後),なんか浮かび上がってきた…！,,0,0,,,
 3,袖机(中に絵具),開きそうで開かない…,,0,0,,OwnerFlag,
 4,袖机(空いた状態),中に何か入ってる…,,0,0,,0,所有者なし
