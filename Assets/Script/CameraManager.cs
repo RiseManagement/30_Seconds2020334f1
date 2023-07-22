@@ -21,12 +21,12 @@ public class CameraManager : MonoBehaviour
         x = transform.position.x;
         if (x<1)
         {
-            transform.Translate(30, 0, 0, Space.World);
+            transform.Translate(60, 0, 0, Space.World);
             Debug.Log("LButton_if");
         }
         else
         {
-            transform.Translate(-10, 0, 0, Space.World);
+            transform.Translate(-20, 0, 0, Space.World);
             Debug.Log("LButton_else");
         }
         //transform.Rotate(0, 90, 0, Space.World);
@@ -34,13 +34,13 @@ public class CameraManager : MonoBehaviour
     public void RButton()   //RButtonを押したときの動作
     {
         x = transform.position.x;
-        if(x>29)
+        if(x>59)
         {
-            transform.Translate(-30, 0, 0, Space.World);
+            transform.Translate(-60, 0, 0, Space.World);
         }
         else
         {
-            transform.Translate(10, 0, 0, Space.World);
+            transform.Translate(20, 0, 0, Space.World);
         }
         
         Debug.Log("RButton");
