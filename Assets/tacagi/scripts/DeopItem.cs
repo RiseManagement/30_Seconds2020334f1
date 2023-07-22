@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeopItem : MonoBehaviour
+public class DeopItem : MonoBehaviour, IPointerClickHandler
 {
     public TItem item;
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log($"オブジェクト {name} がクリックされたよ！");
+        Inventry.instance.Add(item);
+        Destroy(gameObject);
+    }
 
     public void Pickup()
     {
         //Debug.Log("OK");
-        Inventry.instance.Add(item);
-        Destroy(gameObject);
     }
 
 
