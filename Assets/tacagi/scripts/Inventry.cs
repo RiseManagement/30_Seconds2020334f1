@@ -25,9 +25,9 @@ public class Inventry : MonoBehaviour
 
     }
 
-    public List<TItem> items = new List<TItem>();
+    public List<ItemID> items = new List<ItemID>();
 
-    public void Add(TItem item)
+    public void Add(ItemID item)
     {
 
         items.Add(item);
@@ -35,7 +35,7 @@ public class Inventry : MonoBehaviour
 
     }
 
-    public void Removed(TItem item)
+    public void Removed(ItemID item)
     {
         items.Remove(item);
     }

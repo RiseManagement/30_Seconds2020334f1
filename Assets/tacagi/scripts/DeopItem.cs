@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class DeopItem : MonoBehaviour, IPointerClickHandler
 {
-    public TItem item;
+    public ItemID item;
 
     public void OnPointerClick(PointerEventData eventData)
     {

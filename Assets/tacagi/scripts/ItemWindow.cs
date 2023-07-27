@@ -6,14 +6,9 @@ public class ItemWindow : MonoBehaviour
 {
     public GameObject game;
 
-
-
-    public void OnClick()
+    public void ItemWindowOpen()
     {
-
         game.SetActive(true);
-
-
     }
 
 }

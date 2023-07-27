@@ -6,12 +6,12 @@ public class InventryUI : MonoBehaviour
 {
 
     public Transform slotsParent;
-    Slot[] slots;
+   public ItemWinowSlot[] slots;
 
     private void Start()
     {
        
-        slots = slotsParent.GetComponentsInChildren<Slot>();
+        slots = slotsParent.GetComponentsInChildren<ItemWinowSlot>();
     }
 
     public void UpdateUI()
