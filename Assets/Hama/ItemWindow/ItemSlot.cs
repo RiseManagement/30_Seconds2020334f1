@@ -27,8 +27,6 @@ public class ItemSlot : MonoBehaviour
 
     public void SelectItem(ItemID selectitem)
     {
-        if (!selectitem) return;
-
         var itemdata = ItemDataBase.Entity.GetData(selectitem.id);
         item = selectitem;  
         icon= itemdata.Image;

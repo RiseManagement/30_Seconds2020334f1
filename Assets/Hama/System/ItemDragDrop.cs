@@ -41,17 +41,16 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public void OnEndDrag(PointerEventData eventData)
     {
 
-        bool flg = true;
+        bool flg = false;
 
         var raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raycastResults);
 
         foreach (var hit in raycastResults)
         {
-            if (hit.gameObject.CompareTag("slot"))
+            if (hit.gameObject.CompareTag("Slot"))
             {
-                transform.position = hit.gameObject.transform.position;
-                flg = false;
+                flg = true;
             }
         }
 
@@ -59,7 +58,7 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         {
             itemSlotcs.SelectItem(ItemWinowSlot.item);
             transform.position = prevPosition;
-            Debug.Log("ドラックアンドドロップ");
+            //Debug.Log("ドラックアンドドロップ");
         }
         else
         {
