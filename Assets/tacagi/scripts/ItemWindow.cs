@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ItemWindow : MonoBehaviour
+public class ItemWindow : MonoBehaviour, IPointerClickHandler
 {
     public GameObject game;
 
-    public void ItemWindowOpen()
+    void ItemWindowOpen()
     {
         game.SetActive(true);
     }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ItemWindowOpen();
+    }
 }
