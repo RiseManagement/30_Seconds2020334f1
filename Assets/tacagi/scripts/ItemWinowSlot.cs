@@ -21,11 +21,11 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
             return select;
         }
     }
-    ItemSlot itemSlotcs;
+    
 
     private void Start()
     {
-        itemSlotcs = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
+
     }
 
     public void AddItem(ItemID newItem)
@@ -35,6 +35,7 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
         icon = itemdata.Image;
         explanation = itemdata.Explanation;
 
+        transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
     }
 
@@ -42,12 +43,14 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
     {
         item = null;
         icon = null;
+
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
         select = true;
-        itemSlotcs.SelectItem(item);
     }
 
 }
+
