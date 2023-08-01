@@ -8,11 +8,13 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
 
     private Vector2 prevPosition; //保存しておく初期position
     ItemSlot itemSlotcs;
+    PassSlot passSlotcs;
     ItemWinowSlot ItemWinowSlot;
 
     private void Awake()
     {
         itemSlotcs = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
+        passSlotcs = GameObject.Find("PassSlot").GetComponent<PassSlot>();
         ItemWinowSlot = gameObject.transform.parent.GetComponent<ItemWinowSlot>();
     }
 
@@ -40,29 +42,25 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-
-        bool flg = false;
-
         var raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, raycastResults);
 
         foreach (var hit in raycastResults)
         {
-            if (hit.gameObject.CompareTag("Slot"))
+            if (hit.gameObject.CompareTag("ItemSlot"))
             {
-                flg = true;
+                itemSlotcs.SelectItem(ItemWinowSlot.item);
+                transform.position = prevPosition;
             }
-        }
-
-        if (flg)
-        {
-            itemSlotcs.SelectItem(ItemWinowSlot.item);
-            transform.position = prevPosition;
-            //Debug.Log("ドラックアンドドロップ");
-        }
-        else
-        {
-            transform.position = prevPosition;
+            else if (hit.gameObject.CompareTag("PassSlot"))
+            {
+                passSlotcs.SelectItem(ItemWinowSlot.item);
+                transform.position = prevPosition;
+            }
+            else
+            {
+                transform.position = prevPosition;
+            }
         }
     }
 }
