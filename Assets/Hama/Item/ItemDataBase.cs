@@ -100,6 +100,11 @@ public class ItemDataBase : ScriptableObject
         id -= 1;
         return datas[id];
     }
+
+    public ItemData[] GetDataAll()
+    {
+        return datas;
+    }
 }
 
 /// <summary>

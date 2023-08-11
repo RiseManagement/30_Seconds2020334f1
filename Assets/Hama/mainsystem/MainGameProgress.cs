@@ -6,6 +6,8 @@ public class MainGameProgress : MonoBehaviour
 {
     public static GameStaus gameStaus = GameStaus.GameStrat;
     static public MainGameProgress instance;
+    [SerializeField] GameObject playerObj;
+
 
     public enum GameStaus
     {
@@ -82,8 +84,9 @@ public class MainGameProgress : MonoBehaviour
 
     void WaitProgress()
     {
-        Timer.CountReset();
         Debug.Log("【進行】待ち");
+        Timer.CountReset();
+        //PassSystem.ItemPass(playerObj);
 
         //変更予定
         if (Input.GetMouseButtonDown(1))
