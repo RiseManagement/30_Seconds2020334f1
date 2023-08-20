@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Inventry : MonoBehaviour
 {
-
     public static Inventry instance;
     InventryUI InventryUI;
 
@@ -19,25 +18,25 @@ public class Inventry : MonoBehaviour
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         InventryUI = GetComponent<InventryUI>();
         InventryUI.UpdateUI();
 
     }
 
-    public List<ItemID> items = new List<ItemID>();
+    public List<int> itemsid = new List<int>();
 
-    public void Add(ItemID item)
+    public void Add(int itemid)
     {
 
-        items.Add(item);
+        itemsid.Add(itemid);
         InventryUI.UpdateUI();
 
     }
 
-    public void Removed(ItemID item)
+    public void Removed(int itemid)
     {
-        items.Remove(item);
+        itemsid.Remove(itemid);
     }
 
 }

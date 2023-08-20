@@ -16,12 +16,11 @@ public class InventryUI : MonoBehaviour
 
     public void UpdateUI()
     {
-
        for(int i=0; i<slots.Length; i++)
         {
-            if (i < Inventry.instance.items.Count)
+            if (i < Inventry.instance.itemsid.Count)
             {
-                slots[i].AddItem(Inventry.instance.items[i]);
+                slots[i].AddItem(Inventry.instance.itemsid[i]);
             }
             else
                 slots[i].ClearSlot();

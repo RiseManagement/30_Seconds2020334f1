@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
 {
-    public ItemID item;
+    public int  itemid;
     public Sprite icon;
     string explanation;
     bool select;
@@ -28,10 +28,12 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
 
     }
 
-    public void AddItem(ItemID newItem)
+    public void AddItem(int itemID)
     {
-        item = newItem;
-        var itemdata = ItemDataBase.Entity.GetData(newItem.id);
+        //Debug.Log(itemID);
+
+        var itemdata = ItemDataBase.Entity.GetData(itemID);
+        itemid = itemID;
         icon = itemdata.Image;
         explanation = itemdata.Explanation;
 
@@ -41,10 +43,10 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
 
     public void ClearSlot()
     {
-        item = null;
+        itemid = -1;
         icon = null;
 
-        transform.GetChild(0).gameObject.SetActive(false);
+        //transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -52,5 +54,21 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
         select = true;
     }
 
+    public int GetItemData(int id, int owner)
+    {
+        //Debug.Log(id);
+        var item = ItemDataBase.Entity.GetDataAll();
+
+        for(int i = id; i < item.Length; i++)
+        {
+            if (ItemDataBase.Entity.GetData(i).OwnerFlag == owner)
+            {
+                id = i+1;
+                AddItem(i);
+                break;
+            }
+        }
+        return id;
+    }
 }
 

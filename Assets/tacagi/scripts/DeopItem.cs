@@ -11,7 +11,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log($"オブジェクト {name} がクリックされたよ！");
-        Inventry.instance.Add(item);
+        Inventry.instance.Add(item.id);
         Destroy(gameObject);
     }
 

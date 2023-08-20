@@ -86,7 +86,9 @@ public class MainGameProgress : MonoBehaviour
     {
         Debug.Log("【進行】待ち");
         Timer.CountReset();
-        //PassSystem.ItemPass(playerObj);
+
+        //アイテムidをどこから入れる？
+        PassSystem.ItemPass(playerObj);
 
         //変更予定
         if (Input.GetMouseButtonDown(1))

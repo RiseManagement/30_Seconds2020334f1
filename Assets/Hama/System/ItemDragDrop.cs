@@ -49,13 +49,14 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         {
             if (hit.gameObject.CompareTag("ItemSlot"))
             {
-                itemSlotcs.SelectItem(ItemWinowSlot.item);
+                itemSlotcs.SelectItem(ItemWinowSlot.itemid);
                 transform.position = prevPosition;
             }
             else if (hit.gameObject.CompareTag("PassSlot"))
             {
-                passSlotcs.SelectItem(ItemWinowSlot.item);
+                passSlotcs.SelectItem(ItemWinowSlot.itemid);
                 transform.position = prevPosition;
+                PassSystem.passitemid = ItemWinowSlot.itemid;
             }
             else
             {

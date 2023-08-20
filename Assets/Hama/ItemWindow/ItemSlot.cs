@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     Sprite icon;
-    ItemID item;
-    public ItemID Item
+    int itemid;
+    public int ItemId
     {
-        get { return item; }
+        get { return itemid; }
     }
 
     // Start is called before the first frame update
@@ -25,11 +25,11 @@ public class ItemSlot : MonoBehaviour
     }
 
 
-    public void SelectItem(ItemID selectitem)
+    public void SelectItem(int selectitemid)
     {
-        var itemdata = ItemDataBase.Entity.GetData(selectitem.id);
-        item = selectitem;  
-        icon= itemdata.Image;
+        var itemdata = ItemDataBase.Entity.GetData(selectitemid);
+        itemid = selectitemid;
+        icon = itemdata.Image;
 
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
     }

@@ -97,7 +97,6 @@ public class ItemDataBase : ScriptableObject
     /// <returns>idのデータ</returns>
     public ItemData GetData(int id)
     {
-        id -= 1;
         return datas[id];
     }
 

@@ -7,7 +7,11 @@ public class SceneManager : MonoBehaviour
 {
     static public SceneManager instance;
 
-    static string scenename;
+    static string nowscenename;
+    public static string NowSceneName
+    {
+        get { return nowscenename; }
+    }
     static string oldscenename;
     public static string OldSceneName
     {
@@ -41,14 +45,14 @@ public class SceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        oldscenename = scenename;
+        oldscenename = nowscenename;
     }
 
     // Update is called once per frame
     void Update()
     {
-        scenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log("現在のシーン:" +  scenename);
+        nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        Debug.Log("現在のシーン:" + nowscenename);
         Debug.Log("過去のシーン:" + oldscenename);
     }
 
@@ -58,7 +62,7 @@ public class SceneManager : MonoBehaviour
     /// <param name="scene">列挙型のシーン名</param>
     public static void SceneLaod(SceneName scene)
     {
-        oldscenename = scenename;
+        oldscenename = nowscenename;
         string sceneName = scene.ToString().ToLower();
 
         if (!UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())
