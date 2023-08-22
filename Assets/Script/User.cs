@@ -11,6 +11,8 @@ public class User : MonoBehaviour
     //アイテムウィンドウ情報
     [SerializeField] List<ItemWinowSlot> itemWinowSlot;
 
+    static public GameObject playerObj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +22,6 @@ public class User : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     protected void GetItem(GameObject playerobj)
@@ -57,13 +58,14 @@ public class User : MonoBehaviour
 
     protected void SceneSet(GameObject playerobj)
     {
-        DontDestroyOnLoad(playerobj);
-
-        if (SceneManager.NowSceneName == SceneManager.SceneName.INTERVAL.ToString().ToLower())
+        //Debug.Log(playerObj);
+        if (SceneManager.OldSceneName == SceneManager.SceneName.INTERVAL.ToString().ToLower())
         {
-            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(playerobj,
+            //Debug.Log("デストロイ解除");
+            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(playerObj,
                 UnityEngine.SceneManagement.SceneManager.GetActiveScene());
-            Debug.Log("通過2");
+            Destroy(playerObj);
         }
+        DontDestroyOnLoad(playerobj);
     }
 }

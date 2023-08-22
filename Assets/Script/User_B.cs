@@ -13,6 +13,7 @@ public class User_B : User
     {
         GetItem(this.gameObject);
         SceneSet(this.gameObject);
+        User.playerObj = this.gameObject;
     }
 
     // Update is called once per frame

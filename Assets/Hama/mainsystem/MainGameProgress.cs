@@ -88,6 +88,9 @@ public class MainGameProgress : MonoBehaviour
         Timer.CountReset();
 
         //アイテムidをどこから入れる？
+        if(playerObj == null){
+            playerObj = GameObject.Find("Player").gameObject;
+        }
         PassSystem.ItemPass(playerObj);
 
         //変更予定
@@ -99,7 +102,7 @@ public class MainGameProgress : MonoBehaviour
 
     void PlayerTurnProgress()
     {
-        Debug.Log("【進行】プレイヤーのターン");
+        //Debug.Log("【進行】プレイヤーのターン");
         Timer.CountDown();
 
         //変更予定

@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PassSlot : MonoBehaviour
 {
     Sprite icon;
-    int itemid;
+    int itemid = -1;
     public int ItemId
     {
         get { return itemid; }
