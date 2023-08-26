@@ -39,12 +39,15 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
 
         transform.GetChild(0).gameObject.SetActive(true);
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>();
     }
 
     public void ClearSlot()
     {
         itemid = -1;
         icon = null;
+
+        Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
 
         //transform.GetChild(0).gameObject.SetActive(false);
     }

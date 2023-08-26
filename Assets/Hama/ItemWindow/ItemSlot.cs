@@ -15,7 +15,14 @@ public class ItemSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        var id = PassSystem.passitemid;
+
+        if(id != -1)
+        {
+            SelectItem(id);
+        }
+
+        //Debug.Log(id);
     }
 
     // Update is called once per frame
