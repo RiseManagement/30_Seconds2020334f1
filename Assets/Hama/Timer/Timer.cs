@@ -18,18 +18,27 @@ public class Timer : MonoBehaviour
     //カウント最大値
     [SerializeField] static float countmax = 30.0f;
 
+    //カウントストップ用
+    static public bool countstop;
+
     // Start is called before the first frame update
     void Start()
     {
         count = countmax;
+        countstop = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         UIText.text = count.ToString("f0");
-
-        if(count < 0)
+        TimerStopJudge();
+        if ((count<=5)&&(count>0))
+        {
+            UIText.color = new Color(1.0f,0.0f,0.0f,1.0f);
+            Debug.Log("Timer_Red");
+        }
+        else if(count < 0)
         {
             MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
             SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
@@ -39,7 +48,14 @@ public class Timer : MonoBehaviour
     //カウントダウン
     public static void CountDown()
     {
-        count -= Time.deltaTime;
+        if(countstop==true)
+        {
+            count -= Time.deltaTime;
+        }
+        else
+        {
+            Debug.Log("Timer停止");
+        }
 
         //Debug.Log(count);
     }
@@ -48,4 +64,20 @@ public class Timer : MonoBehaviour
     {
         count = countmax;
     }
+
+    //TimerStopの判断
+    public static void TimerStopJudge()
+    {
+        
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            countstop = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.S))
+        {
+            countstop=false;
+        }
+        
+    }
+
 }
