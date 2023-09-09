@@ -32,11 +32,11 @@ public class Timer : MonoBehaviour
     void Update()
     {
         UIText.text = count.ToString("f0");
-        TimerStopJudge();
+        //TimerStopJudge();
         if ((count<=5)&&(count>0))
         {
             UIText.color = new Color(1.0f,0.0f,0.0f,1.0f);
-            Debug.Log("Timer_Red");
+            //Debug.Log("Timer_Red");
         }
         else if(count < 0)
         {
@@ -50,11 +50,11 @@ public class Timer : MonoBehaviour
     {
         if(countstop==true)
         {
-            count -= Time.deltaTime;
+            //Debug.Log("Timer停止");
         }
         else
         {
-            Debug.Log("Timer停止");
+            count -= Time.deltaTime;
         }
 
         //Debug.Log(count);
@@ -66,18 +66,14 @@ public class Timer : MonoBehaviour
     }
 
     //TimerStopの判断
-    public static void TimerStopJudge()
+    public static void TimerStop()
     {
-        
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            countstop = true;
-        }
-        else if(Input.GetKeyDown(KeyCode.S))
-        {
-            countstop=false;
-        }
-        
+        countstop = true;
+    }
+
+    public static void TimerRestart()
+    {
+        countstop = false;
     }
 
 }
