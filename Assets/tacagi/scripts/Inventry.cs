@@ -31,12 +31,12 @@ public class Inventry : MonoBehaviour
 
         itemsid.Add(itemid);
         InventryUI.UpdateUI();
-
     }
 
     public void Removed(int itemid)
     {
         itemsid.Remove(itemid);
+        InventryUI.UpdateUI();
     }
 
 }

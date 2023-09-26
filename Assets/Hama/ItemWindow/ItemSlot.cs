@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     Sprite icon;
-    int itemid;
+    public int itemid = -1;
     public int ItemId
     {
         get { return itemid; }
@@ -39,5 +39,19 @@ public class ItemSlot : MonoBehaviour
         icon = itemdata.Image;
 
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+    }
+
+    public void ItemUse()
+    {
+        if (itemid == -1) return;
+
+        var itemdata = ItemDataBase.Entity.GetData(itemid);
+        itemdata.InteractFlag = 1;
+        itemdata.OwnerFlag = 0;
+        itemid = -1;
+        icon = null;
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
+
+        Debug.Log("アイテム使用済");
     }
 }
