@@ -1,21 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneManager :MonoBehaviour
 {
     static public SceneManager instance;
 
     static string nowscenename;
     public static string NowSceneName
     {
-        get { return nowscenename; }
+        get
+        {
+            return nowscenename;
+        }
     }
     static string oldscenename;
     public static string OldSceneName
     {
-        get { return oldscenename; }
+        get
+        {
+            return oldscenename;
+        }
     }
     public enum SceneName
     {
@@ -26,7 +33,7 @@ public class SceneManager : MonoBehaviour
         MAINGAME_A,
         MAINGAME_B,
     }
-    
+
 
     void Awake()
     {
@@ -52,8 +59,8 @@ public class SceneManager : MonoBehaviour
     void Update()
     {
         nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log("現在のシーン:" + nowscenename);
-        Debug.Log("過去のシーン:" + oldscenename);
+        //Debug.Log("現在のシーン:" + nowscenename);
+        // Debug.Log("過去のシーン:" + oldscenename);
     }
 
     /// <summary>

@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interval : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] Text turnCount;
     void Start()
     {
         //プレイヤー変更
         MainGameProgress.gameStaus = MainGameProgress.GameStaus.Wait;
+        turnCount.text = "経過ターン　"+MainGameManager.nowTurn.ToString()+"/16";
     }
 
     // Update is called once per frame
