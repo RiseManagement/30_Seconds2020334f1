@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 /// タイマークラス
 /// </summary>
 
-public class Timer : MonoBehaviour
+public class Timer :MonoBehaviour
 {
     // UI Text指定用
     public Text UIText;
@@ -21,6 +22,11 @@ public class Timer : MonoBehaviour
     //カウントストップ用
     static public bool countstop;
 
+    [SerializeField] Image timerImage;
+    float skipTimer = 0;
+    float skipTimeRequired = 2;
+    bool isPressed = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,22 +39,34 @@ public class Timer : MonoBehaviour
     {
         UIText.text = count.ToString("f0");
         //TimerStopJudge();
-        if ((count<=5)&&(count>0))
+        if ((count <= 5) && (count > 0))
         {
-            UIText.color = new Color(1.0f,0.0f,0.0f,1.0f);
+            UIText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
             //Debug.Log("Timer_Red");
         }
-        else if(count < 0)
+        else if (count < 0)
         {
-            MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
-            SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
+            TurnEnd();
+        }
+        if (isPressed)
+        {
+            skipTimer += Time.deltaTime;
+            timerImage.fillAmount = 1 - (skipTimer / skipTimeRequired);
+        }
+        if (skipTimer > skipTimeRequired)
+        {
+            TurnEnd();
         }
     }
-
+    void TurnEnd()
+    {
+        MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
+        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
+    }
     //カウントダウン
     public static void CountDown()
     {
-        if(countstop==true)
+        if (countstop == true)
         {
             //Debug.Log("Timer停止");
         }
@@ -76,4 +94,13 @@ public class Timer : MonoBehaviour
         countstop = false;
     }
 
+    public void TimerButtonLongPressed()
+    {
+        isPressed = true;
+    }
+    public void OnTimerButtonRelease()
+    {
+        isPressed = false;
+        skipTimer = 0;
+    }
 }

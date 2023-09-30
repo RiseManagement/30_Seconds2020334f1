@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 
-public class MainGameProgress : MonoBehaviour
+public class MainGameProgress :MonoBehaviour
 {
     public static GameStaus gameStaus = GameStaus.GameStrat;
     static public MainGameProgress instance;
@@ -36,7 +37,7 @@ public class MainGameProgress : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -45,35 +46,35 @@ public class MainGameProgress : MonoBehaviour
         switch (gameStaus)
         {
             case GameStaus.GameStrat:
-                GameStartProgress();
-                break;
+            GameStartProgress();
+            break;
 
             case GameStaus.Wait:
-                WaitProgress();
-                break;
+            WaitProgress();
+            break;
 
             case GameStaus.PlayerTurn:
-                PlayerTurnProgress();
-                break;
+            PlayerTurnProgress();
+            break;
 
             case GameStaus.Interval:
-                IntervalProgress();
-                break;
+            IntervalProgress();
+            break;
 
             case GameStaus.GameClear:
-                GameClearProgress();
-                break;
+            GameClearProgress();
+            break;
 
             case GameStaus.GameOver:
-                GameOverProgress();
-                break;
+            GameOverProgress();
+            break;
 
         }
     }
 
     void GameStartProgress()
     {
-        Debug.Log("【進行】ゲームスタート");
+        //Debug.Log("【進行】ゲームスタート");
 
         //変更予定
         if (Input.GetMouseButtonDown(1))
@@ -88,7 +89,8 @@ public class MainGameProgress : MonoBehaviour
         Timer.CountReset();
 
         //アイテムidをどこから入れる？
-        if(playerObj == null){
+        if (playerObj == null)
+        {
             playerObj = GameObject.Find("Player").gameObject;
         }
         PassSystem.ItemPass(playerObj);
