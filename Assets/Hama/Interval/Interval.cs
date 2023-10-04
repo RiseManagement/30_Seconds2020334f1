@@ -11,6 +11,7 @@ public class Interval : MonoBehaviour
         //プレイヤー変更
         MainGameProgress.gameStaus = MainGameProgress.GameStaus.Wait;
         turnCount.text = "経過ターン　"+MainGameManager.nowTurn.ToString()+"/16";
+        MainGameManager.TurnCountUp();
     }
 
     // Update is called once per frame
