@@ -9,7 +9,7 @@ public class User : MonoBehaviour
     public string User_name{ get { return username; } }
 
     //アイテムウィンドウ情報
-    [SerializeField] List<ItemWinowSlot> itemWinowSlot;
+    [SerializeField] List<ItemWindowSlot> itemWinowSlot;
 
     static public GameObject playerObj;
 
@@ -34,7 +34,7 @@ public class User : MonoBehaviour
         foreach (Transform child in parent.transform)
         {
             itemWinowSlot.Add(itemWinowSlot[count]);
-            itemWinowSlot[count] = child.GetComponent<ItemWinowSlot>(); // 順番に子オブジェクトを取得
+            itemWinowSlot[count] = child.GetComponent<ItemWindowSlot>(); // 順番に子オブジェクトを取得
             count++;
         }
 

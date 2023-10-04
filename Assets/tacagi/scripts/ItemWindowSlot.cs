@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
+public class ItemWindowSlot : MonoBehaviour, IPointerClickHandler
 {
     public int  itemid;
     public Sprite icon;
@@ -56,7 +56,7 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
         itemid = -1;
         icon = null;
 
-        Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
+        //Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
 
         //transform.GetChild(0).gameObject.SetActive(false);
     }
