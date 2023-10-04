@@ -28,6 +28,15 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
 
     }
 
+    private void Update()
+    {
+        if (itemid == -1)
+        {
+            DataReset();
+        }
+        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+    }
+
     public void AddItem(int itemID)
     {
         //Debug.Log(itemID);
@@ -38,7 +47,7 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
         explanation = itemdata.Explanation;
 
         transform.GetChild(0).gameObject.SetActive(true);
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        
         this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>();
     }
 
@@ -57,6 +66,13 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
         select = true;
     }
 
+
+    /// <summary>
+    /// アイテムデータ取得
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="owner"></param>
+    /// <returns></returns>
     public int GetItemData(int id, int owner)
     {
         //Debug.Log(id);
@@ -72,6 +88,12 @@ public class ItemWinowSlot : MonoBehaviour, IPointerClickHandler
             }
         }
         return id;
+    }
+
+    void DataReset()
+    {
+         icon = null;
+         explanation = null;
     }
 }
 
