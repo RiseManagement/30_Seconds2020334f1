@@ -34,7 +34,7 @@ public class MainGameManager :MonoBehaviour
     /// <summary>
     /// ターン数カウントアップ
     /// </summary>
-    public void TurnCountUp()
+    public static void TurnCountUp()
     {
         nowTurn += 1;
     }

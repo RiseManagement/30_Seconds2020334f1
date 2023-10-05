@@ -193,7 +193,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\u7D4C\u904E\u30BF\u30FC\u30F3\u30001/16"
+  m_Text: "\u7D4C\u904E\u30BF\u30FC\u30F3\u3000\u8868\u793A"
 --- !u!222 &155816580
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fa840c1dfee3a4a9949da2b08e2e2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnCount: {fileID: 0}
+  turnCount: {fileID: 155816579}
 --- !u!4 &1555776464
 Transform:
   m_ObjectHideFlags: 0

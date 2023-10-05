@@ -1,19 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Inventry : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Inventry :MonoBehaviour
 {
     public static Inventry instance;
     InventryUI InventryUI;
+    [SerializeField] Text explanationText;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        
+
     }
 
     private void Start()
@@ -31,12 +34,16 @@ public class Inventry : MonoBehaviour
 
         itemsid.Add(itemid);
         InventryUI.UpdateUI();
-
     }
 
     public void Removed(int itemid)
     {
         itemsid.Remove(itemid);
+        InventryUI.UpdateUI();
     }
 
+    public void SetExplanationText(string _explanationText)
+    {
+        explanationText.text = _explanationText;
+    }
 }
