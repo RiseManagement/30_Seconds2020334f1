@@ -48,7 +48,7 @@ public class CameraManager : MonoBehaviour
     }
 
     //引数がアイテムクリック時のアイテム座標のフォーカス機能
-    void Focus(Vector2 vector2)
+    public void Focus(Vector2 vector2)
     {
         Vector2 Focus_adjust = new Vector2(0, 0);    //フォーカスする位置の調整用Vector2
         transform.position = vector2+Focus_adjust ;

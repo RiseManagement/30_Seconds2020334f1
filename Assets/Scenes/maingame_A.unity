@@ -239,6 +239,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AStage_North
       objectReference: {fileID: 0}
+    - target: {fileID: 1290463076183282504, guid: d5d3ea32ba7d0314bbd25be6974e614f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5175644917525570583, guid: d5d3ea32ba7d0314bbd25be6974e614f, type: 3}
+      propertyPath: item
+      value: 
+      objectReference: {fileID: 11400000, guid: 6a081da706f6fc04e88762795238cf41, type: 2}
+    - target: {fileID: 6143058900314051115, guid: d5d3ea32ba7d0314bbd25be6974e614f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d3ea32ba7d0314bbd25be6974e614f, type: 3}
 --- !u!1 &467633844
