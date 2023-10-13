@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class MainGameManager :MonoBehaviour
 {
     public static MainGameManager instance;
+    public static bool isClearUserA;
+    public static bool isClearUserB;
     //現在ターン数
     public static int nowTurn = 1;
 
@@ -20,6 +22,11 @@ public class MainGameManager :MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
         }
     }
     // Start is called before the first frame update
@@ -52,6 +59,14 @@ public class MainGameManager :MonoBehaviour
                 startTurnText.color = new Color(startTurnText.color.r, startTurnText.color.g, startTurnText.color.b, startTurnTextTimer);
             }
         }
+    }
+    public void GameClear()
+    {
+        SceneManager.SceneLaod(SceneManager.SceneName.CLEAR);
+    }
+    public void GameOver()
+    {
+        SceneManager.SceneLaod(SceneManager.SceneName.GAMEOVER);
     }
     /// <summary>
     /// ターン数カウントアップ
