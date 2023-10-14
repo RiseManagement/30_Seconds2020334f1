@@ -5,10 +5,12 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     private float x;
+    private Camera mainCam;
     // Start is called before the first frame update
     void Start()
     {
         x = transform.position.x;
+        mainCam = Camera.main;
     }
 
     // Update is called once per frame
@@ -47,11 +49,36 @@ public class CameraManager : MonoBehaviour
         //transform.Rotate(0,-90,0,Space.World);
     }
 
+    public void ItemFocus(Vector2 vector2,int a)
+    {
+        FocusTransform(vector2);
+        FocusSize(a);
+    }
+
     //引数がアイテムクリック時のアイテム座標のフォーカス機能
-    public void Focus(Vector2 vector2)
+    private void FocusTransform(Vector2 vector2)
     {
         Vector2 Focus_adjust = new Vector2(0, 0);    //フォーカスする位置の調整用Vector2
         transform.position = vector2+Focus_adjust ;
-        this.transform.localScale = new Vector2(2, 2);
     }
+
+    private void FocusSize(int a)
+    {
+        switch(a)
+        {
+            case 1://ズーム小
+                mainCam.orthographicSize += 1;
+                break;
+            case 2: //ズーム中
+                mainCam.orthographicSize += 2;
+                break;
+            case 3: //ズーム大
+                mainCam.orthographicSize += 3;
+                break;
+            default:
+                mainCam.orthographicSize = 5;
+                break;
+        }   
+    }
+
 }
