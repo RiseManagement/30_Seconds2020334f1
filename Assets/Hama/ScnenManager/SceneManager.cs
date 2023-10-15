@@ -29,8 +29,7 @@ public class SceneManager :MonoBehaviour
         TITLE,
         INTERVAL,
         STORY,
-        CLEAR,
-        GAMEOVER,
+        ENDING,
         MAINGAME_A,
         MAINGAME_B,
     }

@@ -60,13 +60,9 @@ public class MainGameManager :MonoBehaviour
             }
         }
     }
-    public void GameClear()
+    public void GoToEnding()
     {
-        SceneManager.SceneLaod(SceneManager.SceneName.CLEAR);
-    }
-    public void GameOver()
-    {
-        SceneManager.SceneLaod(SceneManager.SceneName.GAMEOVER);
+        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
     }
     /// <summary>
     /// ターン数カウントアップ

@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/clear.unity
     guid: 11aeff4b00e340d41be247d4d30e87a9
   - enabled: 1
-    path: Assets/Scenes/gameover.unity
+    path: Assets/Scenes/ending.unity
     guid: 55d32d7c635bbba40a506443a1eee76c
   - enabled: 1
     path: Assets/Scenes/interval.unity

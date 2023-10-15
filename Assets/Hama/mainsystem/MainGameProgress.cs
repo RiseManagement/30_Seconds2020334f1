@@ -111,7 +111,7 @@ public class MainGameProgress :MonoBehaviour
         if (Input.GetMouseButtonDown(1))
         {
             gameStaus = GameStaus.GameClear;
-            SceneManager.SceneLaod(SceneManager.SceneName.CLEAR);
+            SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
         }
         if (Input.GetMouseButtonDown(2))
         {
