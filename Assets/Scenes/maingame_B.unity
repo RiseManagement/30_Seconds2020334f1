@@ -1174,6 +1174,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 118450779903042612, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
   m_PrefabInstance: {fileID: 1943582452}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1846754408 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 813254921, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+  m_PrefabInstance: {fileID: 30049933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1943582452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2070,6 +2081,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainGameManager
       objectReference: {fileID: 0}
+    - target: {fileID: 6372444033393142262, guid: a18f6defd867e8342b6bdebb832953cf, type: 3}
+      propertyPath: startTurnText
+      value: 
+      objectReference: {fileID: 1846754408}
     - target: {fileID: 7802696086757051040, guid: a18f6defd867e8342b6bdebb832953cf, type: 3}
       propertyPath: m_RootOrder
       value: 8
