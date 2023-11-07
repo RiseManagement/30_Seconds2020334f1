@@ -57,9 +57,11 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
         itemid = -1;
         icon = null;
 
-        //Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
+        Debug.Log("クリアスロット");
 
-        //transform.GetChild(0).gameObject.SetActive(false);
+        Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
+
+        transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void OnPointerClick(PointerEventData eventData)

@@ -132,7 +132,7 @@ public class MainGameProgress :MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             gameStaus = GameStaus.GameStrat;
-            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_A);
+            SceneManager.SceneLaod(SceneManager.SceneName.TITLE);
         }
     }
 

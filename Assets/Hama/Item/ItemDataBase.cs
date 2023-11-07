@@ -132,24 +132,36 @@ public class ItemData
     {
         get { return image; }
     }
-    [SerializeField] int ownerFlag;
+    [SerializeField] int ownerflag;
     public int OwnerFlag
     {
-        get { return ownerFlag; }
+        get { return ownerflag; }
         set { if(value <= 2 && value >= 0)
-                {
-                    ownerFlag = value;
-                } 
+            {
+                ownerflag = value;
+            } 
         }
     }
-    [SerializeField] int interactFlag;
+    [SerializeField] int interactflag;
     public int InteractFlag
     {
-        get { return interactFlag; }
+        get { return interactflag; }
+        set
+        {
+            if (value == 0 || value == 1)
+            {
+                interactflag = value;
+            }
+        }
+    }
+    [SerializeField] int enabletake;
+    public int EnabletakeFlag
+    {
+        get { return enabletake; }
         set { if (value == 0 || value == 1)
-                {
-                    interactFlag = value;
-                }
+            {
+                enabletake = value;
+            }
         }
     }
 }

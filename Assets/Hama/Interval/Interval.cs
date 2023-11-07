@@ -38,13 +38,13 @@ public class Interval :MonoBehaviour
     }
     void MainGameSceneChange()
     {
-        if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAME_A.ToString().ToLower())
+        if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAMEFIRST.ToString().ToLower())
         {
-            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_B);
+            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMELAST);
         }
-        else if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAME_B.ToString().ToLower())
+        else if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAMELAST.ToString().ToLower())
         {
-            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_A);
+            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
         }
     }
 

@@ -25,7 +25,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
 
         //Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
         //所持者がいない場合
-        if (ItemDataBase.Entity.GetData(item.id).OwnerFlag == 0)
+        if (ItemDataBase.Entity.GetData(item.id).EnabletakeFlag == 1)
         {
             Inventry.instance.Add(item.id);
             Destroy(gameObject);
@@ -35,22 +35,18 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
             //camera.Focus(eventData.position);
             switch (item.id)
             {
-                case 6:
-                    itemslot.ItemUse();
-                    //事象処理
+                case 0:
+                    if(itemslot.itemid == 12)
+                    {
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        //事象処理
+                    }
                     break;
             }
 
-            Inventry.instance.Removed(itemslot.itemid);
         }
 
     }
-
-    public void Pickup()
-    {
-        //Debug.Log("OK");
-    }
-
-
 
 }
