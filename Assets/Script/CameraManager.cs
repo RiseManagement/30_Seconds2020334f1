@@ -1,17 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
     private float x;
     private float y;
     private Camera mainCam;
+    [SerializeField] GameObject FocusCancelButton;
+    [SerializeField] GameObject LButtonActive;
+    [SerializeField] GameObject RButtonActive;
     // Start is called before the first frame update
     void Start()
     {
         x = transform.position.x;
         mainCam = Camera.main;
+        FocusCancelButton.SetActive(false) ;
+        LButtonActive.SetActive(true);
+        RButtonActive.SetActive(true);
     }
 
     // Update is called once per frame
@@ -50,10 +57,13 @@ public class CameraManager : MonoBehaviour
         //transform.Rotate(0,-90,0,Space.World);
     }
 
-    public void ItemFocus(Vector2 vector2,int a)
+    public void ItemFocus(Vector2 vector2,int a)//フォーカス機能＋フォーカスボタン表示
     {
         FocusTransform(vector2);
         FocusSize(a);
+        FocusCancelButton.SetActive(true);
+        LButtonActive.SetActive(false);
+        RButtonActive.SetActive(false);
     }
 
     //引数がアイテムクリック時のアイテム座標のフォーカス機能
@@ -85,7 +95,10 @@ public class CameraManager : MonoBehaviour
     {
         mainCam.orthographicSize = 5;
         y=transform.position.y;
-        if(y>-10&&y<10)
+        FocusCancelButton.SetActive(false);
+        LButtonActive.SetActive(true);
+        RButtonActive.SetActive(true);
+        if (y>-10&&y<10)
         {
             mainCam.transform.position = new Vector2(0,0);
         }
