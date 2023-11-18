@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
     private float x;
+    private float y;
     private Camera mainCam;
     // Start is called before the first frame update
     void Start()
@@ -80,5 +81,29 @@ public class CameraManager : MonoBehaviour
                 break;
         }   
     }
-
+    public void FocusCancel()
+    {
+        mainCam.orthographicSize = 5;
+        y=transform.position.y;
+        if(y>-10&&y<10)
+        {
+            mainCam.transform.position = new Vector2(0,0);
+        }
+        else if(y>10&&y<30)
+        {
+            mainCam.transform.position = new Vector2(0, 20);
+        }
+        else if (y > 30 && y < 50)
+        {
+            mainCam.transform.position = new Vector2(0, 40);
+        }
+        else if (y > 50 && y < 70)
+        {
+            mainCam.transform.position = new Vector2(0, 60);
+        }
+        else
+        {
+            Debug.Log("FocusCancel失敗");
+        }
+    }
 }
