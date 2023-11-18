@@ -1,7 +1,7 @@
 ﻿ID,Name,Explanation,Image,OwnerFlag,InteractFlag,EnableTake,,
-0,Ａ絵画,不思議な絵画だ…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,,
+0,Ａ絵画,不思議な絵画だ…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,1,1,,,
 1,A絵画(ブラックライト照射後),なんか浮かび上がってきた…！,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,,
-2,袖机(中に絵具),開きそうで開かない…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,OwnerFlag,
+2,袖机(中に絵具),開きそうで開かない…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,2,,OwnerFlag,
 3,袖机(空いた状態),中に何か入ってる…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,0,所有者なし
 4,パズル,これはなんだろう…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,1,先行プレイヤー
 5,パズル(解答後),もう意味がないようだ,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,2,後攻プレイヤー
@@ -11,7 +11,7 @@
 9,Ａ鍵差込口(鍵差込後),もう意味がないようだ,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,1,使用済み
 10,アップライトピアノ,弾いてみようか…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,,
 11,シリンダー,何かに使えるかな…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,1,EnableTake,
-12,ブラックライト,ブラックライトだ,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,1,,
+12,ブラックライト,ブラックライトだ,Assets/Hama/Resources/Item/RoomA/blacklight_icon.png,0,0,1,,
 13,台座ボタン,,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,1,所持可能
 14,台座,これは何だろう…,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,,
 15,台座(物乗っけてる),,Assets/Hama/Resources/Item/1024px-Multiplication_Sign.svg.png,0,0,,,
