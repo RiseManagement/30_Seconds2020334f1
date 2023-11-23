@@ -1,36 +1,56 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class Interval : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class Interval :MonoBehaviour
 {
-    // Start is called before the first frame update
+    public static Interval instance;
+    [SerializeField] Text turnCount;
+    [SerializeField] GameObject shareTextObj;
+    [SerializeField] GameObject adButton;
+    [SerializeField] GameObject startTurnButton;
+    [SerializeField] GameObject preparationTextObj;
+    [SerializeField] AdMobReward admobReward;
+    private void Awake()
+    {
+        instance = this;
+    }
     void Start()
     {
         //プレイヤー変更
         MainGameProgress.gameStaus = MainGameProgress.GameStaus.Wait;
+        turnCount.text = "経過ターン　" + MainGameManager.nowTurn.ToString() + "/16";
     }
-
-    // Update is called once per frame
-    void Update()
+    public void OnClickAdButton()
     {
+        admobReward.ShowAdMobReward();
+        shareTextObj.SetActive(false);
+        adButton.SetActive(false);
+        startTurnButton.SetActive(true);
+        preparationTextObj.SetActive(true);
     }
-
-    public void MainGameSceneChange()
+    public void OnClickStartTurnButton()
     {
-        if(SceneManager.OldSceneName == SceneManager.SceneName.MAINGAME_A.ToString().ToLower())
+        MainGameSceneChange();
+        ChangeGameStausWaitToPlayerTurn();
+    }
+    void MainGameSceneChange()
+    {
+        if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAMEFIRST.ToString().ToLower())
         {
-            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_B);
+            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMELAST);
         }
-        else if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAME_B.ToString().ToLower())
+        else if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAMELAST.ToString().ToLower())
         {
-            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAME_A);
+            SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
         }
     }
 
-    public void GameStausWaitToPlayerTurnChange()
+    void ChangeGameStausWaitToPlayerTurn()
     {
-        if(MainGameProgress.gameStaus == MainGameProgress.GameStaus.Wait)
+        if (MainGameProgress.gameStaus == MainGameProgress.GameStaus.Wait)
             MainGameProgress.gameStaus = MainGameProgress.GameStaus.PlayerTurn;
     }
 }

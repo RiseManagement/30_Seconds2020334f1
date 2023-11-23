@@ -46,4 +46,12 @@ public class CameraManager : MonoBehaviour
         Debug.Log("RButton");
         //transform.Rotate(0,-90,0,Space.World);
     }
+
+    //引数がアイテムクリック時のアイテム座標のフォーカス機能
+    public void Focus(Vector2 vector2)
+    {
+        Vector2 Focus_adjust = new Vector2(0, 0);    //フォーカスする位置の調整用Vector2
+        transform.position = vector2+Focus_adjust ;
+        this.transform.localScale = new Vector2(2, 2);
+    }
 }

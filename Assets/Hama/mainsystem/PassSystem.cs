@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class PassSystem : MonoBehaviour
 {
+    static public int passitemid = -1;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,19 +21,22 @@ public class PassSystem : MonoBehaviour
     public static void ItemPass(GameObject playerobj)
     {
         //Debug.Log("パス");
-        Debug.Log(playerobj.name);
+        //Debug.Log(playerobj.name);
+        //Debug.Log(passitemid);
+
+        if (passitemid == -1) return;
 
         if (playerobj.GetComponent<User_A>())
         {
-            var itemid = playerobj.GetComponent<User_A>().itemID;
-            var item = ItemDataBase.Entity.GetData(itemid.id);
-            item.OwnerFlag = 1;
+            //Debug.Log("Bに渡す");
+            var item = ItemDataBase.Entity.GetData(passitemid);
+            item.OwnerFlag = 2;
         }
         else if (playerobj.GetComponent<User_B>())
         {
-            var itemid = playerobj.GetComponent<User_B>().itemID;
-            var item = ItemDataBase.Entity.GetData(itemid.id);
-            item.OwnerFlag = 2;
+            //Debug.Log("Aに渡す");
+            var item = ItemDataBase.Entity.GetData(passitemid);
+            item.OwnerFlag = 1;
         }
         else
         {

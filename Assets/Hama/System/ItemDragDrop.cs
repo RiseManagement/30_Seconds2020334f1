@@ -1,21 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
 
     private Vector2 prevPosition; //保存しておく初期position
     ItemSlot itemSlotcs;
     PassSlot passSlotcs;
-    ItemWinowSlot ItemWinowSlot;
+    ItemWindowSlot itemwindowSlot;
 
     private void Awake()
     {
         itemSlotcs = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
         passSlotcs = GameObject.Find("PassSlot").GetComponent<PassSlot>();
-        ItemWinowSlot = gameObject.transform.parent.GetComponent<ItemWinowSlot>();
+        itemwindowSlot = gameObject.transform.parent.GetComponent<ItemWindowSlot>();
     }
 
     /// <summary>
@@ -25,6 +26,7 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
     public void OnBeginDrag(PointerEventData eventData)
     {
         prevPosition = transform.position;
+        Inventry.instance.SetExplanationText(itemwindowSlot.explanation);
     }
 
     /// <summary>
@@ -49,18 +51,16 @@ public class ItemDragDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEnd
         {
             if (hit.gameObject.CompareTag("ItemSlot"))
             {
-                itemSlotcs.SelectItem(ItemWinowSlot.item);
-                transform.position = prevPosition;
+                itemSlotcs.SelectItem(itemwindowSlot.itemid);
             }
             else if (hit.gameObject.CompareTag("PassSlot"))
             {
-                passSlotcs.SelectItem(ItemWinowSlot.item);
-                transform.position = prevPosition;
-            }
-            else
-            {
-                transform.position = prevPosition;
+                //Debug.Log("パススロットセット");
+                passSlotcs.SelectItem(itemwindowSlot.itemid);
+                PassSystem.passitemid = itemwindowSlot.itemid;
             }
         }
+        transform.position = prevPosition;
     }
+
 }

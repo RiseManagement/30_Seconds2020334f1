@@ -1,31 +1,73 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class MainGameManager : MonoBehaviour
+using UnityEngine;
+using UnityEngine.UI;
+
+public class MainGameManager :MonoBehaviour
 {
+    public static MainGameManager instance;
+    public static bool isClearUserA;
+    public static bool isClearUserB;
     //現在ターン数
-    static int nowTurn = 1;
+    public static int nowTurn = 1;
 
     //最大ターン数
     int maxTurn = 16;
 
+    [SerializeField] Text startTurnText;
+    float startTurnTextTimer = 0;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartTurn();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ChangeStartTurnTextColor();
     }
-
+    void StartTurn()
+    {
+        startTurnTextTimer = 2;
+        startTurnText.text = GameObject.Find("Player").GetComponent<User>().User_name + "のターン";
+    }
+    void ChangeStartTurnTextColor()
+    {
+        if (startTurnTextTimer > 0)
+        {
+            startTurnTextTimer -= Time.deltaTime;
+            if (startTurnTextTimer > 1)
+            {
+                startTurnText.color = new Color(startTurnText.color.r, startTurnText.color.g, startTurnText.color.b, 1);
+            }
+            else
+            {
+                startTurnText.color = new Color(startTurnText.color.r, startTurnText.color.g, startTurnText.color.b, startTurnTextTimer);
+            }
+        }
+    }
+    public void GoToEnding()
+    {
+        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+    }
     /// <summary>
     /// ターン数カウントアップ
     /// </summary>
-    public void TurnCountUp()
+    public static void TurnCountUp()
     {
         nowTurn += 1;
     }

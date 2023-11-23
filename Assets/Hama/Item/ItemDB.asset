@@ -13,291 +13,339 @@ MonoBehaviour:
   m_Name: ItemDB
   m_EditorClassIdentifier: 
   datas:
-  - id: 1
+  - id: 0
     name: "\uFF21\u7D75\u753B"
     explanation: "\u4E0D\u601D\u8B70\u306A\u7D75\u753B\u3060\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 2
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 1
     name: "A\u7D75\u753B(\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8\u7167\u5C04\u5F8C)"
     explanation: "\u306A\u3093\u304B\u6D6E\u304B\u3073\u4E0A\u304C\u3063\u3066\u304D\u305F\u2026\uFF01"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 3
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 2
     name: "\u8896\u673A(\u4E2D\u306B\u7D75\u5177)"
     explanation: "\u958B\u304D\u305D\u3046\u3067\u958B\u304B\u306A\u3044\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 4
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 3
     name: "\u8896\u673A(\u7A7A\u3044\u305F\u72B6\u614B)"
     explanation: "\u4E2D\u306B\u4F55\u304B\u5165\u3063\u3066\u308B\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 5
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 4
     name: "\u30D1\u30BA\u30EB"
     explanation: "\u3053\u308C\u306F\u306A\u3093\u3060\u308D\u3046\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 6
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 5
     name: "\u30D1\u30BA\u30EB(\u89E3\u7B54\u5F8C)"
     explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 7
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 6
     name: "\uFF21\u51FA\u53E3\u30C9\u30A2"
     explanation: "\u958B\u304B\u306A\u3044\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 8
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 7
     name: "\uFF21\u51FA\u53E3\u30C9\u30A2(\u9375\u5DEE\u8FBC\u5F8C)"
     explanation: "\u5916\u306B\u51FA\u3089\u308C\u305D\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 9
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 8
     name: "\uFF21\u9375\u5DEE\u8FBC\u53E3"
     explanation: "\u9375\u7A74\u304C\u3042\u308B"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 10
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 9
     name: "\uFF21\u9375\u5DEE\u8FBC\u53E3(\u9375\u5DEE\u8FBC\u5F8C)"
     explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 11
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 10
     name: "\u30A2\u30C3\u30D7\u30E9\u30A4\u30C8\u30D4\u30A2\u30CE"
     explanation: "\u5F3E\u3044\u3066\u307F\u3088\u3046\u304B\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 12
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 11
     name: "\u30B7\u30EA\u30F3\u30C0\u30FC"
     explanation: "\u4F55\u304B\u306B\u4F7F\u3048\u308B\u304B\u306A\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 13
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 12
     name: "\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8"
     explanation: "\u30D6\u30E9\u30C3\u30AF\u30E9\u30A4\u30C8\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 14
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 13
     name: "\u53F0\u5EA7\u30DC\u30BF\u30F3"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 15
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 14
     name: "\u53F0\u5EA7"
     explanation: "\u3053\u308C\u306F\u4F55\u3060\u308D\u3046\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 16
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 15
     name: "\u53F0\u5EA7(\u7269\u4E57\u3063\u3051\u3066\u308B)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 17
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 16
     name: "\u6C34\u69FD(\u6C34\u6709\u308A)"
     explanation: "\u6C34\u304C\u6E9C\u307E\u3063\u3066\u3044\u3066\u4E2D\u304C\u826F\u304F\u898B\u3048\u306A\u3044"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 18
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 17
     name: "\u6C34\u69FD(\u6C34\u7121\u3057)"
     explanation: "\u6C34\u304C\u629C\u3051\u305F\u3088\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 19
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 18
     name: "\u6C34\u69FD(\u30B7\u30EA\u30F3\u30C0\u30FC\u5DEE\u8FBC\u5F8C)"
     explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 20
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 19
     name: "\u6C34\u69FD\u306E\u7A74"
     explanation: "\u3053\u308C\u306F\u4F55\u3060\u308D\u3046\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 21
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 20
     name: "\u6C34\u69FD\u306E\u7A74(\u30B7\u30EA\u30F3\u30C0\u30FC\u5DEE\u8FBC\u5F8C)"
     explanation: "\u30B7\u30EA\u30F3\u30C0\u30FC\u304C\u523A\u3055\u3063\u3066\u3044\u308B"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 22
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 21
     name: "\u30B4\u30FC\u30EB\u9375\uFF21"
     explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 23
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 22
     name: "\uFF22\u7D75\u753B"
     explanation: "\u7537\u5973\u306E\u7D75\u753B\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 24
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 23
     name: "\u8B0E\uFF11\u30D2\u30F3\u30C8"
     explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 25
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 24
     name: "\uFF22\u51FA\u53E3\u30C9\u30A2"
     explanation: "\u958B\u304B\u306A\u3044\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 26
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 25
     name: "\uFF22\u51FA\u53E3\u30C9\u30A2(\u9375\u5DEE\u8FBC\u5F8C)"
     explanation: "\u5916\u306B\u51FA\u3089\u308C\u305D\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 27
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 26
     name: "\uFF22\u9375\u5DEE\u8FBC\u53E3"
     explanation: "\u9375\u7A74\u304C\u3042\u308B"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 28
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 27
     name: "\uFF22\u9375\u5DEE\u8FBC\u53E3(\u9375\u5DEE\u8FBC\u5F8C)"
     explanation: "\u3082\u3046\u610F\u5473\u304C\u306A\u3044\u3088\u3046\u3060\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 29
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 28
     name: "\u82B1\u74F6"
     explanation: "\u82B1\u304C\u751F\u3051\u3066\u3042\u308B"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 30
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 29
     name: "\u82B1\u74F6(\u67D3\u8272\u5F8C)"
     explanation: "\u5225\u306E\u8272\u306B\u67D3\u307E\u3063\u305F\u3088\u3046\u3060\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 31
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 30
     name: "\u30B4\u30FC\u30EB\u9375\uFF22"
     explanation: "\u3069\u3053\u304B\u3067\u4F7F\u3048\u305D\u3046\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 32
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 31
     name: "\u9752\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 33
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 32
     name: "\u9752\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 34
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 33
     name: "\u6C34\u629C\u304D\u30B9\u30A4\u30C3\u30C1"
     explanation: "\u4F55\u306E\u30B9\u30A4\u30C3\u30C1\u3060\u308D\u3046\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 34
+    name: 
+    explanation: 
+    image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
   - id: 35
-    name: "\u6D44\u6C34\u5668"
-    explanation: "\u6C34\u3092\u7DBA\u9E97\u306B\u3059\u308B\u88C5\u7F6E\u3060"
+    name: 
+    explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
   - id: 36
-    name: "\u6D44\u6C34\u5668(\u7D75\u5177\u6D41\u3057\u8FBC\u307F\u5F8C)"
-    explanation: "\u4E2D\u306E\u6C34\u304C\u7D75\u306E\u5177\u3067\u67D3\u8272\u3055\u308C\u3066\u308B"
-    image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 37
     name: "\u30E9\u30F3\u30D7\u30D2\u30F3\u30C8(\u7D19)"
     explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 38
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 37
     name: "\u9EC4\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 39
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 38
     name: "\u9EC4\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 40
-    name: "\u8B0E\uFF11\u6B63\u89E3\u30A2\u30A4\u30C6\u30E0"
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 39
+    name: "\u308A\u3093\u3054"
     explanation: "\u4F5C\u308A\u7269\u306E\u308A\u3093\u3054\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 41
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
+  - id: 40
     name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u306A\u3057)"
     explanation: "\u30AA\u30EB\u30B4\u30FC\u30EB\u304C\u3042\u308B\u3000\u97F3\u306F\u9CF4\u3089\u306A\u3044\u307F\u305F\u3044\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 42
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 41
     name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u3042\u308A)"
     explanation: "\u7DBA\u9E97\u306A\u97F3\u3060"
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 43
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 42
     name: "\u8D64\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 44
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 43
     name: "\u8D64\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+  - id: 44
+    name: "\u30C0\u30DF\u30FC1"
+    explanation: 
+    image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
   - id: 45
-    name: 
+    name: "\u30C0\u30DF\u30FC2"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
   - id: 46
-    name: 
+    name: "\u30C0\u30DF\u30FC3"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1
   - id: 47
-    name: 
+    name: "\u30C0\u30DF\u30FC4"
     explanation: 
     image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
-  - id: 48
-    name: 
-    explanation: 
-    image: {fileID: 21300000, guid: 4f323403ccfa60140b03c0d589be6bfd, type: 3}
-    ownerFlag: 0
-    interactFlag: 0
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 1

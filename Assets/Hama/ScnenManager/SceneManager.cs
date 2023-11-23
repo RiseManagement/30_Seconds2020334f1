@@ -1,28 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager : MonoBehaviour
+public class SceneManager :MonoBehaviour
 {
     static public SceneManager instance;
 
-    static string scenename;
+    static string nowscenename;
+    public static string NowSceneName
+    {
+        get
+        {
+            return nowscenename;
+        }
+    }
     static string oldscenename;
     public static string OldSceneName
     {
-        get { return oldscenename; }
+        get
+        {
+            return oldscenename;
+        }
     }
     public enum SceneName
     {
         TITLE,
         INTERVAL,
         STORY,
-        CLEAR,
-        MAINGAME_A,
-        MAINGAME_B,
+        ENDING,
+        MAINGAMEFIRST,
+        MAINGAMELAST,
     }
-    
+
 
     void Awake()
     {
@@ -41,15 +52,15 @@ public class SceneManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        oldscenename = scenename;
+        oldscenename = nowscenename;
     }
 
     // Update is called once per frame
     void Update()
     {
-        scenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
-        Debug.Log("現在のシーン:" +  scenename);
-        Debug.Log("過去のシーン:" + oldscenename);
+        nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        //Debug.Log("現在のシーン:" + nowscenename);
+        // Debug.Log("過去のシーン:" + oldscenename);
     }
 
     /// <summary>
@@ -58,7 +69,7 @@ public class SceneManager : MonoBehaviour
     /// <param name="scene">列挙型のシーン名</param>
     public static void SceneLaod(SceneName scene)
     {
-        oldscenename = scenename;
+        oldscenename = nowscenename;
         string sceneName = scene.ToString().ToLower();
 
         if (!UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())

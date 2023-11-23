@@ -1,43 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
+using UnityEngine.UI;
 
-public class Inventry : MonoBehaviour
+public class Inventry :MonoBehaviour
 {
-
     public static Inventry instance;
     InventryUI InventryUI;
+    [SerializeField] Text explanationText;
 
     private void Awake()
     {
-        if(instance == null)
+        if (instance == null)
         {
             instance = this;
         }
-        
+
     }
 
     private void Start()
     {
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
         InventryUI = GetComponent<InventryUI>();
         InventryUI.UpdateUI();
 
     }
 
-    public List<ItemID> items = new List<ItemID>();
+    public List<int> itemsid = new List<int>();
 
-    public void Add(ItemID item)
+    public void Add(int itemid)
     {
 
-        items.Add(item);
+        itemsid.Add(itemid);
         InventryUI.UpdateUI();
-
     }
 
-    public void Removed(ItemID item)
+    public void Removed(int itemid)
     {
-        items.Remove(item);
+        itemsid.Remove(itemid);
+        InventryUI.UpdateUI();
     }
 
+    public void SetExplanationText(string _explanationText)
+    {
+        explanationText.text = _explanationText;
+    }
 }
