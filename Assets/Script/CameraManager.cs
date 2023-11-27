@@ -1,14 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraManager : MonoBehaviour
 {
     private float x;
+    private float y;
+    private Camera mainCam;
+    [SerializeField] GameObject FocusCancelButton;
+    [SerializeField] GameObject LButtonActive;
+    [SerializeField] GameObject RButtonActive;
     // Start is called before the first frame update
     void Start()
     {
         x = transform.position.x;
+        mainCam = Camera.main;
+        FocusCancelButton.SetActive(false) ;
+        LButtonActive.SetActive(true);
+        RButtonActive.SetActive(true);
     }
 
     // Update is called once per frame
@@ -47,11 +57,66 @@ public class CameraManager : MonoBehaviour
         //transform.Rotate(0,-90,0,Space.World);
     }
 
+    public void ItemFocus(Vector2 vector2,int a)//フォーカス機能＋フォーカスボタン表示
+    {
+        FocusTransform(vector2);
+        FocusSize(a);
+        FocusCancelButton.SetActive(true);
+        LButtonActive.SetActive(false);
+        RButtonActive.SetActive(false);
+    }
+
     //引数がアイテムクリック時のアイテム座標のフォーカス機能
-    public void Focus(Vector2 vector2)
+    private void FocusTransform(Vector2 vector2)
     {
         Vector2 Focus_adjust = new Vector2(0, 0);    //フォーカスする位置の調整用Vector2
         transform.position = vector2+Focus_adjust ;
-        this.transform.localScale = new Vector2(2, 2);
+    }
+
+    private void FocusSize(int a)
+    {
+        switch(a)
+        {
+            case 1://ズーム小
+                mainCam.orthographicSize += 1;
+                break;
+            case 2: //ズーム中
+                mainCam.orthographicSize += 2;
+                break;
+            case 3: //ズーム大
+                mainCam.orthographicSize += 3;
+                break;
+            default:
+                mainCam.orthographicSize = 5;
+                break;
+        }   
+    }
+    public void FocusCancel()
+    {
+        mainCam.orthographicSize = 5;
+        y=transform.position.y;
+        FocusCancelButton.SetActive(false);
+        LButtonActive.SetActive(true);
+        RButtonActive.SetActive(true);
+        if (y>-10&&y<10)
+        {
+            mainCam.transform.position = new Vector2(0,0);
+        }
+        else if(y>10&&y<30)
+        {
+            mainCam.transform.position = new Vector2(0, 20);
+        }
+        else if (y > 30 && y < 50)
+        {
+            mainCam.transform.position = new Vector2(0, 40);
+        }
+        else if (y > 50 && y < 70)
+        {
+            mainCam.transform.position = new Vector2(0, 60);
+        }
+        else
+        {
+            Debug.Log("FocusCancel失敗");
+        }
     }
 }
