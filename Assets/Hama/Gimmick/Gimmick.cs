@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Gimmick : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class Gimmick : MonoBehaviour
     }
 
     //オブジェクト名
-    string stageitemName;
+    int stageitemName;
 
     //ギミック種類
 
@@ -23,7 +24,7 @@ public class Gimmick : MonoBehaviour
     void Start()
     {
         gimmmickFlag = false;
-        stageitemName = gameObject.name;
+        stageitemName = int.Parse(gameObject.name);
     }
 
     // Update is called once per frame
@@ -41,28 +42,33 @@ public class Gimmick : MonoBehaviour
 
         switch (stageitemName)
         {
-            case "0":
-                AnswerItem();
+            case 0://A絵画
+                FiledObjChange();
+                break;
+            case 13:
+                //謎1クリア
+                break;
+            case 14://台座
+                FiledObjChange();
                 break;
         }
         gimmmickFlag = false;
     }
 
     //使用後の事象発生
-    
-    /// <summary>
-    /// 正解アイテム表示
-    /// </summary>
-    public static void AnswerItem()
-    {
-        Debug.Log("正解アイテム表示");
-    }
 
     /// <summary>
     /// フィールド物の変化
     /// </summary>
-    public static void FiledObjChange()
+    public void FiledObjChange()
     {
         Debug.Log("フィールド上物の変化");
+        //Debug.Log( gameObject.transform.GetComponent<SpriteRenderer>().sprite);
+        gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(stageitemName+1).Image;
+    }
+
+    public void NazoCler()
+    {
+        Debug.Log("謎クリア");
     }
 }
