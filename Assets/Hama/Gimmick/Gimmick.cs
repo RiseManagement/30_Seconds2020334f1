@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Gimmick : MonoBehaviour
 {
     //ギミック動作フラグ
-    bool gimmmickFlag;
+   public bool gimmmickFlag;
     public bool GimmmickFlag
     {
         set
@@ -24,12 +24,13 @@ public class Gimmick : MonoBehaviour
     void Start()
     {
         gimmmickFlag = false;
-        stageitemName = int.Parse(gameObject.name);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        stageitemName = int.Parse(gameObject.name);
         GimmickSelect();
     }
 
@@ -45,11 +46,12 @@ public class Gimmick : MonoBehaviour
             case 0://A絵画
                 FiledObjChange();
                 break;
-            case 13:
-                //謎1クリア
-                break;
             case 14://台座
                 FiledObjChange();
+                break;
+            case 15:
+                //謎1クリア
+                MysteryCler();
                 break;
         }
         gimmmickFlag = false;
@@ -63,12 +65,12 @@ public class Gimmick : MonoBehaviour
     public void FiledObjChange()
     {
         Debug.Log("フィールド上物の変化");
-        //Debug.Log( gameObject.transform.GetComponent<SpriteRenderer>().sprite);
         gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(stageitemName+1).Image;
+        this.gameObject.name = (stageitemName + 1).ToString();
     }
 
-    public void NazoCler()
-    {
+    public void MysteryCler()
+    {   
         Debug.Log("謎クリア");
     }
 }
