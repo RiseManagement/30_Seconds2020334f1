@@ -138,6 +138,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: RButton
       objectReference: {fileID: 0}
+    - target: {fileID: 980573441891279748, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1733127788}
+    - target: {fileID: 980573441891279748, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LButton
+      objectReference: {fileID: 0}
     - target: {fileID: 2749789302368204824, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -258,6 +266,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7322493022554786076, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1733127788}
+    - target: {fileID: 7322493022554786076, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: FocusCancel
+      objectReference: {fileID: 0}
     - target: {fileID: 7492919549242295338, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -266,8 +282,21 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LButton
       objectReference: {fileID: 0}
+    - target: {fileID: 8033877470917930829, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1733127788}
+    - target: {fileID: 8033877470917930829, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: RButton
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+--- !u!1 &39823903 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2174942986577736825, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+  m_PrefabInstance: {fileID: 30049933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &61787575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -325,6 +354,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
+--- !u!1 &426582976 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2853429514803795081, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+  m_PrefabInstance: {fileID: 30049933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &469753460
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -446,7 +480,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &609359991
 PrefabInstance:
@@ -465,7 +499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2980094391211902260, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2980094391211902260, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
       propertyPath: m_AnchorMax.x
@@ -891,6 +925,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d55e32882a88a04e80d75e8b967392e, type: 3}
+--- !u!114 &1320419222 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6283910576554546255, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+  m_PrefabInstance: {fileID: 30049933}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1354911068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1056,6 +1101,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1675502338 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7916288472007353258, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+  m_PrefabInstance: {fileID: 30049933}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1733127784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1189,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1733127788
 MonoBehaviour:
@@ -1153,6 +1203,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed550f2e4a8b74547aa87c1f5e9e5001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FocusCancelButton: {fileID: 39823903}
+  LButtonActive: {fileID: 1675502338}
+  RButtonActive: {fileID: 426582976}
 --- !u!114 &1733127789
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1174,17 +1227,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 118450779903042612, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
   m_PrefabInstance: {fileID: 1943582452}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1846754408 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 813254921, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
-  m_PrefabInstance: {fileID: 30049933}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1943582452
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1938,7 +1980,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7161210616452182178, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7173703911093850807, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -2084,7 +2126,7 @@ PrefabInstance:
     - target: {fileID: 6372444033393142262, guid: a18f6defd867e8342b6bdebb832953cf, type: 3}
       propertyPath: startTurnText
       value: 
-      objectReference: {fileID: 1846754408}
+      objectReference: {fileID: 1320419222}
     - target: {fileID: 7802696086757051040, guid: a18f6defd867e8342b6bdebb832953cf, type: 3}
       propertyPath: m_RootOrder
       value: 8
