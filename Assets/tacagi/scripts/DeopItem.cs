@@ -43,6 +43,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         StageItemGimmickOn();
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
                 case 14://アイテム選択された側
@@ -52,6 +53,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         StageItemGimmickOn();
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
                 case 15://アイテム選択された側

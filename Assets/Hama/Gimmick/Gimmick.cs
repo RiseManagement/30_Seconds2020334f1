@@ -23,8 +23,25 @@ public class Gimmick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        stageitemName = int.Parse(gameObject.name);
         gimmmickFlag = false;
-        
+
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            switch (stageitemName)
+            {
+                case 0://A絵画
+                    FiledObjChange();
+                    break;
+                case 14://台座
+                    FiledObjChange();
+                    break;
+                case 15:
+                    //謎1クリア
+                    MysteryCler();
+                    break;
+            }
+        }
     }
 
     // Update is called once per frame
