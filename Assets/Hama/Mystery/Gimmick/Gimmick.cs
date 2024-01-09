@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Gimmick : MonoBehaviour
 {
+  
+    
+    [Header("ギミック")]
     //ギミック動作フラグ
-   public bool gimmmickFlag;
+    public bool gimmmickFlag;
     public bool GimmmickFlag
     {
         set
@@ -19,6 +23,7 @@ public class Gimmick : MonoBehaviour
     int stageitemName;
 
     //ギミック種類
+    
 
     // Start is called before the first frame update
     void Start()
@@ -72,6 +77,14 @@ public class Gimmick : MonoBehaviour
                 break;
         }
         gimmmickFlag = false;
+    }
+
+    /// <summary>
+    /// オルゴール音再生
+    /// </summary>
+    void MusicBoxMusicStart()
+    {
+
     }
 
     //使用後の事象発生
