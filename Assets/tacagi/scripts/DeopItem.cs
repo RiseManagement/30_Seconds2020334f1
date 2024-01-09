@@ -6,12 +6,11 @@ using UnityEngine.UI;
 
 public class DeopItem : MonoBehaviour, IPointerClickHandler
 {
-    public ItemID item;
-    public int itemslotid;
     ItemSlot itemslot;
 
     new CameraManager camera;
     public GameObject stageitemobj;
+    public int stageitemNumber;
 
 
     private void Start()
@@ -22,31 +21,44 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        Debug.Log($"オブジェクト {name} がクリックされたよ！");
-
+        //Debug.Log($"オブジェクト {name} がクリックされたよ！");
+        GetStageItemTapObjectInfo();
+        stageitemNumber = int.Parse(stageitemobj.name);
         //Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
         //所持者がいない場合
-        if (ItemDataBase.Entity.GetData(item.id).EnabletakeFlag == 1)
+        if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
-            Inventry.instance.Add(item.id);
+            Inventry.instance.Add(stageitemNumber);
             Destroy(gameObject);
         }
         else
         {
-            GetStageItemTapObjectInfo();
             //camera.Focus(eventData.position);
-            switch (item.id)
+            switch (stageitemNumber)
             {
                 case 0://アイテム選択された側
                     if(itemslot.itemid == 12)//アイテム使用側
                     {
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-
-
                         //事象処理
                         StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
+                    break;
+                case 14://アイテム選択された側
+                    if (itemslot.itemid == 39)//アイテム使用側
+                    {
+                        //事象処理
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
+                case 15://アイテム選択された側
+                    //事象処理
+                    StageItemGimmickOn();
                     break;
             }
 

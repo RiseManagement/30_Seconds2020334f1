@@ -57,7 +57,7 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
         itemid = -1;
         icon = null;
 
-        Debug.Log("クリアスロット");
+        //Debug.Log("クリアスロット");
 
         Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
 

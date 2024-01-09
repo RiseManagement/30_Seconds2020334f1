@@ -52,6 +52,6 @@ public class ItemSlot : MonoBehaviour
         icon = null;
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
 
-        Debug.Log("アイテム使用済");
+        //Debug.Log("アイテム使用済");
     }
 }
