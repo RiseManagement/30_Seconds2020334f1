@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class Gimmick : MonoBehaviour
 {
-  
-    
     [Header("ギミック")]
     //ギミック動作フラグ
     public bool gimmmickFlag;

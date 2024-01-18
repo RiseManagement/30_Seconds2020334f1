@@ -78,13 +78,13 @@ public class CameraManager : MonoBehaviour
         switch(a)
         {
             case 1://ズーム小
-                mainCam.orthographicSize += 1;
+                mainCam.orthographicSize = 4;
                 break;
             case 2: //ズーム中
-                mainCam.orthographicSize += 2;
+                mainCam.orthographicSize = 3;
                 break;
             case 3: //ズーム大
-                mainCam.orthographicSize += 3;
+                mainCam.orthographicSize = 2;
                 break;
             default:
                 mainCam.orthographicSize = 5;

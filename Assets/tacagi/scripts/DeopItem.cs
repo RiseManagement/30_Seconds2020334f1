@@ -46,6 +46,20 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
+                case 10:
+                    stageitemobj.transform.GetChild(0).GetComponent<Piano>().isFocus = true;
+                    camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+                    break;
+                case 11://アイテム選択された側
+                    if (itemslot.itemid == 40)//アイテム使用側
+                    {
+                        //事象処理
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
                 case 14://アイテム選択された側
                     if (itemslot.itemid == 39)//アイテム使用側
                     {
@@ -60,6 +74,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     //事象処理
                     StageItemGimmickOn();
                     break;
+
             }
 
         }
