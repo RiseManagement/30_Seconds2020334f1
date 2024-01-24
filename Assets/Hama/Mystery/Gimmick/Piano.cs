@@ -10,30 +10,31 @@ public class Piano : MonoBehaviour
     public GameObject[] keybord_obj = new GameObject[pianomaxCount];
     public int pianoplaycount;
     static int pianomaxCount = 6;
+    public bool successFlg;
 
-    //フォーカスフラグ
-    public bool isFocus;
+    CameraManager cameraManager;
 
     // Start is called before the first frame update
     void Start()
     {
+        successFlg = false; 
         pianoplaycount = 0;
-        isFocus = false;
+        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isFocus)
+        if (cameraManager.Focusflg)
         {
             PianoPlay();
-            PianoGimmickClear();
         }
         else
         {
             PianoGimmickReset();
+            this.gameObject.SetActive(false);
+            Debug.Log("フォーカスリセット");
         }
-
     }
 
     /// <summary>
@@ -46,10 +47,10 @@ public class Piano : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
 
-            string[] arr = hit.collider.gameObject.name.Split('_');
+                string[] arr = hit.collider.gameObject.name.Split('_');
 
-            if (arr.Length > 1)
-            {
+                if (arr.Length < 2) return; 
+
                 switch (arr[1])
                 {
                     case "do":
@@ -79,16 +80,17 @@ public class Piano : MonoBehaviour
                 keybord_obj[pianoplaycount] = hit.collider.gameObject;
                 //Debug.Log(hit.collider.gameObject);
                 pianoplaycount++;
-            }
         }
+
+        PianoGimmickSuccessCheack();
+        PianoGimmickFailureCheack();
     }
 
     /// <summary>
-    /// ピアノギミッククリア
+    /// ピアノギミッククリアチェック
     /// </summary>
-    void PianoGimmickClear()
+    void PianoGimmickSuccessCheack()
     {
-        
         for(int i = 0; i < pianomaxCount; i++)
         {
             if (keybord_obj[i] == null) return;
@@ -102,7 +104,19 @@ public class Piano : MonoBehaviour
            keybord_obj[4].gameObject.name == "keyboard_so" && 
            keybord_obj[5].gameObject.name == "keyboard_do")
         {
-            Debug.Log("ピアノクリア");
+            successFlg = true;
+            Debug.Log("ピアノギミック成功");
+            StartCoroutine(FocusCancel());
+        }
+    }
+
+    void PianoGimmickFailureCheack()
+    {
+        if(pianoplaycount >= pianomaxCount && !successFlg)
+        {
+            StartCoroutine(FocusCancel());
+            
+            Debug.Log("ピアノギミック失敗");
         }
     }
 
@@ -115,5 +129,14 @@ public class Piano : MonoBehaviour
         {
             keybord_obj[i] = null;
         }
+        this.transform.GetComponent<SpriteRenderer>().sprite = keybord_sprite[0];
+        pianoplaycount = 0;
+    }
+
+    IEnumerator FocusCancel()
+    {
+        yield return new WaitForSeconds(1);
+
+        cameraManager.FocusCancel();
     }
 }

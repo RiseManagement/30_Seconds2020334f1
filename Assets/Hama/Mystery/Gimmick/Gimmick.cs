@@ -43,6 +43,11 @@ public class Gimmick : MonoBehaviour
                     //謎1クリア
                     MysteryCler();
                     break;
+                case 40:
+                    //オルゴール
+                    FiledObjChange();
+                    MusicBoxMusicStart();
+                    break;
             }
         }
     }
@@ -73,6 +78,11 @@ public class Gimmick : MonoBehaviour
                 //謎1クリア
                 MysteryCler();
                 break;
+            case 40:
+                //オルゴール
+                FiledObjChange();
+                MusicBoxMusicStart();
+                break;
         }
         gimmmickFlag = false;
     }
@@ -82,7 +92,7 @@ public class Gimmick : MonoBehaviour
     /// </summary>
     void MusicBoxMusicStart()
     {
-
+        Debug.Log("音楽流れた");
     }
 
     //使用後の事象発生

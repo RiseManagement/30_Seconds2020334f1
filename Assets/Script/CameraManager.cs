@@ -16,7 +16,7 @@ public class CameraManager : MonoBehaviour
     {
         Focusflg = false;
         mainCam = Camera.main;
-        FocusCancelButton.SetActive(false) ;
+        FocusCancelButton.SetActive(false);
         LButtonActive.SetActive(true);
         RButtonActive.SetActive(true);
     }
@@ -67,6 +67,7 @@ public class CameraManager : MonoBehaviour
         {
             cameraPos.x = transform.position.x;
             cameraPos.y = transform.position.y;
+            //Debug.Log(cameraPos);
         }
     }
 
@@ -83,6 +84,8 @@ public class CameraManager : MonoBehaviour
         FocusCancelButton.SetActive(true);
         LButtonActive.SetActive(false);
         RButtonActive.SetActive(false);
+
+        Debug.Log("アイテムフォーカス");
     }
 
     /// <summary>
@@ -92,7 +95,7 @@ public class CameraManager : MonoBehaviour
     private void FocusTransform(Vector2 vector2)
     {
         Vector2 Focus_adjust = new Vector2(0, 0);    //フォーカスする位置の調整用Vector2
-        transform.position = vector2+Focus_adjust ;
+        transform.position = vector2+Focus_adjust;
     }
 
     /// <summary>
@@ -123,11 +126,13 @@ public class CameraManager : MonoBehaviour
     /// </summary>
     public void FocusCancel()
     {
-        mainCam.orthographicSize = 5;
         mainCam.transform.position = cameraPos;
+        SetFocusSize(0);
         Focusflg = false;
         FocusCancelButton.SetActive(false);
         LButtonActive.SetActive(true);
         RButtonActive.SetActive(true);
+
+        Debug.Log("フォーカスキャンセル");
     }
 }
