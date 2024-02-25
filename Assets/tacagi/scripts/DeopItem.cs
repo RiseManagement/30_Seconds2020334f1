@@ -47,6 +47,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     }
                     break;
                 case 10:
+                    Debug.Log("1");
                     stageitemobj.transform.GetChild(0).GetComponent<Piano>().isFocus = true;
                     camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
                     break;

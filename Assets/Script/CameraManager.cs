@@ -59,6 +59,7 @@ public class CameraManager : MonoBehaviour
 
     public void ItemFocus(Vector2 vector2,int a)//フォーカス機能＋フォーカスボタン表示
     {
+        Debug.Log("5");
         FocusTransform(vector2);
         FocusSize(a);
         FocusCancelButton.SetActive(true);
@@ -106,11 +107,11 @@ public class CameraManager : MonoBehaviour
         {
             mainCam.transform.position = new Vector2(0, 20);
         }
-        else if (y > 30 && y < 50)
+        else if (y>30&&y<50)
         {
             mainCam.transform.position = new Vector2(0, 40);
         }
-        else if (y > 50 && y < 70)
+        else if (y>50 && y<70)
         {
             mainCam.transform.position = new Vector2(0, 60);
         }
