@@ -48,6 +48,13 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
+                case 4:
+                    if (!camera.Focusflg)
+                    {
+                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    break;
                 case 10:
                     if (!camera.Focusflg)
                     {

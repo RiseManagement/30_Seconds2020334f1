@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 6204926829987242883}
   - component: {fileID: 5721331372910671295}
   m_Layer: 0
-  m_Name: Puzzle_2
+  m_Name: Puzzle_1
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 3900265619924016695}
   - component: {fileID: 3622535020332572277}
   m_Layer: 0
-  m_Name: Puzzle_9
+  m_Name: Puzzle_8
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -546,7 +546,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7639822627263557648}
   - component: {fileID: 8020141457054160947}
-  - component: {fileID: 9085336055051235171}
   - component: {fileID: 543210465815316104}
   - component: {fileID: 3980345059594845325}
   m_Layer: 0
@@ -622,18 +621,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &9085336055051235171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1223110909822893932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 716da32245b885440bed7088065bcbfe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &543210465815316104
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -723,7 +710,7 @@ GameObject:
   - component: {fileID: 5033757921566256535}
   - component: {fileID: 1268759300515140969}
   m_Layer: 0
-  m_Name: Puzzle_8
+  m_Name: Puzzle_7
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -978,7 +965,7 @@ GameObject:
   - component: {fileID: 5731300573564533604}
   - component: {fileID: 3230854433178866733}
   m_Layer: 0
-  m_Name: Puzzle_5
+  m_Name: Puzzle_4
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1109,7 +1096,7 @@ GameObject:
   - component: {fileID: 8486620421607267849}
   - component: {fileID: 6983070653794036286}
   m_Layer: 0
-  m_Name: Puzzle_3
+  m_Name: Puzzle_2
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1459,7 +1446,7 @@ GameObject:
   - component: {fileID: 1066482965275379061}
   - component: {fileID: 3340073224997086155}
   m_Layer: 0
-  m_Name: Puzzle_6
+  m_Name: Puzzle_5
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,7 +1577,7 @@ GameObject:
   - component: {fileID: 7452925024208687740}
   - component: {fileID: 736180647722246611}
   m_Layer: 0
-  m_Name: Puzzle_7
+  m_Name: Puzzle_6
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1721,7 +1708,7 @@ GameObject:
   - component: {fileID: 5315475362932757101}
   - component: {fileID: 3534349778427612026}
   m_Layer: 0
-  m_Name: Puzzle_4
+  m_Name: Puzzle_3
   m_TagString: Area
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1932,7 +1919,7 @@ GameObject:
   - component: {fileID: 8688901944796502183}
   - component: {fileID: 6729500833994683054}
   m_Layer: 0
-  m_Name: SildePuzzle
+  m_Name: 4_SildePuzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1987,6 +1974,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  successFlg: 0
+  cameraManager: {fileID: 0}
 --- !u!1 &8377873119438168057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2000,7 +1989,7 @@ GameObject:
   - component: {fileID: 7006804690638104364}
   - component: {fileID: 8213286748040717663}
   m_Layer: 0
-  m_Name: Puzzle_1
+  m_Name: Puzzle_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
