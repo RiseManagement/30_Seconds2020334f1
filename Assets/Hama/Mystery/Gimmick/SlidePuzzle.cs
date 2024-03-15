@@ -5,25 +5,30 @@ using UnityEngine.EventSystems;
 
 public class SlidePuzzle : MonoBehaviour
 {
-    //作業保存
+    //座標保存
     public Vector3 saveThisObjPosition;
 
+    //ピース交換対象オブジェクト
     public GameObject tapObj;
     public GameObject centerObj;
 
-    //パズル
+    //パズル数
     const int puzzle_MAX_COUNT = 9;
     public GameObject[] puzzleObj = new GameObject[puzzle_MAX_COUNT];
     public GameObject[] answerpuzzleObj = new GameObject[puzzle_MAX_COUNT];
 
-    public bool successFlg;
+    //フラグ
+    public bool successFlag;
+    public bool tapObjFlag;
+    public bool clearFlag;
 
     CameraManager cameraManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        successFlg = false;
+        successFlag = false;
+        clearFlag = false;
         centerObj = this.gameObject.transform.GetChild(0).gameObject;
         cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
 
@@ -34,8 +39,8 @@ public class SlidePuzzle : MonoBehaviour
         PuzzleReset();
         if (!PuzzleClearCkeck())
         {
-            PuzzleReset();
-            return;
+            //PuzzleReset();
+            Debug.Log("やり直し");
         }
     }
 
@@ -60,7 +65,6 @@ public class SlidePuzzle : MonoBehaviour
         int westNo = 0;
         int southNo = 0;
 
-        //
         //上下左右にRayを飛ばす。
         RaycastHit2D hitUp = Physics2D.Raycast(centerObj.transform.position + Vector3.up, Vector2.up, 0.1f);
         RaycastHit2D hitDown = Physics2D.Raycast(centerObj.transform.position + Vector3.down, Vector2.down, 0.1f);
@@ -86,7 +90,7 @@ public class SlidePuzzle : MonoBehaviour
             if (hitLeft.transform.gameObject.name.Contains("Puzzle"))
                 westNo = int.Parse(hitLeft.transform.gameObject.name.Substring(7, 1));
         }
-        Debug.Log(northNo + "," + southNo + "," + eastNo + "," + westNo);
+        //Debug.Log(northNo + "," + southNo + "," + eastNo + "," + westNo);
 
 
         //空白のピースの位置を取得する
@@ -100,18 +104,18 @@ public class SlidePuzzle : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             GetStageItemTapObjectInfo();
+
+            if (!tapObjFlag) return;
+
             var tapNo = 0;
             for (int i = 0; i < puzzleObj.Length; i++)
             {
                 if (puzzleObj[i].gameObject.name.Contains(tapObj.name))
                     tapNo = i;
             }
-            //var tapNo = int.Parse(tapObj.name.Substring(7, 1));
-
-            Debug.Log("センターNo：" + centerNo);
-            Debug.Log("タップNo：" + tapNo);
-
+            //Debug.Log("センターNo：" + centerNo);
             //Debug.Log("タップNo：" + tapNo);
+
             //スライド式にするためにタップしたピースがどの位置かを判定する
             if (//上下左右1マスのみ判定
                 (int.Parse(tapObj.name.Substring(7, 1)) == northNo ||
@@ -136,7 +140,7 @@ public class SlidePuzzle : MonoBehaviour
                 puzzleObj[tapNo] = puzzleObj[centerNo];
                 puzzleObj[centerNo] = savePuzzleObj;
 
-                Debug.Log("交換");
+                //Debug.Log("交換");
             }
         }
 
@@ -150,9 +154,14 @@ public class SlidePuzzle : MonoBehaviour
             int.Parse(puzzleObj[6].gameObject.transform.gameObject.name.Substring(7, 1)) == 6 &&
             int.Parse(puzzleObj[7].gameObject.transform.gameObject.name.Substring(7, 1)) == 7 &&
             int.Parse(puzzleObj[8].gameObject.transform.gameObject.name.Substring(7, 1)) == 8
-            )
+            && !clearFlag)
         {
             Debug.Log("パズル完了");
+            successFlag = true;
+            clearFlag = true;
+            StartCoroutine(FocusCancel());
+            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).InteractFlag = 1;
+            gameObject.transform.parent.name = (int.Parse(gameObject.transform.parent.name) + 1).ToString();
         }
     }
 
@@ -193,7 +202,7 @@ public class SlidePuzzle : MonoBehaviour
                 else
                 {
                     index++;
-                    Debug.Log("移動数：" + movecount);
+                    //Debug.Log("移動数：" + movecount);
                     movecount++;
                 }
             }
@@ -221,8 +230,15 @@ public class SlidePuzzle : MonoBehaviour
         if (hit2d)
         {
             if (hit2d.transform.gameObject.name.Contains("Puzzle"))
+            {
                 tapObj = hit2d.transform.gameObject;
-            Debug.Log(tapObj);
+                tapObjFlag = true;
+            }
+            //Debug.Log(tapObj);
+        }
+        else
+        {
+            tapObjFlag = false;
         }
 
     }
@@ -253,7 +269,7 @@ public class SlidePuzzle : MonoBehaviour
             random = Random.Range(0, 8);
             if (!puzzle[randompuzzlecount].gameObject.name.Contains(random.ToString()))
             {
-                Debug.Log("ランダム数：" + random);
+                //Debug.Log("ランダム数：" + random);
                 puzzleNo.Add(random);
                 puzzle.Remove(puzzle[randompuzzlecount]);
                 randompuzzlecount--;
@@ -262,9 +278,6 @@ public class SlidePuzzle : MonoBehaviour
 
         for (int i = 0; i < puzzleObj.Length-1; i++)
         {
-            //ランダム数値を取得し、数値のピース名を設定
-            //交換の関数作成
-
             //オブジェクト入れ替え
             var savePuzzleObj = puzzleObj[i];
             puzzleObj[i] = puzzleObj[puzzleNo[i]];
@@ -275,5 +288,16 @@ public class SlidePuzzle : MonoBehaviour
             puzzleObj[i].transform.position = puzzleObj[puzzleNo[i]].transform.position;
             puzzleObj[puzzleNo[i]].transform.position = saveThisObjPosition;
         }
+    }
+
+    /// <summary>
+    /// コールチンのフォーカス解除
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator FocusCancel()
+    {
+        yield return new WaitForSeconds(1);
+
+        cameraManager.FocusCancel();
     }
 }

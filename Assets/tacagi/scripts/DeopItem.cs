@@ -48,6 +48,8 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
+                case 3:
+                    break;
                 case 4:
                     if (!camera.Focusflg)
                     {
@@ -86,11 +88,8 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
-
             }
-
         }
-
     }
 
     void GetStageItemTapObjectInfo()

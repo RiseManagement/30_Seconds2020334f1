@@ -36,6 +36,9 @@ public class Gimmick : MonoBehaviour
                 case 0://A絵画
                     FiledObjChange();
                     break;
+                case 2://袖机(中に絵具)
+                    FiledObjChange();
+                    break;
                 case 14://台座
                     FiledObjChange();
                     break;
@@ -71,6 +74,14 @@ public class Gimmick : MonoBehaviour
             case 0://A絵画
                 FiledObjChange();
                 break;
+            case 2://袖机(中に絵具)
+                DeskOpen();
+                break;
+            case 5://パズル
+                PazzleClear();
+                //パズルクリア後机から絵具入手可能（パズルクリア→２→３）
+                
+                break;
             case 14://台座
                 FiledObjChange();
                 break;
@@ -85,6 +96,25 @@ public class Gimmick : MonoBehaviour
                 break;
         }
         gimmmickFlag = false;
+    }
+
+    /// <summary>
+    /// パズルクリア
+    /// </summary>
+    void PazzleClear()
+    {
+        if(ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            ItemDataBase.Entity.GetData(2).InteractFlag = 1;
+        }
+    }
+
+    void DeskOpen()
+    {
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            FiledObjChange();
+        }
     }
 
     /// <summary>
@@ -110,5 +140,10 @@ public class Gimmick : MonoBehaviour
     public void MysteryCler()
     {   
         Debug.Log("謎クリア");
+    }
+
+    public void ObjChangeCheck()
+    {
+        gimmmickFlag = false;
     }
 }
