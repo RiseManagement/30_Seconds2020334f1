@@ -4,11 +4,22 @@ using UnityEngine;
 
 public class User_A : User
 {
+    
     private void Awake()
     {
-        username = "Player_A";
+        username = NameInputcontroller.player_1name;
+        /*if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }*/
     }
 
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +31,6 @@ public class User_A : User
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(username);
     }
 }
