@@ -36,7 +36,6 @@ public class SlidePuzzle : MonoBehaviour
             puzzleObj[i] = transform.GetChild(i).gameObject;
             answerpuzzleObj[i] = transform.GetChild(i).gameObject;
         }
-        PuzzleReset();
         if (!PuzzleClearCkeck())
         {
             //PuzzleReset();
@@ -160,8 +159,15 @@ public class SlidePuzzle : MonoBehaviour
             successFlag = true;
             clearFlag = true;
             StartCoroutine(FocusCancel());
+
+            //使用済に更新
             ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).InteractFlag = 1;
+            //アイテム名前変更
             gameObject.transform.parent.name = (int.Parse(gameObject.transform.parent.name) + 1).ToString();
+
+            //机は中身情報に変更
+            gameObject.transform.root.Find("2").gameObject.name = "3";
+            ItemDataBase.Entity.GetData(3).InteractFlag = 1;
         }
     }
 

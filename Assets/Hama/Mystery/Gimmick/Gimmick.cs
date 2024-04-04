@@ -21,14 +21,26 @@ public class Gimmick : MonoBehaviour
     int stageitemName;
 
     //ギミック種類
-    
+
+    //保持
+    GameObject itemObj34;
 
     // Start is called before the first frame update
     void Start()
     {
         stageitemName = int.Parse(gameObject.name);
-        gimmmickFlag = false;
+        gimmmickFlag = true;
 
+        switch (stageitemName)
+        {
+            case 2://袖机(中に絵具)
+                   //FiledObjChange();
+                itemObj34 = GameObject.Find("34").gameObject;
+                itemObj34.SetActive(false);
+                break;
+        }
+
+        //画面以降後の反映状況の取得方法
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
             switch (stageitemName)
@@ -77,10 +89,16 @@ public class Gimmick : MonoBehaviour
             case 2://袖机(中に絵具)
                 DeskOpen();
                 break;
+            case 3:
+                //本体活性
+                if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+                {
+                    itemObj34.SetActive(true);
+                    ObjChangeCheck();
+                }
+                break;
             case 5://パズル
                 PazzleClear();
-                //パズルクリア後机から絵具入手可能（パズルクリア→２→３）
-                
                 break;
             case 14://台座
                 FiledObjChange();
@@ -95,7 +113,7 @@ public class Gimmick : MonoBehaviour
                 MusicBoxMusicStart();
                 break;
         }
-        gimmmickFlag = false;
+        
     }
 
     /// <summary>
@@ -103,9 +121,11 @@ public class Gimmick : MonoBehaviour
     /// </summary>
     void PazzleClear()
     {
-        if(ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        //アイテム5が使用済
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
-            ItemDataBase.Entity.GetData(2).InteractFlag = 1;
+            Debug.Log("パズルクリア後ギミック");
+            ObjChangeCheck();
         }
     }
 
@@ -114,6 +134,7 @@ public class Gimmick : MonoBehaviour
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
             FiledObjChange();
+            ObjChangeCheck();
         }
     }
 
@@ -122,7 +143,11 @@ public class Gimmick : MonoBehaviour
     /// </summary>
     void MusicBoxMusicStart()
     {
-        Debug.Log("音楽流れた");
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            Debug.Log("音楽流れた");
+            ObjChangeCheck();
+        }
     }
 
     //使用後の事象発生
@@ -138,8 +163,11 @@ public class Gimmick : MonoBehaviour
     }
 
     public void MysteryCler()
-    {   
-        Debug.Log("謎クリア");
+    {
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            Debug.Log("謎クリア");
+        }
     }
 
     public void ObjChangeCheck()

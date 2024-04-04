@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class ItemSlot : MonoBehaviour
 {
     Sprite icon;
+
+    //使用中アイテムID
     public int itemid = -1;
     public int ItemId
     {
@@ -32,6 +34,10 @@ public class ItemSlot : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 所有アイテムリストからアイテムスロットのアイテム選択
+    /// </summary>
+    /// <param name="selectitemid"></param>
     public void SelectItem(int selectitemid)
     {
         var itemdata = ItemDataBase.Entity.GetData(selectitemid);
@@ -41,14 +47,23 @@ public class ItemSlot : MonoBehaviour
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
     }
 
+    /// <summary>
+    /// アイテム使用
+    /// </summary>
     public void ItemUse()
     {
         if (itemid == -1) return;
 
         var itemdata = ItemDataBase.Entity.GetData(itemid);
+
+        //使用済に更新
         itemdata.InteractFlag = 1;
+
+        //所有者なしに更新
         itemdata.OwnerFlag = 0;
         itemid = -1;
+
+        //アイテム画像なしに更新
         icon = null;
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
 

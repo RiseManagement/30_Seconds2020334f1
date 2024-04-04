@@ -24,23 +24,60 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         GetStageItemTapObjectInfo();
         if(!stageitemobj.name.Contains("_"))
         {
+            //ステージ名取得
             stageitemNumber = int.Parse(stageitemobj.name);
         }
         //Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
-        //所持者がいない場合
+        //所持可能なアイテムをタップした場合
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
             Inventry.instance.Add(stageitemNumber);
+
+            //所有者設定
+
+            ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
+            ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
+
+            //ステージ上のアイテム削除
             Destroy(gameObject);
         }
         else
         {
-            //camera.Focus(eventData.position);
+            //Debug.Log("何側？：" + stageitemNumber);
             switch (stageitemNumber)
             {
                 case 0://アイテム選択された側
                     if(itemslot.itemid == 12)//アイテム使用側
                     {
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+
+                        //アイテム選択側は使用済み更新
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
+                case 4://パズル
+                    if (!camera.Focusflg)//フォーカスフラグ
+                    {
+                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+
+                        //本体活性
+                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    break;
+                case 10://アップライトピアノ
+                    if (!camera.Focusflg)//フォーカスフラグ
+                    {
+                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+
+                        //本体活性
+                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
+                    }
+                    break;
+                case 14://台座
+                    if (itemslot.itemid == 39)//リンゴ
+                    {
                         //事象処理
                         StageItemGimmickOn();
                         Inventry.instance.Removed(itemslot.itemid);
@@ -48,38 +85,11 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;
-                case 3:
-                    break;
-                case 4:
-                    if (!camera.Focusflg)
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
-                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                    break;
-                case 10:
-                    if (!camera.Focusflg)
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
-                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                    break;
-                case 14://アイテム選択された側
-                    if (itemslot.itemid == 39)//アイテム使用側
-                    {
-                        //事象処理
+                case 15://台座(物乗っけてる)
                         StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
                     break;
-                case 15://アイテム選択された側
-                    //事象処理
-                    StageItemGimmickOn();
-                    break;
-                case 40://アイテム選択された側
-                    if (itemslot.itemid == 11)//アイテム使用側
+                case 40://オルゴール(シリンダーなし)
+                    if (itemslot.itemid == 11)//シリンダー
                     {
                         //事象処理
                         StageItemGimmickOn();
@@ -92,6 +102,9 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    /// <summary>
+    /// タップしたステージアイテム情報取得
+    /// </summary>
     void GetStageItemTapObjectInfo()
     {
         stageitemobj = null;
@@ -107,6 +120,9 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         Debug.Log(stageitemobj);
     }
 
+    /// <summary>
+    /// ステージアイテムギミックスタートオン
+    /// </summary>
     void StageItemGimmickOn()
     {
         stageitemobj.GetComponent<Gimmick>().GimmmickFlag = true;

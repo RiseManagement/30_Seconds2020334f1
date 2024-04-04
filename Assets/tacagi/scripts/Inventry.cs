@@ -29,13 +29,20 @@ public class Inventry :MonoBehaviour
 
     public List<int> itemsid = new List<int>();
 
+    /// <summary>
+    /// インベントリーにアイテム追加
+    /// </summary>
+    /// <param name="itemid">アイテム</param>
     public void Add(int itemid)
     {
-
         itemsid.Add(itemid);
         InventryUI.UpdateUI();
     }
 
+    /// <summary>
+    /// インベントリーアイテム削除
+    /// </summary>
+    /// <param name="itemid">アイテムID</param>
     public void Removed(int itemid)
     {
         itemsid.Remove(itemid);
