@@ -32,11 +32,18 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
             Inventry.instance.Add(stageitemNumber);
-
+            GameObject playerObj = GameObject.Find("Player").gameObject;
             //所有者設定
-
-            ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
-            ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
+            if (playerObj.GetComponent<User_A>())
+            {
+                //Debug.Log("Aが取得");
+                ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
+            }
+            else if (playerObj.GetComponent<User_B>())
+            {
+                //Debug.Log("Bが取得");
+                ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
+            }
 
             //ステージ上のアイテム削除
             Destroy(gameObject);
@@ -88,6 +95,22 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                 case 15://台座(物乗っけてる)
                         StageItemGimmickOn();
                     break;
+                case 31://青ランプ(消灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    break;
+                case 32://青ランプ(点灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                    break;
+                case 37://黄ランプ(消灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    break;
+                case 38://黄ランプ(点灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                    break;
                 case 40://オルゴール(シリンダーなし)
                     if (itemslot.itemid == 11)//シリンダー
                     {
@@ -97,6 +120,14 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
+                    break;
+                case 42://赤ランプ(消灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    break;
+                case 43://赤ランプ(点灯)
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
                     break;
             }
         }

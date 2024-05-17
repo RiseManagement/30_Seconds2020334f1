@@ -29,7 +29,6 @@ public class Gimmick : MonoBehaviour
     void Start()
     {
         stageitemName = int.Parse(gameObject.name);
-        gimmmickFlag = true;
 
         switch (stageitemName)
         {
@@ -37,6 +36,27 @@ public class Gimmick : MonoBehaviour
                    //FiledObjChange();
                 itemObj34 = GameObject.Find("34").gameObject;
                 itemObj34.SetActive(false);
+                break;
+            case 31://青ランプ(消灯)
+                gimmmickFlag = false;
+                break;
+            case 32://青ランプ(点灯)
+                gimmmickFlag = false;
+                break;
+            case 37://黄ランプ(消灯)
+                gimmmickFlag = false;
+                break;
+            case 38://黄ランプ(点灯)
+                gimmmickFlag = false;
+                break;
+            case 42://黄ランプ(消灯)
+                gimmmickFlag = false;
+                break;
+            case 43://黄ランプ(点灯)
+                gimmmickFlag = false;
+                break;
+            default:
+                gimmmickFlag = true;
                 break;
         }
 
@@ -107,10 +127,34 @@ public class Gimmick : MonoBehaviour
                 //謎1クリア
                 MysteryCler();
                 break;
+            case 31://青ランプ(消灯)  
+                FiledObjChange();
+                ObjChangeCheck();
+                break;
+            case 32://青ランプ(点灯)
+                FiledObjChange(1);
+                ObjChangeCheck();
+                break;
+            case 37://黄ランプ(消灯)  
+                FiledObjChange();
+                ObjChangeCheck();
+                break;
+            case 38://黄ランプ(点灯)
+                FiledObjChange(1);
+                ObjChangeCheck();
+                break;
             case 40:
                 //オルゴール
                 FiledObjChange();
                 MusicBoxMusicStart();
+                break;
+            case 42://赤ランプ(消灯)  
+                FiledObjChange();
+                ObjChangeCheck();
+                break;
+            case 43://赤ランプ(点灯)
+                FiledObjChange(1);
+                ObjChangeCheck();
                 break;
         }
         
@@ -155,11 +199,25 @@ public class Gimmick : MonoBehaviour
     /// <summary>
     /// フィールド物の変化
     /// </summary>
-    public void FiledObjChange()
+    public void FiledObjChange(int updwon = 0)
     {
+        int dataname;
+        switch (updwon)
+        {
+            case 0:
+                dataname = stageitemName + 1;
+                break;
+            case 1:
+                dataname = stageitemName - 1;
+                break;
+            default:
+                dataname = stageitemName + 1;
+                break;
+        }
+
         Debug.Log("フィールド上物の変化");
-        gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(stageitemName+1).Image;
-        this.gameObject.name = (stageitemName + 1).ToString();
+        gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(dataname).Image;
+        this.gameObject.name = (dataname).ToString();
     }
 
     public void MysteryCler()
