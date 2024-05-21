@@ -5,15 +5,15 @@ using UnityEngine;
 public class LampManager : MonoBehaviour
 {
     //ランプオブジェクトリスト
-    public GameObject[] LampObjList = new GameObject[3];
+    GameObject[] LampObjList = new GameObject[3];
 
     //点灯オブジェクトリスト
     GameObject[] LightingObjList = new GameObject[3];
 
     //ランプ回答順リスト
-    public List<GameObject> AnwserObjList = new List<GameObject>();
+    List<GameObject> AnwserObjList = new List<GameObject>();
 
-    public　Gimmick[] LampGimmickList = new Gimmick[3];
+    Gimmick[] LampGimmickList = new Gimmick[3];
 
     //水抜きスイッチ
     public GameObject WaterSwitchObj;
@@ -44,12 +44,7 @@ public class LampManager : MonoBehaviour
         {
             if (AnwserObjList[0].name == "43" && AnwserObjList[1].name == "38" && AnwserObjList[2].name == "32")
             {
-                Debug.Log("スイッチ出現");
-                
-                //ランプは使用済み
-                ItemDataBase.Entity.GetData(int.Parse(AnwserObjList[0].name)).InteractFlag = 1;
-                ItemDataBase.Entity.GetData(int.Parse(AnwserObjList[1].name)).InteractFlag = 1;
-                ItemDataBase.Entity.GetData(int.Parse(AnwserObjList[2].name)).InteractFlag = 1;
+                //Debug.Log("スイッチ出現");
 
                 //スイッチ出現（統合後触る）
                 //WaterSwitchObj.SetActive(true);
@@ -57,7 +52,7 @@ public class LampManager : MonoBehaviour
             else
             {
                 AnwserObjList.Clear();
-                Debug.Log("ランプ点灯リセット");
+                //Debug.Log("ランプ点灯リセット");
             }
         }
 
