@@ -93,6 +93,13 @@ public class Gimmick : MonoBehaviour
                 case 19://水槽の穴
                     FiledObjChange();
                     break;
+                case 22://Ｂ絵画
+                    FiledObjChange(2);
+                    break;
+                case 28://花瓶
+                    FiledObjChange();
+                    MusicBoxMusicStart();
+                    break;
                 case 40://オルゴール
                     FiledObjChange();
                     MusicBoxMusicStart();
@@ -145,6 +152,9 @@ public class Gimmick : MonoBehaviour
                 break;
             case 19://水槽の穴
                 FiledObjChange();
+                break;
+            case 22://Ｂ絵画
+                FiledObjChange(2);
                 break;
             case 31://青ランプ(消灯)  
                 FiledObjChange();
@@ -234,6 +244,9 @@ public class Gimmick : MonoBehaviour
                 break;
             case 1:
                 dataname = stageitemName - 1;
+                break;
+            case 2:
+                dataname = 35;//Ｂ絵画→B絵画(使用後)
                 break;
             default:
                 dataname = stageitemName + 1;

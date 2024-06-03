@@ -132,8 +132,28 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        stageitemNumber = 17;
+                        ItemDataBase.Entity.GetData(stageitemNumber - 2).InteractFlag = 1;
+                    }
+                    break;
+                case 22://Ｂ絵画
+                    if (itemslot.itemid == 29)//花瓶(染色後)
+                    {
+                        //事象処理
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
+                case 28://花瓶
+                    if (itemslot.itemid == 34)//絵具
+                    {
+                        //事象処理
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        ItemDataBase.Entity.GetData(stageitemNumber + 1).InteractFlag = 1;
                     }
                     break;
                 case 31://青ランプ(消灯)
