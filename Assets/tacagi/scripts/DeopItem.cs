@@ -12,6 +12,8 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
     public GameObject stageitemobj;
     public int stageitemNumber;
 
+    public int old_stageitemNumber;
+
     private void Start()
     {
         itemslot = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
@@ -31,13 +33,28 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         //所持可能なアイテムをタップした場合
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
+            //保存
+            old_stageitemNumber = stageitemNumber;
+
+            switch (stageitemNumber)
+            {
+                case 41://オルゴール(シリンダーあり)
+                    stageitemNumber = 11;
+                    break;
+                default:
+                    break;
+            }
+
+            //イベントり追加
             Inventry.instance.Add(stageitemNumber);
             GameObject playerObj = GameObject.Find("Player").gameObject;
+
             //所有者設定
             if (playerObj.GetComponent<User_A>())
             {
                 //Debug.Log("Aが取得");
                 ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
+
             }
             else if (playerObj.GetComponent<User_B>())
             {
@@ -45,8 +62,20 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                 ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
             }
 
-            //ステージ上のアイテム削除
-            Destroy(gameObject);
+            //もとに戻す
+            stageitemNumber = old_stageitemNumber;
+
+            //ステージ上のアイテム変化
+            switch (stageitemNumber)
+            {
+                case 41://オルゴール(シリンダーあり)
+                    gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(40).Image;
+                    this.gameObject.name = (40).ToString();
+                    break;
+                default:
+                    Destroy(gameObject);
+                    break;
+            }
         }
         else
         {
@@ -93,7 +122,19 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     }
                     break;
                 case 15://台座(物乗っけてる)
+                    StageItemGimmickOn();
+                    break;
+                case 19://水槽の穴
+                    if (itemslot.itemid == 11)//シリンダー
+                    {
+                        //事象処理
                         StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        stageitemNumber = 17;
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
                     break;
                 case 31://青ランプ(消灯)
                     StageItemGimmickOn();
@@ -102,6 +143,10 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                 case 32://青ランプ(点灯)
                     StageItemGimmickOn();
                     ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                    break;
+                case 33://水抜きスイッチ
+                    StageItemGimmickOn();
+                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     break;
                 case 37://黄ランプ(消灯)
                     StageItemGimmickOn();
@@ -119,6 +164,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
                     }
                     break;
                 case 42://赤ランプ(消灯)

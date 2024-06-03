@@ -49,10 +49,13 @@ public class Gimmick : MonoBehaviour
             case 38://黄ランプ(点灯)
                 gimmmickFlag = false;
                 break;
+            case 43://黄ランプ(点灯)
+                gimmmickFlag = false;
+                break;
             case 42://黄ランプ(消灯)
                 gimmmickFlag = false;
                 break;
-            case 43://黄ランプ(点灯)
+            case 40://オルゴール
                 gimmmickFlag = false;
                 break;
             default:
@@ -78,8 +81,19 @@ public class Gimmick : MonoBehaviour
                     //謎1クリア
                     MysteryCler();
                     break;
-                case 40:
-                    //オルゴール
+                case 16://水槽(水有り)
+                    if(ItemDataBase.Entity.GetData(33).InteractFlag == 1)
+                    {
+                        FiledObjChange();
+                    }
+                    break;
+                case 17://水槽(水無し)
+                    FiledObjChange();
+                    break;
+                case 19://水槽の穴
+                    FiledObjChange();
+                    break;
+                case 40://オルゴール
                     FiledObjChange();
                     MusicBoxMusicStart();
                     break;
@@ -123,9 +137,14 @@ public class Gimmick : MonoBehaviour
             case 14://台座
                 FiledObjChange();
                 break;
-            case 15:
-                //謎1クリア
+            case 15://謎1クリア
                 MysteryCler();
+                break;
+            case 17://水槽(水無し)
+                FiledObjChange();
+                break;
+            case 19://水槽の穴
+                FiledObjChange();
                 break;
             case 31://青ランプ(消灯)  
                 FiledObjChange();
@@ -133,6 +152,9 @@ public class Gimmick : MonoBehaviour
                 break;
             case 32://青ランプ(点灯)
                 FiledObjChange(1);
+                ObjChangeCheck();
+                break;
+            case 33://水抜きスイッチ
                 ObjChangeCheck();
                 break;
             case 37://黄ランプ(消灯)  
@@ -143,8 +165,7 @@ public class Gimmick : MonoBehaviour
                 FiledObjChange(1);
                 ObjChangeCheck();
                 break;
-            case 40:
-                //オルゴール
+            case 40://オルゴール
                 FiledObjChange();
                 MusicBoxMusicStart();
                 break;
@@ -173,10 +194,14 @@ public class Gimmick : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 机の引き出し開放
+    /// </summary>
     void DeskOpen()
     {
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
+            Debug.Log("デスクオープン");
             FiledObjChange();
             ObjChangeCheck();
         }
