@@ -254,7 +254,7 @@ public class Gimmick : MonoBehaviour
         }
 
         Debug.Log("フィールド上物の変化");
-        gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(dataname).Image;
+        gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(dataname).Image;
         this.gameObject.name = (dataname).ToString();
     }
 
