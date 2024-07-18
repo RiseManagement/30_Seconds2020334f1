@@ -24,6 +24,7 @@ public class Gimmick : MonoBehaviour
 
     //保持
     GameObject itemObj34;
+    GameObject itemObj33;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,7 @@ public class Gimmick : MonoBehaviour
         switch (stageitemName)
         {
             case 2://袖机(中に絵具)
-                   //FiledObjChange();
+                //FiledObjChange();
                 itemObj34 = GameObject.Find("34").gameObject;
                 itemObj34.SetActive(false);
                 break;
@@ -100,6 +101,13 @@ public class Gimmick : MonoBehaviour
                     FiledObjChange();
                     MusicBoxMusicStart();
                     break;
+                case 36:
+                    if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 0)
+                    {
+                        itemObj33 = GameObject.Find("33").gameObject;
+                        itemObj33.SetActive(false);
+                    }
+                    break;
                 case 40://オルゴール
                     FiledObjChange();
                     MusicBoxMusicStart();
@@ -140,6 +148,10 @@ public class Gimmick : MonoBehaviour
                 break;
             case 5://パズル
                 PazzleClear();
+                MysteryCler();
+                break;
+            case 10:
+                MysteryCler();
                 break;
             case 14://台座
                 FiledObjChange();
@@ -149,12 +161,14 @@ public class Gimmick : MonoBehaviour
                 break;
             case 17://水槽(水無し)
                 FiledObjChange();
+                MysteryCler();
                 break;
             case 19://水槽の穴
                 FiledObjChange();
                 break;
             case 22://Ｂ絵画
                 FiledObjChange(2);
+                MysteryCler();
                 break;
             case 31://青ランプ(消灯)  
                 FiledObjChange();
@@ -166,6 +180,14 @@ public class Gimmick : MonoBehaviour
                 break;
             case 33://水抜きスイッチ
                 ObjChangeCheck();
+                break;
+            case 36:
+                if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+                {
+                    itemObj33 = GameObject.Find("33").gameObject;
+                    itemObj33.SetActive(true);
+                }
+                MysteryCler();
                 break;
             case 37://黄ランプ(消灯)  
                 FiledObjChange();
@@ -258,11 +280,36 @@ public class Gimmick : MonoBehaviour
         this.gameObject.name = (dataname).ToString();
     }
 
+    /// <summary>
+    /// 謎クリア
+    /// </summary>
     public void MysteryCler()
     {
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
             Debug.Log("謎クリア");
+            switch (stageitemName)
+            {
+                case 5:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3A);
+                    break;
+                case 10:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO2);
+                    break;
+                case 15:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO1);
+                    break;
+                case 17:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO4A);
+                    break;
+                case 22:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO4B);
+                    break;
+                case 36:
+                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3B);
+                    break;
+
+            }
         }
     }
 

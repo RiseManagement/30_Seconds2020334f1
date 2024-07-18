@@ -45,7 +45,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     break;
             }
 
-            //イベントり追加
+            //イベントリ追加
             Inventry.instance.Add(stageitemNumber);
             GameObject playerObj = GameObject.Find("Player").gameObject;
 
