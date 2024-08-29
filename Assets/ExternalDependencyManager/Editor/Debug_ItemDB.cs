@@ -17,21 +17,21 @@ public class Debug_ItemDB : MonoBehaviour
         
     }
 
-    //public void ItemDBReset()
-    //{
-    //    //ファイル存在確認
-    //    var result = UnityEditor.AssetDatabase.CopyAsset("Assets/Hama/Item/ItemDB.asset", "Assets/Hama/Resources/ItemDB.asset");
-    //    if (result)
-    //    {
-    //        //コピー成功
-    //        Debug.Log("コピー成功");
+    public void ItemDBReset()
+    {
+        //ファイル存在確認
+        var result = UnityEditor.AssetDatabase.CopyAsset("Assets/Hama/Item/ItemDB.asset", "Assets/Hama/Resources/ItemDB.asset");
+        if (result)
+        {
+            //コピー成功
+            Debug.Log("コピー成功");
 
-    //    }
-    //    else
-    //    {
-    //        //コピー失敗
-    //        Debug.Log("コピー失敗");
-    //    }
-    //    UnityEditor.AssetDatabase.SaveAssets();
-    //}
+        }
+        else
+        {
+            //コピー失敗
+            Debug.Log("コピー失敗");
+        }
+        UnityEditor.AssetDatabase.SaveAssets();
+    }
 }
