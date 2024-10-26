@@ -28,6 +28,12 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         //所持者がいない場合
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
+            //アイテムの詳細画面の表示非表示をObject名を参照して行う
+            //ここにitem_Ditealの関数を書く
+            Item_Diteal item_Diteal=null;
+            item_Diteal = GameObject.Find("MainGameManager").GetComponent<Item_Diteal>();
+            item_Diteal.ItemDropDiteal(stageitemNumber);
+            
             Inventry.instance.Add(stageitemNumber);
             Destroy(gameObject);
         }

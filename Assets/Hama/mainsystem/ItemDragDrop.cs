@@ -44,7 +44,7 @@ public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     /// <param name="eventData"></param>
     public void OnEndDrag(PointerEventData eventData)
     {
-        var raycastResults = new List<RaycastResult>();
+        var raycastResults = new List<RaycastResult>();     
         EventSystem.current.RaycastAll(eventData, raycastResults);
 
         foreach (var hit in raycastResults)
