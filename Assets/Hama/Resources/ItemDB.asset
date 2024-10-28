@@ -170,35 +170,35 @@ MonoBehaviour:
   - id: 22
     name: "\uFF22\u7D75\u753B"
     explanation: "\u7537\u5973\u306E\u7D75\u753B\u3060"
-    image: {fileID: 21300000, guid: 397cc23cc9bdc4a49a7c11d972399a1b, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 23
     name: "\u8B0E\uFF11\u30D2\u30F3\u30C8"
     explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
-    image: {fileID: 21300000, guid: 2d72b5e5b7489d44f97fcc11cc25b74c, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 1
   - id: 24
     name: "\uFF22\u51FA\u53E3\u30C9\u30A2"
     explanation: "\u958B\u304B\u306A\u3044\u2026"
-    image: {fileID: 21300000, guid: 8dabbbfa266a29448b72e4f8c18ed99b, type: 3}
+    image: {fileID: 21300000, guid: 38cec284194d5db41bdd40bdb140ab22, type: 3}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 25
     name: "\uFF22\u51FA\u53E3\u30C9\u30A2(\u9375\u5DEE\u8FBC\u5F8C)"
     explanation: "\u5916\u306B\u51FA\u3089\u308C\u305D\u3046\u3060"
-    image: {fileID: 21300000, guid: dc7d46279db36e6449fc0e3116da6d9f, type: 3}
+    image: {fileID: 21300000, guid: cbc4457d5574ce440bbd3813a9924e0c, type: 3}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 26
     name: "\uFF22\u9375\u5DEE\u8FBC\u53E3"
     explanation: "\u9375\u7A74\u304C\u3042\u308B"
-    image: {fileID: 21300000, guid: 12f3745be206d044cbf53a48843bb5c8, type: 3}
+    image: {fileID: 21300000, guid: c2a1b0958c11b05409fa9ef03a721fe5, type: 3}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
@@ -212,14 +212,14 @@ MonoBehaviour:
   - id: 28
     name: "\u82B1\u74F6"
     explanation: "\u82B1\u304C\u751F\u3051\u3066\u3042\u308B"
-    image: {fileID: 21300000, guid: df1242a1122a87441951ea93c3b7d6e6, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 29
     name: "\u82B1\u74F6(\u67D3\u8272\u5F8C)"
     explanation: "\u5225\u306E\u8272\u306B\u67D3\u307E\u3063\u305F\u3088\u3046\u3060\u2026"
-    image: {fileID: 21300000, guid: d346afe796efe474c87672c3bf43cb1f, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
@@ -233,21 +233,21 @@ MonoBehaviour:
   - id: 31
     name: "\u9752\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: f71efadea94b76748b42541add4953ef, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 32
     name: "\u9752\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: c911030621aad524e9cb1389108a61b1, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 33
     name: "\u6C34\u629C\u304D\u30B9\u30A4\u30C3\u30C1"
     explanation: "\u4F55\u306E\u30B9\u30A4\u30C3\u30C1\u3060\u308D\u3046\u2026"
-    image: {fileID: 21300000, guid: 6bf071a18815fa34eb68d42390b05a1a, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
@@ -261,91 +261,91 @@ MonoBehaviour:
   - id: 35
     name: "B\u7D75\u753B(\u4F7F\u7528\u5F8C)"
     explanation: "\u7D2B\u306E\u30C1\u30E5\u30FC\u30EA\u30C3\u30D7\u304C\u8F1D\u3044\u3066\u3044\u308B"
-    image: {fileID: 21300000, guid: 2729fe8c76127604fbdefe1c6b4ead65, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 36
     name: "\u30E9\u30F3\u30D7\u30D2\u30F3\u30C8(\u7D19)"
     explanation: "\u4F55\u304B\u306E\u6697\u53F7\u3060\u308D\u3046\u304B\u2026"
-    image: {fileID: 21300000, guid: a173866ac4e616643b3cdb6ef00a1378, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 1
   - id: 37
     name: "\u9EC4\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: 4bbea1637a01eed478cd185711e4b4d8, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 38
     name: "\u9EC4\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: 5131a97a375f8ab48a086a0de8c1cd3c, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 39
     name: "\u308A\u3093\u3054"
     explanation: "\u4F5C\u308A\u7269\u306E\u308A\u3093\u3054\u3060"
-    image: {fileID: 21300000, guid: 00f4c680cdb856242a53995242359c56, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 1
   - id: 40
     name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u306A\u3057)"
     explanation: "\u30AA\u30EB\u30B4\u30FC\u30EB\u304C\u3042\u308B\u3000\u97F3\u306F\u9CF4\u3089\u306A\u3044\u307F\u305F\u3044\u3060"
-    image: {fileID: 21300000, guid: 1441743c1322af24895993c757a1cd37, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 41
     name: "\u30AA\u30EB\u30B4\u30FC\u30EB(\u30B7\u30EA\u30F3\u30C0\u30FC\u3042\u308A)"
     explanation: "\u7DBA\u9E97\u306A\u97F3\u3060"
-    image: {fileID: 21300000, guid: c5f13bc8387a1a846b3dfd2f71211a93, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 42
     name: "\u8D64\u30E9\u30F3\u30D7(\u6D88\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: 3e8acd9264a8c304b82db86fce65e98f, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 43
     name: "\u8D64\u30E9\u30F3\u30D7(\u70B9\u706F)"
     explanation: 
-    image: {fileID: 21300000, guid: 70e0ab73c7d4f5b448daa5fbb6da2b6e, type: 3}
+    image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
     enabletake: 0
   - id: 44
-    name: "\u30C0\u30DF\u30FC1"
+    name: "\u5B9D\u7BB1\uFF08\u30AF\u30ED\u30FC\u30BA\uFF09"
     explanation: 
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: deb06ba2443edb64f8cec3acbb1eafad, type: 3}
     ownerflag: 0
     interactflag: 0
-    enabletake: 1
+    enabletake: 0
   - id: 45
-    name: "\u30C0\u30DF\u30FC2"
+    name: "\u5B9D\u7BB1\uFF08\u30AA\u30FC\u30D7\u30F3\uFF09"
     explanation: 
-    image: {fileID: 0}
+    image: {fileID: 21300000, guid: d56217f87c2d8f9478ef82fc6b701a9f, type: 3}
     ownerflag: 0
     interactflag: 0
-    enabletake: 1
+    enabletake: 0
   - id: 46
-    name: "\u30C0\u30DF\u30FC3"
+    name: "\u30C0\u30DF\u30FC"
     explanation: 
     image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
-    enabletake: 1
+    enabletake: 0
   - id: 47
-    name: "\u30C0\u30DF\u30FC4"
+    name: "\u30C0\u30DF\u30FC"
     explanation: 
     image: {fileID: 0}
     ownerflag: 0
     interactflag: 0
-    enabletake: 1
+    enabletake: 0

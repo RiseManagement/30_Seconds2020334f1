@@ -443,12 +443,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 424ba845279dc084fae1b7c5d35794a9, type: 3}
+  m_Sprite: {fileID: 21300000, guid: deb06ba2443edb64f8cec3acbb1eafad, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 3.16, y: 2.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -561,7 +561,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7678531809899038247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -0.03}
   m_LocalScale: {x: 0.21375, y: 0.21375, z: 0.21375}
   m_Children: []
   m_Father: {fileID: 8304070899039995390}
@@ -607,12 +607,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6490acfa7bcaa674ba16a52c0b40fa6d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3258ee9af60e02144bfb3b26f768bcee, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 3.16, y: 2.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -712,3 +712,4 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 5d51921e921c56c449910cee0984dfa7, type: 3}
   - {fileID: 21300000, guid: c69e4d5929d1f2f40a0256737d1f28ae, type: 3}
   - {fileID: 21300000, guid: 6ea9aaac6e2489a408933a33e112dc9f, type: 3}
+  TreasureChestSprite: {fileID: 21300000, guid: d56217f87c2d8f9478ef82fc6b701a9f, type: 3}

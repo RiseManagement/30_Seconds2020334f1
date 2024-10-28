@@ -4,6 +4,7 @@ public class TreasureChest : MonoBehaviour
 {
     //画像データ
     public Sprite[] LampSprites = new Sprite[5];
+    public Sprite TreasureChestSprite;
 
     MysteryManager mysteryManager;
 

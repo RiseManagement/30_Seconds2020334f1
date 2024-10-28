@@ -32,28 +32,28 @@ public class MysteryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.F1))
-        //{
-        //    Debug.Log("謎クリア0");
-        //    MysteryClerSet(MysteryType.NAZO1);
-        //}
-        //if (Input.GetKeyDown(KeyCode.F2))
-        //{
-        //    Debug.Log("謎クリア0");
-        //    MysteryClerSet(MysteryType.NAZO2);
-        //}
-        //if (Input.GetKeyDown(KeyCode.F3))
-        //{
-        //    Debug.Log("謎クリア0");
-        //    MysteryClerSet(MysteryType.NAZO3A);
-        //    MysteryClerSet(MysteryType.NAZO3B);
-        //}
-        //if (Input.GetKeyDown(KeyCode.F4))
-        //{
-        //    Debug.Log("謎クリア0");
-        //    MysteryClerSet(MysteryType.NAZO4A);
-        //    MysteryClerSet(MysteryType.NAZO4B);
-        //}
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log("謎クリア0");
+            MysteryClerSet(MysteryType.NAZO1);
+        }
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            Debug.Log("謎クリア0");
+            MysteryClerSet(MysteryType.NAZO2);
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            Debug.Log("謎クリア0");
+            MysteryClerSet(MysteryType.NAZO3A);
+            MysteryClerSet(MysteryType.NAZO3B);
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            Debug.Log("謎クリア0");
+            MysteryClerSet(MysteryType.NAZO4A);
+            MysteryClerSet(MysteryType.NAZO4B);
+        }
     }
 
     //謎クリアセット
@@ -80,5 +80,24 @@ public class MysteryManager : MonoBehaviour
                 mysterylist[(int)MysteryManager.MysteryType.NAZO4B] = true;
                 break;
         }
+    }
+
+    /// <summary>
+    /// 全謎クリアチェック
+    /// </summary>
+    /// <returns></returns>
+    public static bool MysteryAllClerCheck()
+    {
+        if(mysterylist[(int)MysteryManager.MysteryType.NAZO1] &&
+            mysterylist[(int)MysteryManager.MysteryType.NAZO2] &&
+            mysterylist[(int)MysteryManager.MysteryType.NAZO3A] &&
+            mysterylist[(int)MysteryManager.MysteryType.NAZO3B] &&
+            mysterylist[(int)MysteryManager.MysteryType.NAZO4A] &&
+            mysterylist[(int)MysteryManager.MysteryType.NAZO4B])
+        {
+            return true;
+        }
+
+        return false;
     }
 }
