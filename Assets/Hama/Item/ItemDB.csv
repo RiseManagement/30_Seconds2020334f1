@@ -8,7 +8,7 @@
 6,Ａ出口ドア,開かない…,Assets/Hama/Resources/Item/RoomCommon/Gole_Door01.png,0,0,,,
 7,Ａ出口ドア(鍵差込後),外に出られそうだ,Assets/Hama/Resources/Item/RoomCommon/Gole_Door04.png,0,0,,InteractFlag,
 8,Ａ鍵差込口,鍵穴がある,Assets/Hama/Resources/Item/RoomCommon/Key_Hole.png,0,0,,0,使用可
-9,Ａ鍵差込口(鍵差込後),もう意味がないようだ,Assets/Hama/Resources/Item/RoomA/,0,0,,1,使用済み
+9,Ａ鍵差込口(鍵差込後),もう意味がないようだ,Assets/Hama/Resources/Item/RoomCommon/Key_Hole.png,0,0,,1,使用済み
 10,アップライトピアノ,弾いてみようか…,Assets/Hama/Resources/Item/RoomA/Upright_Piano.png,0,0,,,
 11,シリンダー,何かに使えるかな…,Assets/Hama/Resources/Item/RoomA/Cylinder.png,0,0,1,EnableTake,
 12,ブラックライト,ブラックライトだ,Assets/Hama/Resources/Item/RoomA/Blacklight.png,0,0,1,,

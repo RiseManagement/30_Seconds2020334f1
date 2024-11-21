@@ -115,6 +115,24 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
                     }
                     break;
+                case 6://Ａ出口ドア
+                    if (ItemDataBase.Entity.GetData(8).InteractFlag == 1)//鍵を開けてる場合
+                    {
+                        StageItemGimmickOn();
+                        itemslot.ItemUse();
+                    }
+                    break;
+                case 8://Ａ鍵差込口
+                    if (itemslot.itemid == 21)//アイテム使用側
+                    {
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+
+                        //アイテム選択側は使用済み更新
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
                 case 10://アップライトピアノ
                     if (!camera.Focusflg)//フォーカスフラグ
                     {
@@ -155,6 +173,24 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         StageItemGimmickOn();
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
+                    break;
+                case 24://Ｂ出口ドア
+                    if (ItemDataBase.Entity.GetData(26).InteractFlag == 1)//鍵を開けてる場合
+                    {
+                        StageItemGimmickOn();
+                        itemslot.ItemUse();
+                    }
+                    break;
+                case 26://Ｂ鍵差込口
+                    if (itemslot.itemid == 30)//アイテム使用側
+                    {
+                        StageItemGimmickOn();
+                        Inventry.instance.Removed(itemslot.itemid);
+                        itemslot.ItemUse();
+
+                        //アイテム選択側は使用済み更新
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     }
                     break;

@@ -34,23 +34,19 @@ public class MysteryManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            Debug.Log("謎クリア0");
             MysteryClerSet(MysteryType.NAZO1);
         }
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            Debug.Log("謎クリア0");
             MysteryClerSet(MysteryType.NAZO2);
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
-            Debug.Log("謎クリア0");
             MysteryClerSet(MysteryType.NAZO3A);
             MysteryClerSet(MysteryType.NAZO3B);
         }
         if (Input.GetKeyDown(KeyCode.F4))
         {
-            Debug.Log("謎クリア0");
             MysteryClerSet(MysteryType.NAZO4A);
             MysteryClerSet(MysteryType.NAZO4B);
         }

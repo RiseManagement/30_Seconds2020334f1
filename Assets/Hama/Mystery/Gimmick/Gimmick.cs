@@ -38,6 +38,18 @@ public class Gimmick : MonoBehaviour
                 itemObj34 = GameObject.Find("34").gameObject;
                 itemObj34.SetActive(false);
                 break;
+            case 6://Ａ出口ドア
+                gimmmickFlag = false;
+                break;
+            case 8://Ａ鍵差込口
+                gimmmickFlag = false;
+                break;
+            case 24://Ｂ出口ドア
+                gimmmickFlag = false;
+                break;
+            case 26://Ｂ鍵差込口
+                gimmmickFlag = false;
+                break;
             case 31://青ランプ(消灯)
                 gimmmickFlag = false;
                 break;
@@ -74,6 +86,9 @@ public class Gimmick : MonoBehaviour
                     break;
                 case 2://袖机(中に絵具)
                     FiledObjChange();
+                    break;
+                case 8://Ａ鍵差込口
+
                     break;
                 case 14://台座
                     FiledObjChange();
@@ -150,6 +165,12 @@ public class Gimmick : MonoBehaviour
                 PazzleClear();
                 MysteryCler();
                 break;
+            case 6://Ａ鍵差込口
+                this.gameObject.GetComponentInChildren<Door>().animeStart();
+                break;
+            case 8://Ａ鍵差込口
+                FiledObjChange();
+                break;
             case 10:
                 MysteryCler();
                 break;
@@ -169,6 +190,12 @@ public class Gimmick : MonoBehaviour
             case 22://Ｂ絵画
                 FiledObjChange(2);
                 MysteryCler();
+                break;
+            case 24://Ｂ鍵差込口
+                this.gameObject.GetComponentInChildren<Door>().animeStart();
+                break;
+            case 26://Ｂ鍵差込口
+                FiledObjChange();
                 break;
             case 31://青ランプ(消灯)  
                 FiledObjChange();
