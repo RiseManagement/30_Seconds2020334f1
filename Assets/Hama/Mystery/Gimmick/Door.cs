@@ -36,7 +36,21 @@ public class Door : MonoBehaviour
         Debug.Log("アニメ終了");
         
         //プロセス変更
-        MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
+
+        GameObject playerObj = GameObject.Find("Player").gameObject;
+
+        //所有者設定
+        if (playerObj.GetComponent<User_A>())
+        {
+            MainGameManager.isClearUserA = true;
+            //Debug.Log("Aが取得");
+        }
+        if (playerObj.GetComponent<User_B>())
+        {
+            //Debug.Log("Bが取得");
+            MainGameManager.isClearUserB = true;
+        }
+        MainGameProgress.gameStaus = MainGameProgress.GameStaus.ClearCheckNow;
     }
 
 }

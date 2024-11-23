@@ -9,11 +9,12 @@ public class MainGameManager :MonoBehaviour
     public static MainGameManager instance;
     public static bool isClearUserA;
     public static bool isClearUserB;
+    
     //現在ターン数
     public static int nowTurn = 1;
 
-    //最大ターン数
-    int maxTurn = 16;
+    //最大ターン
+    public static int maxTurn = 16;
 
     [SerializeField] Text startTurnText;
     float startTurnTextTimer = 0;
@@ -39,6 +40,8 @@ public class MainGameManager :MonoBehaviour
     void Update()
     {
         ChangeStartTurnTextColor();
+
+        Debug.Log("ターン数:" + nowTurn);
     }
     void StartTurn()
     {
@@ -64,6 +67,7 @@ public class MainGameManager :MonoBehaviour
     {
         SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
     }
+
     /// <summary>
     /// ターン数カウントアップ
     /// </summary>

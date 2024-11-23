@@ -60,8 +60,8 @@ public class Timer :MonoBehaviour
     }
     void TurnEnd()
     {
-        MainGameProgress.gameStaus = MainGameProgress.GameStaus.Interval;
-        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
+        MainGameProgress.gameStaus = MainGameProgress.GameStaus.ClearCheckNow;
+        Destroy(this);
     }
     //カウントダウン
     public static void CountDown()

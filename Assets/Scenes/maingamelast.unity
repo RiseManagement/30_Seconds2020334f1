@@ -360,6 +360,22 @@ PrefabInstance:
       propertyPath: gimmmickFlag
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4922503024271802755, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922503024271802755, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -6.504
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922503024271802755, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.032
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922503024271802755, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
     - target: {fileID: 8847783723204861043, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -390,6 +406,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &61787579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 61787576}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b90f4e92f11a2e46b70f259cc99f4ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
 --- !u!1 &426582976 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2853429514803795081, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}

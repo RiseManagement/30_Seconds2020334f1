@@ -58,7 +58,8 @@ public class SceneManager :MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (MainGameProgress.gameStaus != MainGameProgress.GameStaus.Interval)
+            nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         //Debug.Log("現在のシーン:" + nowscenename);
         // Debug.Log("過去のシーン:" + oldscenename);
     }
