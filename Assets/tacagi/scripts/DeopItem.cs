@@ -46,6 +46,12 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
             }
 
             //イベントり追加
+            //アイテムの詳細画面の表示非表示をObject名を参照して行う
+            //ここにitem_Ditealの関数を書く
+            Item_Diteal item_Diteal=null;
+            item_Diteal = GameObject.Find("MainGameManager").GetComponent<Item_Diteal>();
+            item_Diteal.ItemDropDiteal(stageitemNumber);
+            
             Inventry.instance.Add(stageitemNumber);
             GameObject playerObj = GameObject.Find("Player").gameObject;
 
