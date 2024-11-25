@@ -107,6 +107,9 @@ public class Piano : MonoBehaviour
             successFlg = true;
             Debug.Log("ピアノギミック成功");
             StartCoroutine(FocusCancel());
+
+            //使用済に更新
+            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).InteractFlag = 1;
         }
     }
 

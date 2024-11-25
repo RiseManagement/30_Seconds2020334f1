@@ -27,9 +27,6 @@ public class LampManager : MonoBehaviour
 
         for(int i = 0;i < LampGimmickList.Length;i++)
             LampGimmickList[i] = LampObjList[i].GetComponent<Gimmick>();
-
-        //
-        //WaterSwitchObj = GameObject.Find("33");
     }
 
     // Update is called once per frame
@@ -44,10 +41,10 @@ public class LampManager : MonoBehaviour
         {
             if (AnwserObjList[0].name == "43" && AnwserObjList[1].name == "38" && AnwserObjList[2].name == "32")
             {
-                //Debug.Log("スイッチ出現");
+                Debug.Log("スイッチ出現");
 
-                //スイッチ出現（統合後触る）
-                //WaterSwitchObj.SetActive(true);
+                //ランプのヒントを使用済
+                ItemDataBase.Entity.GetData(36).InteractFlag = 1;
             }
             else
             {

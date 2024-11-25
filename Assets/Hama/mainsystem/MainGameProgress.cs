@@ -12,12 +12,13 @@ public class MainGameProgress :MonoBehaviour
 
     public enum GameStaus
     {
-        GameStrat,  //ゲーム開始
-        Wait,       //待機
-        PlayerTurn, //プレイヤーターン
-        Interval,   //インターバル
-        GameClear,  //ゲームクリア
-        GameOver,   //ゲームオーバー
+        GameStrat,      //ゲーム開始
+        ResetTurn,      //リセットターン
+        PlayerTurn,     //プレイヤーターン
+        Interval,       //インターバル
+        ClearCheckNow,  //クリアチェック中
+        GameClear,      //ゲームクリア
+        GameOver,       //ゲームオーバー
     }
 
     void Awake()
@@ -49,8 +50,8 @@ public class MainGameProgress :MonoBehaviour
             GameStartProgress();
             break;
 
-            case GameStaus.Wait:
-            WaitProgress();
+            case GameStaus.ResetTurn:
+            ResetTurnProgress();
             break;
 
             case GameStaus.PlayerTurn:
@@ -61,6 +62,10 @@ public class MainGameProgress :MonoBehaviour
             IntervalProgress();
             break;
 
+            case GameStaus.ClearCheckNow:
+            ClearCheckNowProgress();
+            break;
+            
             case GameStaus.GameClear:
             GameClearProgress();
             break;
@@ -74,76 +79,87 @@ public class MainGameProgress :MonoBehaviour
 
     void GameStartProgress()
     {
-        //Debug.Log("【進行】ゲームスタート");
+        Debug.Log("【進行】ゲームスタート");
+
+        MainGameManager.nowTurn = 1;
 
         //変更予定
-        if (Input.GetMouseButtonDown(1))
+        //if (Input.GetMouseButtonDown(1))
         {
-            gameStaus = GameStaus.Wait;
+            gameStaus = GameStaus.ResetTurn;
         }
     }
 
-    void WaitProgress()
+    void ResetTurnProgress()
     {
-        Debug.Log("【進行】待ち");
-        Timer.CountReset();
+        Debug.Log("【進行】リセットターン");
+        Timer.CountReset();//タイマーリセット
 
         //アイテムidをどこから入れる？
         if (playerObj == null)
         {
             playerObj = GameObject.Find("Player").gameObject;
         }
-        PassSystem.ItemPass(playerObj);
+        PassSystem.ItemPass(playerObj);//パス実行
 
         //変更予定
-        if (Input.GetMouseButtonDown(1))
-        {
-            gameStaus = GameStaus.PlayerTurn;
-        }
+        gameStaus = GameStaus.PlayerTurn;
     }
 
     void PlayerTurnProgress()
     {
-        //Debug.Log("【進行】プレイヤーのターン");
+        Debug.Log("【進行】プレイヤーのターン");
         Timer.CountDown();
 
         //変更予定
-        if (Input.GetMouseButtonDown(1))
-        {
-            gameStaus = GameStaus.GameClear;
-            SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
-        }
-        if (Input.GetMouseButtonDown(2))
-        {
-            gameStaus = GameStaus.GameOver;
-        }
+        //if (Input.GetMouseButtonDown(1))//
+        //{
+        //    gameStaus = GameStaus.GameClear;
+        //    SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        //}
+        //if (Input.GetMouseButtonDown(2))
+        //{
+        //    gameStaus = GameStaus.GameOver;
+        //}
     }
 
     void IntervalProgress()
     {
         Debug.Log("【進行】インターバル");
+        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
+    }
+
+    void ClearCheckNowProgress()
+    {
+        Debug.Log("ゲームクリアチェック中");
+
+        if(MainGameManager.nowTurn % 2 == 0) { //Bターン（偶数）の場合
+            //先行と後攻のフラグによって遷移するシーンが変わる
+            if(MainGameManager.isClearUserA && MainGameManager.isClearUserB)//AB脱出ルート
+                gameStaus = GameStaus.GameClear;
+            if(MainGameManager.isClearUserA || MainGameManager.isClearUserB) //AorB脱出ルート
+                gameStaus = GameStaus.GameClear;
+        }
+        else if(MainGameManager.nowTurn >= MainGameManager.maxTurn)//16ターン超えた場合
+            gameStaus = GameStaus.GameOver;
+        else
+            gameStaus = GameStaus.Interval;
     }
 
     void GameClearProgress()
     {
         Debug.Log("【進行】ゲームクリア");
 
-        //変更予定
-        if (Input.GetMouseButtonDown(0))
-        {
-            gameStaus = GameStaus.GameStrat;
-            SceneManager.SceneLaod(SceneManager.SceneName.TITLE);
-        }
+        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        gameStaus = GameStaus.GameStrat;
     }
 
     void GameOverProgress()
     {
         Debug.Log("【進行】ゲームオーバ");
 
-        //変更予定
-        if (Input.GetMouseButtonDown(0))
-        {
-            gameStaus = GameStaus.GameStrat;
-        }
+        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        gameStaus = GameStaus.GameStrat;
+
     }
 }

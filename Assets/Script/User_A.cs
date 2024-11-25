@@ -31,6 +31,6 @@ public class User_A : User
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(username);
+        Debug.Log("ユーザー名：" + username);
     }
 }
