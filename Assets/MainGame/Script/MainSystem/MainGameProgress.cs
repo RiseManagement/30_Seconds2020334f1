@@ -139,11 +139,14 @@ public class MainGameProgress :MonoBehaviour
                 gameStaus = GameStaus.GameClear;
             if(MainGameManager.isClearUserA || MainGameManager.isClearUserB) //AorB脱出ルート
                 gameStaus = GameStaus.GameClear;
+            else
+                gameStaus = GameStaus.Interval;
         }
         else if(MainGameManager.nowTurn >= MainGameManager.maxTurn)//16ターン超えた場合
             gameStaus = GameStaus.GameOver;
         else
             gameStaus = GameStaus.Interval;
+
     }
 
     void GameClearProgress()

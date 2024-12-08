@@ -401,7 +401,6 @@ GameObject:
   - component: {fileID: 439547866}
   - component: {fileID: 439547865}
   - component: {fileID: 439547869}
-  - component: {fileID: 439547868}
   m_Layer: 5
   m_Name: OK_Button
   m_TagString: Untagged
@@ -485,9 +484,9 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 439547868}
-        m_TargetAssemblyTypeName: ScenedemoManager, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 439547869}
+        m_TargetAssemblyTypeName: NameInputcontroller, Assembly-CSharp
+        m_MethodName: LoadSceneMainGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -535,18 +534,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 439547863}
   m_CullTransparentMesh: 1
---- !u!114 &439547868
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 439547863}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87dbddefb658b95439167b40fefadbba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &439547869
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -39,7 +39,7 @@ public class Item_Diteal : MonoBehaviour
         Debug.Log(gameObject);
         Debug.Log("Item_Diteal");
         gameObject.transform.GetChild(1).GetComponent<Image>().sprite=sprite;
-        gameObject.transform.GetChild(0).GetComponent<Text>().text=diteal;
+        gameObject.transform.GetChild(2).GetChild(0).GetComponent<Text>().text=diteal;
         ItemDitealDisplaySwitch(gameObject,isDiteal=true);
         
     }

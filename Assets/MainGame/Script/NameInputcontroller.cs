@@ -20,10 +20,15 @@ public class NameInputcontroller : MonoBehaviour
     {
         
     }
-    public void InputPlayerName()
+    public void SetInputPlayerName()
     {
         player_1name=player_1obj.transform.GetChild(2).GetComponent<Text>().text;
         player_2name=player_2obj.transform.GetChild(2).GetComponent<Text>().text;
+    }
+
+    public void LoadSceneMainGame()
+    {
+        SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
     }
 
 }
