@@ -474,7 +474,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 439547869}
         m_TargetAssemblyTypeName: NameInputcontroller, Assembly-CSharp
-        m_MethodName: InputPlayerName
+        m_MethodName: SetInputPlayerName
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
