@@ -695,7 +695,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1555776463}
         m_TargetAssemblyTypeName: Interval, Assembly-CSharp
-        m_MethodName: OnClickAdButton
+        m_MethodName: OnClickAdRewardButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

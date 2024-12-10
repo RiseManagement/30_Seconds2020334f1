@@ -20,6 +20,10 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         camera = GameObject.Find("Main Camera").GetComponent<CameraManager>();
     }
 
+    /// <summary>
+    /// アイテムをタップ時の処理
+    /// </summary>
+    /// <param name="eventData">タップ情報</param>
     public void OnPointerClick(PointerEventData eventData)
     {
         //Debug.Log($"オブジェクト {name} がクリックされたよ！");
@@ -29,9 +33,6 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         //所持可能なアイテムをタップした場合
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
-            //更新前の保存
-            //old_stageitemNumber = stageitemNumber;
-
             //所持する前の操作
             switch (stageitemNumber)
             {
@@ -72,9 +73,6 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                 ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
             }
 
-            //もとに戻す
-            //stageitemNumber = old_stageitemNumber;
-
             //ステージ上のアイテム変化
             switch (stageitemNumber)
             {
@@ -99,7 +97,6 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            //Debug.Log("何側？：" + stageitemNumber);
             switch (stageitemNumber)
             {
                 case 0://アイテム選択された側

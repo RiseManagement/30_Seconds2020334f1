@@ -17,13 +17,18 @@ public class Interval :MonoBehaviour
     {
         instance = this;
     }
+
     void Start()
     {
         MainGameManager.TurnCountUp();
         //プレイヤー変更
         turnCount.text = "経過ターン　" + MainGameManager.nowTurn.ToString() + "/16";
     }
-    public void OnClickAdButton()
+
+    /// <summary>
+    /// アンドロイドリワード広告開始ボタン
+    /// </summary>
+    public void OnClickAdRewardButton()
     {
         admobReward.ShowAdMobReward();
         shareTextObj.SetActive(false);
@@ -31,11 +36,19 @@ public class Interval :MonoBehaviour
         startTurnButton.SetActive(true);
         preparationTextObj.SetActive(true);
     }
+
+    /// <summary>
+    /// ターン開始ボタン
+    /// </summary>
     public void OnClickStartTurnButton()
     {
         MainGameSceneChange();
         ChangeGameStausWaitToPlayerTurn();
     }
+
+    /// <summary>
+    /// 前半ターンと後半ターンの切り替え遷移
+    /// </summary>
     void MainGameSceneChange()
     {
         if (SceneManager.OldSceneName == SceneManager.SceneName.MAINGAMEFIRST.ToString().ToLower())
@@ -48,6 +61,9 @@ public class Interval :MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ゲームステータス待ちからプレイヤーターンに遷移
+    /// </summary>
     void ChangeGameStausWaitToPlayerTurn()
     {
         if (MainGameProgress.gameStaus == MainGameProgress.GameStaus.Interval)
