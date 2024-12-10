@@ -28,6 +28,8 @@ public class NameInputcontroller : MonoBehaviour
 
     public void LoadSceneMainGame()
     {
+        SetInputPlayerName();
+
         SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
     }
 
