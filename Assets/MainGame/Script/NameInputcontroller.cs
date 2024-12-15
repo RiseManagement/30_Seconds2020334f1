@@ -30,7 +30,8 @@ public class NameInputcontroller : MonoBehaviour
     {
         SetInputPlayerName();
 
-        SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
+        //SceneManager.SceneLaod(SceneManager.SceneName.MAINGAMEFIRST);
+        UnityEngine.SceneManagement.SceneManager.LoadScene("maingamefirst");
     }
 
 }
