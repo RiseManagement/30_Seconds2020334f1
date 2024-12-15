@@ -65,7 +65,7 @@ public class MainGameManager :MonoBehaviour
     }
     public void GoToEnding()
     {
-        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
     }
 
     /// <summary>

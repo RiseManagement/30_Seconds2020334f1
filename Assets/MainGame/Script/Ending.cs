@@ -40,6 +40,6 @@ public class Ending :MonoBehaviour
     }
     public void OnClickTitleButton()
     {
-        SceneManager.SceneLaod(SceneManager.SceneName.TITLE);
+        SceneTransitions.SceneLaod(SceneTransitions.SceneName.TITLE);
     }
 }

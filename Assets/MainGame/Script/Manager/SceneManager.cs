@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneManager :MonoBehaviour
+public class SceneTransitions : MonoBehaviour
 {
-    static public SceneManager instance;
+    static public SceneTransitions instance;
 
     static string nowscenename;
     public static string NowSceneName

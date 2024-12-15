@@ -126,7 +126,7 @@ public class MainGameProgress :MonoBehaviour
     void IntervalProgress()
     {
         Debug.Log("【進行】インターバル");
-        SceneManager.SceneLaod(SceneManager.SceneName.INTERVAL);
+        SceneTransitions.SceneLaod(SceneTransitions.SceneName.INTERVAL);
     }
 
     void ClearCheckNowProgress()
@@ -153,7 +153,7 @@ public class MainGameProgress :MonoBehaviour
     {
         Debug.Log("【進行】ゲームクリア");
 
-        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
         gameStaus = GameStaus.GameStrat;
     }
 
@@ -161,7 +161,7 @@ public class MainGameProgress :MonoBehaviour
     {
         Debug.Log("【進行】ゲームオーバ");
 
-        SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
+        SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
         gameStaus = GameStaus.GameStrat;
 
     }
