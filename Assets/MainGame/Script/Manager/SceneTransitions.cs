@@ -71,11 +71,8 @@ public class SceneTransitions : MonoBehaviour
     public static void SceneLaod(SceneName scene)
     {
         oldscenename = nowscenename;
-        string sceneName = scene.ToString().ToLower();
+        string sceneName = scene.ToString();
 
-        if (!UnityEngine.SceneManagement.SceneManager.GetSceneByName(sceneName).IsValid())
-        {
-            UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
-        }
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 }
