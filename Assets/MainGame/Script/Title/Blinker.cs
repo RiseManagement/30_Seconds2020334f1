@@ -19,6 +19,7 @@ public class Blinker : MonoBehaviour
         text = this.gameObject.GetComponent<Text>();
         outline = this.gameObject.GetComponent<Outline>();
 
+
         if (outline == null)
         {
             Debug.LogError("Outline component is missing on this game object");
