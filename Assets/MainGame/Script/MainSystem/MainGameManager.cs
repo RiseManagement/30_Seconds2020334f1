@@ -50,6 +50,8 @@ public class MainGameManager :MonoBehaviour
     }
     void ChangeStartTurnTextColor()
     {
+        if(SceneTransitions.NowSceneName == "interval")
+
         if (startTurnTextTimer > 0)
         {
             startTurnTextTimer -= Time.deltaTime;
@@ -73,6 +75,7 @@ public class MainGameManager :MonoBehaviour
     /// </summary>
     public static void TurnCountUp()
     {
-        nowTurn += 1;
+        if(nowTurn < maxTurn)
+            nowTurn += 1;
     }
 }

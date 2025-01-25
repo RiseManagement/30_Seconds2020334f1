@@ -158,9 +158,17 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: eccef723866df66489a46aa8c767fc67, type: 3}
+    - target: {fileID: 3743269473599925905, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4677dd7155568a3438d61b2276b179d2, type: 3}
     - target: {fileID: 4660046358952996780, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
       propertyPath: m_IgnoreReversedGraphics
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5360592070754918138, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
+      propertyPath: m_Name
+      value: PlayerName
       objectReference: {fileID: 0}
     - target: {fileID: 5399617189285958411, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
