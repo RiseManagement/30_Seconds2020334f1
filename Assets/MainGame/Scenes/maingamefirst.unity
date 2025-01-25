@@ -807,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838704, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838708, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Pivot.x
@@ -1289,6 +1289,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 398194021693690093, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398194021693690093, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398194021693690093, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 398194021693690093, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -17
+      objectReference: {fileID: 0}
     - target: {fileID: 870290156880778070, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
