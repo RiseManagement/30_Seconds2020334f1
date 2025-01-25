@@ -807,7 +807,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838704, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838708, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Pivot.x
@@ -2129,6 +2129,10 @@ PrefabInstance:
       propertyPath: itemid
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 4171687959934295231, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4758246352605337762, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
       propertyPath: m_Name
       value: Slot_Canvas
@@ -2149,6 +2153,10 @@ PrefabInstance:
       propertyPath: Inventry
       value: 
       objectReference: {fileID: 1522409243}
+    - target: {fileID: 8525099851522857737, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
 --- !u!1001 &5875133787167675364

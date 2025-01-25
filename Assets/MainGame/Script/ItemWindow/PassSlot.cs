@@ -21,10 +21,13 @@ public class PassSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ItemUIActiveChange();
     }
 
-
+    /// <summary>
+    /// アイテム選択
+    /// </summary>
+    /// <param name="selectitemid"></param>
     public void SelectItem(int selectitemid)
     {
         var itemdata = ItemDataBase.Entity.GetData(selectitemid);
@@ -32,5 +35,16 @@ public class PassSlot : MonoBehaviour
         icon= itemdata.Image;
 
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+    }
+
+    /// <summary>
+    /// アイテムUI活性非活性切り替え
+    /// </summary>
+    private void ItemUIActiveChange()
+    {
+        if (itemid != -1)
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        else
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }

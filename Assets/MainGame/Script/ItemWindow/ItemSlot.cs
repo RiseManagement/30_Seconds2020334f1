@@ -30,7 +30,7 @@ public class ItemSlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        ItemUIActiveChange();
     }
 
 
@@ -68,5 +68,16 @@ public class ItemSlot : MonoBehaviour
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
 
         //Debug.Log("アイテム使用済");
+    }
+
+    /// <summary>
+    /// アイテムUI活性非活性切り替え
+    /// </summary>
+    private void ItemUIActiveChange()
+    {
+        if(itemid != -1)
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        else
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
     }
 }
