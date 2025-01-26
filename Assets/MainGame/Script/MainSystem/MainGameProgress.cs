@@ -15,7 +15,8 @@ public class MainGameProgress :MonoBehaviour
         GameStrat,      //ゲーム開始
         ResetTurn,      //リセットターン
         PlayerTurn,     //プレイヤーターン
-        Interval,       //インターバル
+        IntervalStart,  //インターバル開始
+        IntervalEnd,    //インターバル終了
         ClearCheckNow,  //クリアチェック中
         GameClear,      //ゲームクリア
         GameOver,       //ゲームオーバー
@@ -44,6 +45,8 @@ public class MainGameProgress :MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("プロセス：" + gameStaus);
+
         switch (gameStaus)
         {
             case GameStaus.GameStrat:
@@ -58,8 +61,12 @@ public class MainGameProgress :MonoBehaviour
             PlayerTurnProgress();
             break;
 
-            case GameStaus.Interval:
-            IntervalProgress();
+            case GameStaus.IntervalStart:
+            IntervalStartProgress();
+            break;
+
+            case GameStaus.IntervalEnd:
+            IntervalEndProgress();
             break;
 
             case GameStaus.ClearCheckNow:
@@ -81,7 +88,7 @@ public class MainGameProgress :MonoBehaviour
     {
         Debug.Log("【進行】ゲームスタート");
 
-        MainGameManager.nowTurn = 1;
+        TurnManager.nowTurn = 1;
 
         //変更予定
         //if (Input.GetMouseButtonDown(1))
@@ -108,7 +115,7 @@ public class MainGameProgress :MonoBehaviour
 
     void PlayerTurnProgress()
     {
-        Debug.Log("【進行】プレイヤーのターン");
+        //Debug.Log("【進行】プレイヤーのターン");
         Timer.CountDown();
 
         //変更予定
@@ -123,29 +130,34 @@ public class MainGameProgress :MonoBehaviour
         //}
     }
 
-    void IntervalProgress()
+    void IntervalStartProgress()
     {
-        Debug.Log("【進行】インターバル");
+        Debug.Log("【進行】インターバル開始");
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.INTERVAL);
+        gameStaus = GameStaus.IntervalEnd;
+    }
+    void IntervalEndProgress()
+    {
+        Debug.Log("【進行】インターバル終了");
     }
 
     void ClearCheckNowProgress()
     {
         Debug.Log("ゲームクリアチェック中");
 
-        if(MainGameManager.nowTurn % 2 == 0) { //Bターン（偶数）の場合
+        if(TurnManager.nowTurn % 2 == 0) { //Bターン（偶数）の場合
             //先行と後攻のフラグによって遷移するシーンが変わる
             if(MainGameManager.isClearUserA && MainGameManager.isClearUserB)//AB脱出ルート
                 gameStaus = GameStaus.GameClear;
             if(MainGameManager.isClearUserA || MainGameManager.isClearUserB) //AorB脱出ルート
                 gameStaus = GameStaus.GameClear;
             else
-                gameStaus = GameStaus.Interval;
+                gameStaus = GameStaus.IntervalStart;
         }
-        else if(MainGameManager.nowTurn >= MainGameManager.maxTurn)//16ターン超えた場合
+        else if(TurnManager.nowTurn >= TurnManager.maxTurn)//16ターン超えた場合
             gameStaus = GameStaus.GameOver;
         else
-            gameStaus = GameStaus.Interval;
+            gameStaus = GameStaus.IntervalStart;
 
     }
 

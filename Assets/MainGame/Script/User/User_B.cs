@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class User_B : User
 {
-    
     private void Awake()
     {
         username = NameInputcontroller.player_2name;

@@ -20,9 +20,9 @@ public class Interval :MonoBehaviour
 
     void Start()
     {
-        MainGameManager.TurnCountUp();
+        TurnManager.TurnCountUp();
         //プレイヤー変更
-        turnCount.text = "経過ターン　" + MainGameManager.nowTurn.ToString() + "/16";
+        turnCount.text = "経過ターン　" + TurnManager.nowTurn.ToString() + "/16";
     }
 
     /// <summary>
@@ -66,7 +66,7 @@ public class Interval :MonoBehaviour
     /// </summary>
     void ChangeGameStausWaitToPlayerTurn()
     {
-        if (MainGameProgress.gameStaus == MainGameProgress.GameStaus.Interval)
+        if (MainGameProgress.gameStaus == MainGameProgress.GameStaus.IntervalEnd)
             MainGameProgress.gameStaus = MainGameProgress.GameStaus.ResetTurn;
     }
 }

@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         string name;
-        name = user.User_name;
+        name = GameObject.Find("Player").GetComponent<User>().User_name;
         //Debug.Log(name);
         this.Playername = GameObject.Find("PlayerName");
         this.Playername.transform.GetChild(0).GetComponent<Text>().text = (name);

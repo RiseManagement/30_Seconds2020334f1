@@ -11,7 +11,7 @@ public class Item_Diteal : MonoBehaviour
 {
     public GameObject itemSlotcs;
     public bool isDiteal=false;
-    public GameObject itemditeal;
+    GameObject itemditeal;
     //アイテム詳細の表示非表示のどのアイテムの詳細を表示するかの判定
     // Start is called before the first frame update
     void Start()
@@ -36,14 +36,13 @@ public class Item_Diteal : MonoBehaviour
         sprite=ItemDataBase.Entity.GetData(itemnumber).Image;
         diteal = ItemDataBase.Entity.GetData(itemnumber).Explanation;
         Debug.Log(diteal);
-        GameObject gameObject=GameObject.Find("ItemDiteal_Canvas");
         
         Debug.Log(gameObject);
         Debug.Log("Item_Diteal");
         //アイテム画像
-        gameObject.transform.GetChild(1).GetChild(1).GetComponent<Image>().sprite=sprite;
-        gameObject.transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>().text=diteal;
-        ItemDitealDisplaySwitch(gameObject,isDiteal=true);
+        itemditeal.transform.GetChild(1).GetChild(1).GetComponent<Image>().sprite=sprite;
+        itemditeal.transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>().text=diteal;
+        //ItemDitealDisplaySwitch(itemditeal, isDiteal=true);
         
     }
 

@@ -38,11 +38,10 @@ public class Timer :MonoBehaviour
     void Update()
     {
         UIText.text = count.ToString("f0");
-        //TimerStopJudge();
+        //タイム残り5秒表示
         if ((count <= 5) && (count > 0))
         {
             UIText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-            //Debug.Log("Timer_Red");
         }
         else if (count < 0)
         {
