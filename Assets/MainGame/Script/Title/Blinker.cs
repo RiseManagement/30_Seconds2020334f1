@@ -7,7 +7,7 @@ public class Blinker : MonoBehaviour
     public float fadeOutSpeed = 1.0f; // フェードアウトのスピード
     public float blinkSpeed = 5.0f;   // 点滅のスピード
     public float blinkInterval = 0.5f; // 点滅のインターバル
-    private Text text;
+    private Image image;
     private Outline outline;
     private bool isBlinking = true;
 
@@ -16,7 +16,7 @@ public class Blinker : MonoBehaviour
 
     void Start()
     {
-        text = this.gameObject.GetComponent<Text>();
+        image = this.gameObject.GetComponent<Image>();
         outline = this.gameObject.GetComponent<Outline>();
 
 
@@ -56,25 +56,25 @@ public class Blinker : MonoBehaviour
 
     public IEnumerator FadeOut()
     {
-        Color textColor = text.color;
+        Color imageColor = image.color;
         Color outlineColor = outline.effectColor;
-        Vector3 originalScale = text.transform.localScale;
+        Vector3 originalScale = image.transform.localScale;
         Vector3 targetScale = originalScale * maxScaleMultiplier;
 
         float fadeDuration = 3.0f; // フェードアウトの持続時間を3秒に設定
         float elapsedTime = 0.0f;
 
-        while (textColor.a > 0)
+        while (imageColor.a > 0)
         {
             elapsedTime += Time.deltaTime;
             float alpha = Mathf.Lerp(1, 0, elapsedTime / fadeDuration);
-            textColor.a = alpha;
-            text.color = textColor;
+            imageColor.a = alpha;
+            image.color = imageColor;
 
             outlineColor.a = alpha;
             outline.effectColor = outlineColor;
 
-            text.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / fadeDuration);
+            image.transform.localScale = Vector3.Lerp(originalScale, targetScale, elapsedTime / fadeDuration);
 
             yield return null;
         }
