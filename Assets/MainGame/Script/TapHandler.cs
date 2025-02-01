@@ -7,10 +7,12 @@ public class TapHandler : MonoBehaviour
     public AudioClip genericTapSound; // 汎用タップSE
     public AudioClip startTapSound;   // スタート画面専用タップSE
     private Blinker blinker;
+    private BlinkerClock blinkerClock;
 
     void Start()
     {
         blinker = FindObjectOfType<Blinker>(); // Blinkerコンポーネントを取得
+        blinkerClock = FindObjectOfType<BlinkerClock>();
         SoundManager.instance.ChangeBGM(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); // 現在のシーンに基づいてBGMを再生
     }
 
@@ -26,6 +28,7 @@ public class TapHandler : MonoBehaviour
     {
         blinker.StopBlinking(); // Blinkerの点滅を停止
         blinker.StartCoroutine(blinker.FadeOut()); // Blinkerのフェードアウトを開始
+        blinkerClock.StartCoroutine(blinkerClock.FadeOut());
         yield return PlayTapSound(); // タップ時のSEを再生
         yield return ChangeScene();
     }
