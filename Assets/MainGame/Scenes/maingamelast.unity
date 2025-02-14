@@ -1046,6 +1046,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dd8cb3a4851c9f499d34b700b4ee91b, type: 3}
+--- !u!1 &1458144805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3625356930865395547, guid: 01f4f7fa67ea4874f8852237727f36db, type: 3}
+  m_PrefabInstance: {fileID: 469753460}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1479352305
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2461,6 +2466,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
+--- !u!1 &2002678668
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002678670}
+  - component: {fileID: 2002678669}
+  m_Layer: 0
+  m_Name: LampManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2002678669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002678668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 888e9458354f79a479fa660627e593b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WaterSwitchObj: {fileID: 1458144805}
+--- !u!4 &2002678670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002678668}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2012010757
 PrefabInstance:
   m_ObjectHideFlags: 0
