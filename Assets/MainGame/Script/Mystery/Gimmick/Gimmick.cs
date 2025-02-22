@@ -44,6 +44,12 @@ public class Gimmick : MonoBehaviour
             case 8://Ａ鍵差込口
                 gimmmickFlag = false;
                 break;
+            case 11://シリンダー
+                gimmmickFlag = false;
+                break;
+            case 17://水槽(水無し)
+                gimmmickFlag = false;
+                break;  
             case 24://Ｂ出口ドア
                 gimmmickFlag = false;
                 break;
@@ -56,19 +62,26 @@ public class Gimmick : MonoBehaviour
             case 32://青ランプ(点灯)
                 gimmmickFlag = false;
                 break;
+            case 33://水抜きスイッチ(消灯)
+                gimmmickFlag = false;
+                this.gameObject.SetActive(false);
+                break;
             case 37://黄ランプ(消灯)
                 gimmmickFlag = false;
                 break;
             case 38://黄ランプ(点灯)
                 gimmmickFlag = false;
                 break;
-            case 43://黄ランプ(点灯)
+            case 40://オルゴール
                 gimmmickFlag = false;
                 break;
             case 42://黄ランプ(消灯)
                 gimmmickFlag = false;
                 break;
-            case 40://オルゴール
+            case 43://黄ランプ(点灯)
+                gimmmickFlag = false;
+                break;
+            case 47://水抜きスイッチ(点灯)
                 gimmmickFlag = false;
                 break;
             default:
@@ -79,54 +92,17 @@ public class Gimmick : MonoBehaviour
         //画面以降後の反映状況の取得方法
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
-            switch (stageitemName)
-            {
-                case 0://A絵画
-                    FiledObjChange();
-                    break;
-                case 2://袖机(中に絵具)
-                    FiledObjChange();
-                    break;
-                case 8://Ａ鍵差込口
+            GimmickActoin();
+        }
 
-                    break;
-                case 14://台座
-                    FiledObjChange();
-                    break;
-                case 15:
-                    //謎1クリア
-                    MysteryCler();
-                    break;
-                case 16://水槽(水有り)
-                    if(ItemDataBase.Entity.GetData(33).InteractFlag == 1)
-                    {
-                        FiledObjChange();
-                    }
-                    break;
-                case 17://水槽(水無し)
-                    FiledObjChange();
-                    break;
-                case 19://水槽の穴
-                    FiledObjChange();
-                    break;
-                case 22://Ｂ絵画
-                    FiledObjChange(2);
-                    break;
-                case 28://花瓶
-                    FiledObjChange();
-                    MusicBoxMusicStart();
-                    break;
-                case 36:
-                    if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 0)
-                    {
-                        itemObj33 = GameObject.Find("33").gameObject;
-                        itemObj33.SetActive(false);
-                    }
-                    break;
-                case 40://オルゴール
-                    FiledObjChange();
-                    MusicBoxMusicStart();
-                    break;
+        if(ItemDataBase.Entity.GetData(stageitemName).EnabletakeFlag == 1)
+        {
+            if (ItemDataBase.Entity.GetData(stageitemName).OwnerFlag == 1 ||
+                ItemDataBase.Entity.GetData(stageitemName).OwnerFlag == 2 ||
+                ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+            {
+
+                this.gameObject.SetActive(false);
             }
         }
     }
@@ -145,8 +121,17 @@ public class Gimmick : MonoBehaviour
     {
         if (!gimmmickFlag) return;
 
+        GimmickActoin();
+    }
+
+    /// <summary>
+    /// ギミック動作
+    /// </summary>
+    void GimmickActoin()
+    {
         switch (stageitemName)
         {
+
             case 0://A絵画
                 FiledObjChange();
                 break;
@@ -180,8 +165,15 @@ public class Gimmick : MonoBehaviour
             case 15://謎1クリア
                 MysteryCler();
                 break;
+            case 16://水槽(水あり)
+                if (ItemInteractFlagCheck(33))//スイッチがONの場合
+                {
+                    FiledObjChange();
+                    MysteryCler();
+                }
+                break;
             case 17://水槽(水無し)
-                FiledObjChange();
+                TankCylinderSet();
                 MysteryCler();
                 break;
             case 19://水槽の穴
@@ -205,8 +197,9 @@ public class Gimmick : MonoBehaviour
                 FiledObjChange(1);
                 ObjChangeCheck();
                 break;
-            case 33://水抜きスイッチ
-                ObjChangeCheck();
+            case 33://水抜き水抜きスイッチ
+                FiledObjChange(3);
+                TankIsEmpty();
                 break;
             case 36:
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
@@ -237,7 +230,7 @@ public class Gimmick : MonoBehaviour
                 ObjChangeCheck();
                 break;
         }
-        
+
     }
 
     /// <summary>
@@ -278,6 +271,40 @@ public class Gimmick : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 水槽の水がなくなる
+    /// </summary>
+    void TankIsEmpty()
+    {
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            Debug.Log("水槽の水がなくなった");
+            ObjChangeCheck();
+        }
+    }
+
+    /// <summary>
+    /// 水槽（水無し）にシリンダーをセット
+    /// </summary>
+    void TankCylinderSet()
+    {
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            var item = this.transform.Find("11").gameObject;
+            item.SetActive(true);
+        }
+    }
+
+    bool ItemInteractFlagCheck(int no)
+    {
+        bool flag = false;
+
+        if (ItemDataBase.Entity.GetData(no).InteractFlag == 1)
+            flag = true;
+
+        return flag;
+    }
+
     //使用後の事象発生
 
     /// <summary>
@@ -296,6 +323,9 @@ public class Gimmick : MonoBehaviour
                 break;
             case 2:
                 dataname = 35;//Ｂ絵画→B絵画(使用後)
+                break;
+            case 3:
+                dataname = 46;//水抜きスイッチオフ→オン
                 break;
             default:
                 dataname = stageitemName + 1;

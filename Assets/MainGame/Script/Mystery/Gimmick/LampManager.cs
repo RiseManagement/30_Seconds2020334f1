@@ -43,8 +43,8 @@ public class LampManager : MonoBehaviour
             {
                 Debug.Log("スイッチ出現");
 
-                //ランプのヒントを使用済
-                ItemDataBase.Entity.GetData(36).InteractFlag = 1;
+                //スイッチ出現
+                WaterSwitchObj.SetActive(true);
             }
             else
             {

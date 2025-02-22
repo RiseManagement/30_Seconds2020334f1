@@ -185,14 +185,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 388263791102512500, guid: 7619ea08c964f404a990dcec8cf2166d, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 2f6e12291bc08b34196c695122cf7735, type: 3}
-    - target: {fileID: 388263791102512500, guid: 7619ea08c964f404a990dcec8cf2166d, type: 3}
-      propertyPath: m_WasSpriteAssigned
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3549471058408982329, guid: 7619ea08c964f404a990dcec8cf2166d, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -332,6 +324,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d5d3ea32ba7d0314bbd25be6974e614f, type: 3}
+--- !u!1 &410934474 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2306181832342964486, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
+  m_PrefabInstance: {fileID: 1935922148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &410934476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410934474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2964ef5f7d6115e479857f3ed0d98b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gimmmickFlag: 0
 --- !u!1 &467633844
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +691,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1137998773 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4865900427534230450, guid: 7619ea08c964f404a990dcec8cf2166d, type: 3}
+  m_PrefabInstance: {fileID: 176742881}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1137998774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137998773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2964ef5f7d6115e479857f3ed0d98b9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gimmmickFlag: 0
 --- !u!1001 &1168846782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1124,6 +1152,18 @@ PrefabInstance:
     - target: {fileID: 1588304959203031214, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
       propertyPath: m_Name
       value: AStage_West
+      objectReference: {fileID: 0}
+    - target: {fileID: 1588304959203031214, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799455491241582502, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
+      propertyPath: m_Name
+      value: Img_cylinder
+      objectReference: {fileID: 0}
+    - target: {fileID: 5799455491241582502, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6624527843327209727, guid: f794fda42ec41244cbdf759f5cf07aa8, type: 3}
       propertyPath: m_RootOrder
