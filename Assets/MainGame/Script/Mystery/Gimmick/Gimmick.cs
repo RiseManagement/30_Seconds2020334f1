@@ -44,6 +44,12 @@ public class Gimmick : MonoBehaviour
             case 8://Ａ鍵差込口
                 gimmmickFlag = false;
                 break;
+            case 11://シリンダー
+                gimmmickFlag = false;
+                break;
+            case 17://水槽(水無し)
+                gimmmickFlag = false;
+                break;  
             case 24://Ｂ出口ドア
                 gimmmickFlag = false;
                 break;
@@ -86,58 +92,17 @@ public class Gimmick : MonoBehaviour
         //画面以降後の反映状況の取得方法
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
-            switch (stageitemName)
-            {
-                case 0://A絵画
-                    FiledObjChange();
-                    break;
-                case 2://袖机(中に絵具)
-                    FiledObjChange();
-                    break;
-                case 8://Ａ鍵差込口
+            GimmickActoin();
+        }
 
-                    break;
-                case 14://台座
-                    FiledObjChange();
-                    break;
-                case 15:
-                    //謎1クリア
-                    MysteryCler();
-                    break;
-                case 16://水槽(水有り)
-                    if(ItemDataBase.Entity.GetData(33).InteractFlag == 1)
-                    {
-                        FiledObjChange();
-                    }
-                    break;
-                case 17://水槽(水無し)
-                    //FiledObjChange();
-                    break;
-                case 19://水槽の穴
-                    FiledObjChange();
-                    break;
-                case 22://Ｂ絵画
-                    FiledObjChange(2);
-                    break;
-                case 28://花瓶
-                    FiledObjChange();
-                    MusicBoxMusicStart();
-                    break;
-                case 33://水抜きスイッチ(消灯)
-                    FiledObjChange(3);
-                    this.gameObject.SetActive(true);
-                    break;
-                case 36:
-                    if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 0)
-                    {
-                        itemObj33 = GameObject.Find("33").gameObject;
-                        itemObj33.SetActive(false);
-                    }
-                    break;
-                case 40://オルゴール
-                    FiledObjChange();
-                    MusicBoxMusicStart();
-                    break;
+        if(ItemDataBase.Entity.GetData(stageitemName).EnabletakeFlag == 1)
+        {
+            if (ItemDataBase.Entity.GetData(stageitemName).OwnerFlag == 1 ||
+                ItemDataBase.Entity.GetData(stageitemName).OwnerFlag == 2 ||
+                ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+            {
+
+                this.gameObject.SetActive(false);
             }
         }
     }
@@ -156,8 +121,17 @@ public class Gimmick : MonoBehaviour
     {
         if (!gimmmickFlag) return;
 
+        GimmickActoin();
+    }
+
+    /// <summary>
+    /// ギミック動作
+    /// </summary>
+    void GimmickActoin()
+    {
         switch (stageitemName)
         {
+
             case 0://A絵画
                 FiledObjChange();
                 break;
@@ -199,8 +173,8 @@ public class Gimmick : MonoBehaviour
                 }
                 break;
             case 17://水槽(水無し)
-                //FiledObjChange();
-                //MysteryCler();
+                TankCylinderSet();
+                MysteryCler();
                 break;
             case 19://水槽の穴
                 FiledObjChange();
@@ -256,7 +230,7 @@ public class Gimmick : MonoBehaviour
                 ObjChangeCheck();
                 break;
         }
-        
+
     }
 
     /// <summary>
@@ -306,6 +280,18 @@ public class Gimmick : MonoBehaviour
         {
             Debug.Log("水槽の水がなくなった");
             ObjChangeCheck();
+        }
+    }
+
+    /// <summary>
+    /// 水槽（水無し）にシリンダーをセット
+    /// </summary>
+    void TankCylinderSet()
+    {
+        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        {
+            var item = this.transform.Find("11").gameObject;
+            item.SetActive(true);
         }
     }
 

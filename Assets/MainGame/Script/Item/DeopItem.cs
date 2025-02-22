@@ -91,7 +91,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     this.gameObject.name = (40).ToString();
                     break;
                 default:
-                    Destroy(gameObject);
+                    gameObject.SetActive(false);
                     break;
             }
         }
@@ -159,7 +159,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                 case 15://台座(物乗っけてる)
                     StageItemGimmickOn();
                     break;
-                case 19://水槽の穴
+                case 17://水槽空
                     if (itemslot.itemid == 11)//シリンダー
                     {
                         //事象処理
@@ -167,7 +167,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         Inventry.instance.Removed(itemslot.itemid);
                         itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        ItemDataBase.Entity.GetData(stageitemNumber - 2).InteractFlag = 1;
+                        ItemDataBase.Entity.GetData(itemslot.itemid).OwnerFlag = 0;
                     }
                     break;
                 case 22://Ｂ絵画
