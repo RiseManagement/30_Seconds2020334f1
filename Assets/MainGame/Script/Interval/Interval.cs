@@ -7,12 +7,13 @@ using UnityEngine.UI;
 public class Interval :MonoBehaviour
 {
     public static Interval instance;
-    [SerializeField] Text turnCount;
     [SerializeField] GameObject shareTextObj;
     [SerializeField] GameObject adButton;
     [SerializeField] GameObject startTurnButton;
     [SerializeField] GameObject preparationTextObj;
     [SerializeField] AdMobReward admobReward;
+    [SerializeField] Sprite[] spriteTurn = new Sprite[16];
+    [SerializeField] GameObject TurnCountObj;
     private void Awake()
     {
         instance = this;
@@ -21,8 +22,14 @@ public class Interval :MonoBehaviour
     void Start()
     {
         TurnManager.TurnCountUp();
-        //プレイヤー変更
-        turnCount.text = "経過ターン　" + TurnManager.nowTurn.ToString() + "/16";
+
+        if (TurnCountObj == null)
+        {
+            Debug.LogWarning("TurnCountObjが設定されていません");
+            return;
+        }
+
+        TurnCountObj.GetComponent<Image>().sprite = spriteTurn[TurnManager.nowTurn - 1];
     }
 
     /// <summary>
