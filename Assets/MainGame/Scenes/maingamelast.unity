@@ -738,6 +738,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9aedabe302fec524f910e3249007710d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &981903801 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6359437471076877787, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+  m_PrefabInstance: {fileID: 1479352305}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1012189523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,6 +758,10 @@ PrefabInstance:
       propertyPath: UIText
       value: 
       objectReference: {fileID: 1479352306}
+    - target: {fileID: 4412321053507145036, guid: 21e85ffbf4e638d40a6b6aae550884c1, type: 3}
+      propertyPath: timeupBgObj
+      value: 
+      objectReference: {fileID: 981903801}
     - target: {fileID: 4412321053507145037, guid: 21e85ffbf4e638d40a6b6aae550884c1, type: 3}
       propertyPath: m_RootOrder
       value: 10

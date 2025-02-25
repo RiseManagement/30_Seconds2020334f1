@@ -23,9 +23,7 @@ public class Timer :MonoBehaviour
     static public bool countstop;
 
     [SerializeField] Image timerImage;
-    float skipTimer = 0;
-    float skipTimeRequired = 2;
-    bool isPressed = false;
+    [SerializeField] GameObject timeupBgObj;
 
     // Start is called before the first frame update
     void Start()
@@ -42,26 +40,19 @@ public class Timer :MonoBehaviour
         if ((count <= 5) && (count > 0))
         {
             UIText.color = new Color(1.0f, 0.0f, 0.0f, 1.0f);
+            timeupBgObj.SetActive(true);
         }
         else if (count < 0)
         {
             TurnEnd();
         }
-        if (isPressed)
-        {
-            skipTimer += Time.deltaTime;
-            timerImage.fillAmount = 1 - (skipTimer / skipTimeRequired);
-        }
-        if (skipTimer > skipTimeRequired)
-        {
-            TurnEnd();
-        }
     }
-    void TurnEnd()
+    public static void TurnEnd()
     {
         MainGameProgress.gameStaus = MainGameProgress.GameStaus.ClearCheckNow;
-        Destroy(this);
+        CountReset();
     }
+
     //カウントダウン
     public static void CountDown()
     {
@@ -73,33 +64,11 @@ public class Timer :MonoBehaviour
         {
             count -= Time.deltaTime;
         }
-
         //Debug.Log(count);
     }
 
     public static void CountReset()
     {
         count = countmax;
-    }
-
-    //TimerStopの判断
-    public static void TimerStop()
-    {
-        countstop = true;
-    }
-
-    public static void TimerRestart()
-    {
-        countstop = false;
-    }
-
-    public void TimerButtonLongPressed()
-    {
-        isPressed = true;
-    }
-    public void OnTimerButtonRelease()
-    {
-        isPressed = false;
-        skipTimer = 0;
     }
 }

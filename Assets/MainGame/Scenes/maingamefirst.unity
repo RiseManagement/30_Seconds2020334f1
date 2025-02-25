@@ -549,7 +549,11 @@ PrefabInstance:
     - target: {fileID: 4412321053507145036, guid: 21e85ffbf4e638d40a6b6aae550884c1, type: 3}
       propertyPath: timerImage
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1732024107}
+    - target: {fileID: 4412321053507145036, guid: 21e85ffbf4e638d40a6b6aae550884c1, type: 3}
+      propertyPath: timeupBgObj
+      value: 
+      objectReference: {fileID: 1435978200}
     - target: {fileID: 4412321053507145037, guid: 21e85ffbf4e638d40a6b6aae550884c1, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -804,9 +808,21 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 808897009190225767, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+      propertyPath: m_ScreenMatchMode
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 808897009190225769, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
       propertyPath: m_Name
       value: Timer_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 808897009190225769, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1450661591297622892, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 2878972585855215904, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -1017,6 +1033,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 812acdb43e5667a478bdf3959e9450dc, type: 3}
+--- !u!1 &1435978200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6359437471076877787, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+  m_PrefabInstance: {fileID: 1168846782}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1461023998 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2853429514803795081, guid: b35c0513ccc6c8441878239bf70c1856, type: 3}
@@ -1131,6 +1152,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1732024107 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3527658917278005266, guid: 6dad4693c06406a408dfc3c2eed15cfa, type: 3}
+  m_PrefabInstance: {fileID: 1168846782}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1796530974 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 776529839135866363, guid: 42a1631301712844babd323dc5c0331f, type: 3}
