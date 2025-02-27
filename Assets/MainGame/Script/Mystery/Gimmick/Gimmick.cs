@@ -26,10 +26,13 @@ public class Gimmick : MonoBehaviour
     GameObject itemObj34;
     GameObject itemObj33;
 
+    CameraManager cameraManager;
+
     // Start is called before the first frame update
     void Start()
     {
         stageitemName = int.Parse(gameObject.name);
+        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
 
         switch (stageitemName)
         {
@@ -45,6 +48,12 @@ public class Gimmick : MonoBehaviour
                 gimmmickFlag = false;
                 break;
             case 11://シリンダー
+                gimmmickFlag = false;
+                break;
+            case 14://台座
+                gimmmickFlag = false;
+                break;
+            case 15://台座(物乗っけてる)
                 gimmmickFlag = false;
                 break;
             case 17://水槽(水無し)

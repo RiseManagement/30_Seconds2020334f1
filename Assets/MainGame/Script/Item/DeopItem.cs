@@ -147,7 +147,13 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     }
                     break;
                 case 14://台座
-                    if (itemslot.itemid == 39)//リンゴ
+                    //フォーカスではない場合
+                    if (!camera.Focusflg)
+                    {
+                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 2);
+                    }
+                    //フォーカス中の場合
+                    else if (itemslot.itemid == 39)//リンゴ
                     {
                         //事象処理
                         StageItemGimmickOn();
@@ -157,7 +163,15 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     }
                     break;
                 case 15://台座(物乗っけてる)
-                    StageItemGimmickOn();
+                    if (!camera.Focusflg)//フォーカスフラグ
+                    {
+                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 2);
+                    }
+                    else
+                    {
+                        StageItemGimmickOn();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                    }
                     break;
                 case 17://水槽空
                     if (itemslot.itemid == 11)//シリンダー
