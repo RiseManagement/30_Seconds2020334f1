@@ -7,7 +7,7 @@ public class CameraManager : MonoBehaviour
 {
     Vector3 cameraPos;
     private Camera mainCam;
-    public bool Focusflg;
+    public bool Focusflg; //true:フォーカス中、false：フォーカスではない
     [SerializeField] GameObject FocusCancelButton;
     [SerializeField] GameObject LButtonActive;
     [SerializeField] GameObject RButtonActive;

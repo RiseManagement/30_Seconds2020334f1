@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
+using System;
 
 /// <summary>
 /// アイテムデータベース
@@ -115,31 +116,37 @@ public class ItemData
     [SerializeField] int id;
     public int Id
     {
-        get{ return id; }
+        get { return id; }
     }
+
     [SerializeField] string name;
     public string Name
     {
         get { return name; }
     }
+
     [SerializeField] string explanation;
     public string Explanation
     {
         get { return explanation; }
     }
+
     [SerializeField] Sprite image;
     public Sprite Image
     {
         get { return image; }
     }
+
     [SerializeField] int ownerflag;
     public int OwnerFlag
     {
         get { return ownerflag; }
-        set { if(value <= 2 && value >= 0)
+        set
+        {
+            if (value <= 2 && value >= 0)
             {
                 ownerflag = value;
-            } 
+            }
         }
     }
     [SerializeField] int interactflag;
@@ -154,13 +161,35 @@ public class ItemData
             }
         }
     }
+
     [SerializeField] int enabletake;
     public int EnabletakeFlag
     {
         get { return enabletake; }
-        set { if (value == 0 || value == 1)
+        set
+        {
+            if (value == 0 || value == 1)
             {
                 enabletake = value;
+            }
+        }
+    }
+
+    [SerializeField] int focuspower;
+    public int FocusPower
+    {
+        get { return focuspower; }
+    }
+
+    [SerializeField] int clearcheck;
+    public int ClearCheck
+    {
+        get { return clearcheck; }
+        set
+        {
+            if (value == 2)
+            {
+                clearcheck = value;
             }
         }
     }

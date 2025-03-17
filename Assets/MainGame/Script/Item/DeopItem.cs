@@ -30,6 +30,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         GetStageItemTapObjectInfo();
 
         //Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
+
         //所持可能なアイテムをタップした場合
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
@@ -97,171 +98,171 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         }
         else
         {
-            switch (stageitemNumber)
+            //フォーカス対象＋カメラフォーカスではない
+            if (ItemDataBase.Entity.GetData(stageitemNumber).FocusPower > 0 && !camera.Focusflg)
             {
-                case 0://アイテム選択された側
-                    if(itemslot.itemid == 12)//アイテム使用側
-                    {
-                        StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
+                Debug.Log("フォーカスではない");
+                //フォーカス
+                camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), ItemDataBase.Entity.GetData(stageitemNumber).FocusPower);
+            }
+            else
+            {
+                Debug.Log("フォーカス中");
+                switch (stageitemNumber)
+                {
+                    case 0://アイテム選択された側
+                        if (itemslot.itemid == 12)//アイテム使用側
+                        {
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
 
-                        //アイテム選択側は使用済み更新
-                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 4://パズル
-                    if (!camera.Focusflg)//フォーカスフラグ
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+                            //アイテム選択側は使用済み更新
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        }
+                        break;
+                    case 4://パズル
+                        if (!camera.Focusflg)//フォーカスフラグ
+                        {
+                            camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
 
-                        //本体活性
-                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                    break;
-                case 6://Ａ出口ドア
-                    if (ItemDataBase.Entity.GetData(8).InteractFlag == 1)//鍵を開けてる場合
-                    {
-                        StageItemGimmickOn();
-                        itemslot.ItemUse();
-                    }
-                    break;
-                case 8://Ａ鍵差込口
-                    if (itemslot.itemid == 21)//アイテム使用側
-                    {
-                        StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
+                            //本体活性
+                            stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
+                        }
+                        break;
+                    case 6://Ａ出口ドア
+                        if (ItemDataBase.Entity.GetData(8).InteractFlag == 1)//鍵を開けてる場合
+                        {
+                            StageItemGimmickOn();
+                            itemslot.ItemUse();
+                        }
+                        break;
+                    case 8://Ａ鍵差込口
+                        if (itemslot.itemid == 21)//アイテム使用側
+                        {
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
 
-                        //アイテム選択側は使用済み更新
+                            //アイテム選択側は使用済み更新
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        }
+                        break;
+                    case 10://アップライトピアノ
+                        if(ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag == 0)
+                        {
+                            if(this.gameObject.transform.GetChild(0).gameObject != null)
+                                this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            Debug.Log("ピアノタップ");
+                        }
+                        break;
+                    case 14://台座
+                        if (itemslot.itemid == 39)//リンゴ
+                        {
+                            //事象処理
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        }
+                        break;
+                    case 15://台座(物乗っけてる)
+                        StageItemGimmickOn();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 10://アップライトピアノ
-                    if (!camera.Focusflg)//フォーカスフラグ
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
+                        ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
+                        break;
+                    case 17://水槽空
+                        if (itemslot.itemid == 11)//シリンダー
+                        {
+                            //事象処理
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                            ItemDataBase.Entity.GetData(itemslot.itemid).OwnerFlag = 0;
+                            ItemDataBase.Entity.GetData(itemslot.itemid).ClearCheck = 2;
+                        }
+                        break;
+                    case 22://Ｂ絵画
+                        if (itemslot.itemid == 29)//花瓶(染色後)
+                        {
+                            //事象処理
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                            ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
+                        }
+                        break;
+                    case 24://Ｂ出口ドア
+                        if (ItemDataBase.Entity.GetData(26).InteractFlag == 1)//鍵を開けてる場合
+                        {
+                            StageItemGimmickOn();
+                            itemslot.ItemUse();
+                        }
+                        break;
+                    case 26://Ｂ鍵差込口
+                        if (itemslot.itemid == 30)//アイテム使用側
+                        {
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
 
-                        //本体活性
-                        stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
-                    }
-                    break;
-                case 14://台座
-                    //フォーカスではない場合
-                    if (!camera.Focusflg)
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 2);
-                    }
-                    //フォーカス中の場合
-                    else if (itemslot.itemid == 39)//リンゴ
-                    {
-                        //事象処理
-                        StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 15://台座(物乗っけてる)
-                    if (!camera.Focusflg)//フォーカスフラグ
-                    {
-                        camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 2);
-                    }
-                    else
-                    {
+                            //アイテム選択側は使用済み更新
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                        }
+                        break;
+                    case 28://花瓶
+                        if (itemslot.itemid == 34)//絵具
+                        {
+                            //事象処理
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                            ItemDataBase.Entity.GetData(stageitemNumber + 1).InteractFlag = 1;
+                        }
+                        break;
+                    case 31://青ランプ(消灯)
                         StageItemGimmickOn();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 17://水槽空
-                    if (itemslot.itemid == 11)//シリンダー
-                    {
-                        //事象処理
+                        break;
+                    case 32://青ランプ(点灯)
                         StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                        break;
+                    case 33://水抜きスイッチ
+                        StageItemGimmickOn();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        ItemDataBase.Entity.GetData(itemslot.itemid).OwnerFlag = 0;
-                    }
-                    break;
-                case 22://Ｂ絵画
-                    if (itemslot.itemid == 29)//花瓶(染色後)
-                    {
-                        //事象処理
+                        break;
+                    case 37://黄ランプ(消灯)
                         StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 24://Ｂ出口ドア
-                    if (ItemDataBase.Entity.GetData(26).InteractFlag == 1)//鍵を開けてる場合
-                    {
+                        break;
+                    case 38://黄ランプ(点灯)
                         StageItemGimmickOn();
-                        itemslot.ItemUse();
-                    }
-                    break;
-                case 26://Ｂ鍵差込口
-                    if (itemslot.itemid == 30)//アイテム使用側
-                    {
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                        break;
+                    case 40://オルゴール(シリンダーなし)
+                        if (itemslot.itemid == 11)//シリンダー
+                        {
+                            //事象処理
+                            StageItemGimmickOn();
+                            Inventry.instance.Removed(itemslot.itemid);
+                            itemslot.ItemUse();
+                            ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+                            ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
+                        }
+                        break;
+                    case 42://赤ランプ(消灯)
                         StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-
-                        //アイテム選択側は使用済み更新
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    }
-                    break;
-                case 28://花瓶
-                    if (itemslot.itemid == 34)//絵具
-                    {
-                        //事象処理
+                        break;
+                    case 43://赤ランプ(点灯)
                         StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        ItemDataBase.Entity.GetData(stageitemNumber + 1).InteractFlag = 1;
-                    }
-                    break;
-                case 31://青ランプ(消灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    break;
-                case 32://青ランプ(点灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
-                    break;
-                case 33://水抜きスイッチ
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    break;
-                case 37://黄ランプ(消灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    break;
-                case 38://黄ランプ(点灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
-                    break;
-                case 40://オルゴール(シリンダーなし)
-                    if (itemslot.itemid == 11)//シリンダー
-                    {
-                        //事象処理
-                        StageItemGimmickOn();
-                        Inventry.instance.Removed(itemslot.itemid);
-                        itemslot.ItemUse();
-                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
-                    }
-                    break;
-                case 42://赤ランプ(消灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                    break;
-                case 43://赤ランプ(点灯)
-                    StageItemGimmickOn();
-                    ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
-                    break;
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 0;
+                        break;
+                }
             }
         }
     }
