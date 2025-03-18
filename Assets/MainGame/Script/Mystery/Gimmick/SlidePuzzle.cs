@@ -36,9 +36,11 @@ public class SlidePuzzle : MonoBehaviour
             puzzleObj[i] = transform.GetChild(i).gameObject;
             answerpuzzleObj[i] = transform.GetChild(i).gameObject;
         }
+        PuzzleReset();
+
         if (!PuzzleClearCkeck())
         {
-            //PuzzleReset();
+            PuzzleReset();
             Debug.Log("やり直し");
         }
     }
@@ -48,11 +50,14 @@ public class SlidePuzzle : MonoBehaviour
     {
         if (cameraManager.Focusflg)
         {
+            for (int i = 0; i < puzzleObj.Length; i++)
+                puzzleObj[i].SetActive(true);
             SlidePuzzlePlay();
         }
         else
         {
-            this.gameObject.SetActive(false);
+            for (int i = 0; i < puzzleObj.Length; i++)
+                puzzleObj[i].SetActive(false);
             Debug.Log("フォーカスリセット");
         }
     }
@@ -105,6 +110,7 @@ public class SlidePuzzle : MonoBehaviour
             GetStageItemTapObjectInfo();
 
             if (!tapObjFlag) return;
+            Debug.Log("パズル移動開始");
 
             var tapNo = 0;
             for (int i = 0; i < puzzleObj.Length; i++)
@@ -112,8 +118,8 @@ public class SlidePuzzle : MonoBehaviour
                 if (puzzleObj[i].gameObject.name.Contains(tapObj.name))
                     tapNo = i;
             }
-            //Debug.Log("センターNo：" + centerNo);
-            //Debug.Log("タップNo：" + tapNo);
+            Debug.Log("センターNo：" + centerNo);
+            Debug.Log("タップNo：" + tapNo);
 
             //スライド式にするためにタップしたピースがどの位置かを判定する
             if (//上下左右1マスのみ判定
@@ -165,6 +171,9 @@ public class SlidePuzzle : MonoBehaviour
             //アイテム名前変更
             gameObject.transform.parent.name = (int.Parse(gameObject.transform.parent.name) + 1).ToString();
 
+            //クリア判定
+            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).ClearCheck = 2;
+            
             //机は中身情報に変更
             gameObject.transform.root.Find("2").gameObject.name = "3";
             ItemDataBase.Entity.GetData(3).InteractFlag = 1;
@@ -231,16 +240,19 @@ public class SlidePuzzle : MonoBehaviour
         tapObj = null;
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
+
+        int layerMask = LayerMask.GetMask("Puzzle");
+        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, layerMask);
 
         if (hit2d)
         {
+            Debug.Log("パズルタップ:" + hit2d.transform.gameObject.name);
             if (hit2d.transform.gameObject.name.Contains("Puzzle"))
             {
                 tapObj = hit2d.transform.gameObject;
                 tapObjFlag = true;
             }
-            //Debug.Log(tapObj);
+            Debug.Log("パズルタップ可能:" + tapObj);
         }
         else
         {

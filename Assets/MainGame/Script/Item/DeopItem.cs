@@ -122,13 +122,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         }
                         break;
                     case 4://パズル
-                        if (!camera.Focusflg)//フォーカスフラグ
-                        {
-                            camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), 3);
 
-                            //本体活性
-                            stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
-                        }
                         break;
                     case 6://Ａ出口ドア
                         if (ItemDataBase.Entity.GetData(8).InteractFlag == 1)//鍵を開けてる場合
@@ -151,8 +145,8 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                     case 10://アップライトピアノ
                         if(ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag == 0)
                         {
-                            if(this.gameObject.transform.GetChild(0).gameObject != null)
-                                this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+                            if(stageitemobj.transform.GetChild(0).gameObject != null)
+                                stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
                             Debug.Log("ピアノタップ");
                         }
                         break;

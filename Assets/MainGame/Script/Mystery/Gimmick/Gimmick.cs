@@ -47,6 +47,9 @@ public class Gimmick : MonoBehaviour
             case 8://Ａ鍵差込口
                 gimmmickFlag = false;
                 break;
+            case 10://ピアノ
+                gimmmickFlag = false;
+                break;
             case 11://シリンダー
                 gimmmickFlag = false;
                 break;
@@ -215,6 +218,8 @@ public class Gimmick : MonoBehaviour
                 {
                     itemObj33 = GameObject.Find("33").gameObject;
                     itemObj33.SetActive(true);
+                    ItemDataBase.Entity.GetData(stageitemName).ClearCheck = 2;
+
                 }
                 MysteryCler();
                 break;
@@ -351,7 +356,7 @@ public class Gimmick : MonoBehaviour
     /// </summary>
     public void MysteryCler()
     {
-        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+        if (ItemDataBase.Entity.GetData(stageitemName).ClearCheck == 2)
         {
             Debug.Log("謎クリア");
             switch (stageitemName)
@@ -374,7 +379,6 @@ public class Gimmick : MonoBehaviour
                 case 36:
                     MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3B);
                     break;
-
             }
         }
     }

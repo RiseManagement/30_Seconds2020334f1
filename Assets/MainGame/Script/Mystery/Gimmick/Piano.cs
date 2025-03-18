@@ -108,8 +108,10 @@ public class Piano : MonoBehaviour
             Debug.Log("ピアノギミック成功");
             StartCoroutine(FocusCancel());
 
-            //使用済に更新
-            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).InteractFlag = 1;
+            Debug.Log("確認：" + this.gameObject.transform.parent.name);
+
+            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).ClearCheck = 2;
+            this.gameObject.transform.parent.GetComponent<Gimmick>().GimmmickFlag = true;
         }
     }
 
@@ -138,7 +140,7 @@ public class Piano : MonoBehaviour
 
     IEnumerator FocusCancel()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.5f);
 
         cameraManager.FocusCancel();
     }
