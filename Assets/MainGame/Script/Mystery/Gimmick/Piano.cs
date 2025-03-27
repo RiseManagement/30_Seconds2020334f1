@@ -33,6 +33,8 @@ public class Piano : MonoBehaviour
         {
             PianoGimmickReset();
             this.gameObject.SetActive(false);
+            ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).InteractFlag = 0;
+
             Debug.Log("フォーカスリセット");
         }
     }

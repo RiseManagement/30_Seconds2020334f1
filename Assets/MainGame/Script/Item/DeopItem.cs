@@ -149,6 +149,8 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                                 stageitemobj.transform.GetChild(0).gameObject.SetActive(true);
                             Debug.Log("ピアノタップ");
                         }
+                        ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
+
                         break;
                     case 14://台座
                         if (itemslot.itemid == 39)//リンゴ
