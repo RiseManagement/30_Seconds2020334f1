@@ -1297,6 +1297,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 262454031981621144, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 262454032086640857, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 262454032271504421, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1384,6 +1392,22 @@ PrefabInstance:
     - target: {fileID: 262454032271504424, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
       propertyPath: m_Name
       value: Debug_Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1602374265077196481, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_Name
+      value: Debug_Mode_On_Btn
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651135758106026399, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651135758106026399, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8651135758106026399, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfb73cd120fe68a4bab9f1fae0ae8121, type: 3}
