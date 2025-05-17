@@ -63,7 +63,7 @@ public class NameInputcontroller : MonoBehaviour
 
         try
         {
-            SceneTransitions.SceneLaod(SceneTransitions.SceneName.MAINGAMEFIRST);
+            SceneTransitions.SceneLaod(SceneTransitions.SceneName.TUTORIAL);
         }
         catch (System.Exception ex)
         {

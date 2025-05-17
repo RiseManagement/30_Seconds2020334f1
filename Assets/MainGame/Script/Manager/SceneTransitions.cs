@@ -27,6 +27,7 @@ public class SceneTransitions : MonoBehaviour
     public enum SceneName
     {
         TITLE,
+        TUTORIAL,
         INTERVAL,
         STORY,
         ENDING,

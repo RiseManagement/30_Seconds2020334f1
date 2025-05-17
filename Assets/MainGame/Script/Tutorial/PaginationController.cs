@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PaginationController : MonoBehaviour
 {
@@ -23,6 +24,9 @@ public class PaginationController : MonoBehaviour
     [SerializeField] private Color activeColor = Color.white;
     [SerializeField] private Color inactiveColor = Color.gray;
 
+    [Header("シーン遷移ボタン（最後のページ用）")]
+    [SerializeField] private Button nextSceneButton;
+
     private int currentPage = 0;
     private int totalPages;
     private Image[] paginationDots;
@@ -35,6 +39,11 @@ public class PaginationController : MonoBehaviour
 
         btnLeft.onClick.AddListener(() => ChangePage(-1));
         btnRight.onClick.AddListener(() => ChangePage(1));
+
+        nextSceneButton.onClick.AddListener(() =>
+        {
+            SceneTransitions.SceneLaod(SceneTransitions.SceneName.MAINGAMEFIRST);
+        });
     }
 
     void SetupPaginationDots()
@@ -75,5 +84,7 @@ public class PaginationController : MonoBehaviour
 
         btnLeft.gameObject.SetActive(currentPage > 0);
         btnRight.gameObject.SetActive(currentPage < totalPages - 1);
+
+        nextSceneButton.gameObject.SetActive(currentPage == totalPages - 1);
     }
 }
