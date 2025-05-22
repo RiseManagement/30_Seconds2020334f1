@@ -6,20 +6,26 @@ using UnityEngine.EventSystems;
 public class Piano : MonoBehaviour
 {
     [Header("アップライトピアノ")]
-    public Sprite[] keybord_sprite = new Sprite[8];
-    public GameObject[] keybord_obj = new GameObject[pianomaxCount];
-    public int pianoplaycount;
-    static int pianomaxCount = 6;
-    public bool successFlg;
+    public Sprite[] keybord_sprite = new Sprite[8]; //0番目は何も押してない状態、1から7番目各鍵盤を押した状態
+    public GameObject[] keybord_obj = new GameObject[pianomaxCount];　//ピアノオブジェクト
 
-    CameraManager cameraManager;
+    public int pianoplaycount;      //ピアノ鍵盤を押した数
+    static int pianomaxCount = 6;   //ピアノ鍵盤を押せる最大数
+    public bool successFlg;　       //ギミックフラグ
 
+    [Header("アップライトピアノの音")]
+    AudioSource audioSource;
+    public AudioClip[] audioClip = new AudioClip[7];
+
+    CameraManager cameraManager; //カメラ管理スクリプト
+   
     // Start is called before the first frame update
     void Start()
     {
-        successFlg = false; 
+        successFlg = false;
         pianoplaycount = 0;
         cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        audioSource = this.transform.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -49,39 +55,51 @@ public class Piano : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
 
-                string[] arr = hit.collider.gameObject.name.Split('_');
+            string[] arr = hit.collider.gameObject.name.Split('_');
 
-                if (arr.Length < 2) return; 
+            if (arr.Length < 2) return;
 
-                switch (arr[1])
-                {
-                    case "do":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[1];
-                        break;
-                    case "re":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[2];
-                        break;
-                    case "mi":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[3];
-                        break;
-                    case "fua":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[4];
-                        break;
-                    case "so":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[5];
-                        break;
-                    case "ra":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[6];
-                        break;
-                    case "si":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[7];
-                        break;
-                    default:
-                        break;
-                }
-                keybord_obj[pianoplaycount] = hit.collider.gameObject;
-                //Debug.Log(hit.collider.gameObject);
-                pianoplaycount++;
+            switch (arr[1])
+            {
+                case "do":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[1];
+                    audioSource.PlayOneShot(audioClip[0]);//音再生
+                    break;
+                case "re":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[2];
+                    audioSource.PlayOneShot(audioClip[1]);//音再生
+                    break;
+                case "mi":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[3];
+                    audioSource.PlayOneShot(audioClip[2]);//音再生
+
+                    break;
+                case "fua":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[4];
+                    audioSource.PlayOneShot(audioClip[3]);//音再生
+
+                    break;
+                case "so":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[5];
+                    audioSource.PlayOneShot(audioClip[4]);//音再生
+
+                    break;
+                case "ra":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[6];
+                    audioSource.PlayOneShot(audioClip[5]);//音再生
+
+                    break;
+                case "si":
+                    hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[7];
+                    audioSource.PlayOneShot(audioClip[6]);//音再生
+
+                    break;
+                default:
+                    break;
+            }
+            keybord_obj[pianoplaycount] = hit.collider.gameObject;
+            //Debug.Log(hit.collider.gameObject);
+            pianoplaycount++;
         }
 
         PianoGimmickSuccessCheack();
@@ -98,7 +116,7 @@ public class Piano : MonoBehaviour
             if (keybord_obj[i] == null) return;
         }
 
-        //
+        //ギミッククリア条件
         if(keybord_obj[0].gameObject.name == "keyboard_do" &&
            keybord_obj[1].gameObject.name == "keyboard_do" && 
            keybord_obj[2].gameObject.name == "keyboard_mi" && 
@@ -110,7 +128,7 @@ public class Piano : MonoBehaviour
             Debug.Log("ピアノギミック成功");
             StartCoroutine(FocusCancel());
 
-            Debug.Log("確認：" + this.gameObject.transform.parent.name);
+            //Debug.Log("確認：" + this.gameObject.transform.parent.name);
 
             ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).ClearCheck = 2;
             this.gameObject.transform.parent.GetComponent<Gimmick>().GimmmickFlag = true;
@@ -140,6 +158,10 @@ public class Piano : MonoBehaviour
         pianoplaycount = 0;
     }
 
+    /// <summary>
+    /// フォーカスキャンセル
+    /// </summary>
+    /// <returns></returns>
     IEnumerator FocusCancel()
     {
         yield return new WaitForSeconds(1.5f);

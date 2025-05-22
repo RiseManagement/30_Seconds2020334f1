@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.EventSystems;
 
 public class TapHandler : MonoBehaviour
 {
@@ -18,8 +19,11 @@ public class TapHandler : MonoBehaviour
 
     void Update()
     {
+
         if (Input.GetMouseButtonDown(0) && UnityEngine.SceneManagement.SceneManager.GetActiveScene().name == "Start") // 左クリックまたはタップ
         {
+            if (EventSystem.current.IsPointerOverGameObject()) return; // UIならスキップ
+
             StartCoroutine(HandleTap());
         }
     }
