@@ -10,7 +10,7 @@ public class SoundManager : MonoBehaviour
     private AudioSource bgmSource;
 
     public AudioClip mainMenuBGM; // スタートシーンとタイトルシーンのBGM
-    public AudioClip gameBGM;     // ゲームシーンのBGM
+    public AudioClip[] gameBGM = new AudioClip[3];     // ゲームシーンのBGM
 
     void Awake()
     {
@@ -83,9 +83,30 @@ public class SoundManager : MonoBehaviour
         }
         else if (sceneName == "maingamefirst" || sceneName == "maingamelast")
         {
-            if (bgmSource.clip != gameBGM) // BGMが変更されていない場合のみ再生
+            if (bgmSource.clip != gameBGM[0]) // BGMが変更されていない場合のみ再生
             {
-                PlayBGM(gameBGM);
+                PlayBGM(gameBGM[0]);
+            }
+        }
+        else if (sceneName == "ending")
+        {
+            //エンディング情報取得
+            Ending e = GameObject.Find("EndingManager").GetComponent<Ending>();
+
+            int soundNo = 0;
+
+            if (e.IsEndingEnd)
+            {
+                soundNo = 1;
+            }
+            else
+            {
+                soundNo = 2;
+            }
+
+            if (bgmSource.clip != gameBGM[soundNo]) // BGMが変更されていない場合のみ再生
+            {
+                PlayBGM(gameBGM[soundNo]);
             }
         }
     }
