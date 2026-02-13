@@ -48,6 +48,10 @@ public class Piano : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
+            if (hit.collider == null)
+            {
+                return;
+            }
 
                 string[] arr = hit.collider.gameObject.name.Split('_');
 

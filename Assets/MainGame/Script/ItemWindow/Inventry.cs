@@ -23,11 +23,30 @@ public class Inventry :MonoBehaviour
     {
         //gameObject.SetActive(false);
         InventryUI = GetComponent<InventryUI>();
+        if (InventryUI == null)
+        {
+            Debug.LogError("InventryUI が見つかりません");
+            return;
+        }
+        RefreshForCurrentPlayer();
         InventryUI.UpdateUI();
 
     }
 
     public List<int> itemsid = new List<int>();
+
+    private void OnEnable()
+    {
+        if (InventryUI == null)
+        {
+            InventryUI = GetComponent<InventryUI>();
+        }
+        RefreshForCurrentPlayer();
+        if (InventryUI != null)
+        {
+            InventryUI.UpdateUI();
+        }
+    }
 
     /// <summary>
     /// インベントリーにアイテム追加
@@ -35,8 +54,11 @@ public class Inventry :MonoBehaviour
     /// <param name="itemid">アイテム</param>
     public void Add(int itemid)
     {
-        itemsid.Add(itemid);
-        InventryUI.UpdateUI();
+        if (!itemsid.Contains(itemid))
+        {
+            itemsid.Add(itemid);
+            InventryUI.UpdateUI();
+        }
     }
 
     /// <summary>
@@ -45,12 +67,52 @@ public class Inventry :MonoBehaviour
     /// <param name="itemid">アイテムID</param>
     public void Removed(int itemid)
     {
-        itemsid.Remove(itemid);
-        InventryUI.UpdateUI();
+        if (itemsid.Remove(itemid))
+        {
+            InventryUI.UpdateUI();
+        }
     }
 
     public void SetExplanationText(string _explanationText)
     {
         explanationText.text = _explanationText;
+    }
+
+    private void RefreshForCurrentPlayer()
+    {
+        if (itemsid == null)
+        {
+            itemsid = new List<int>();
+        }
+        itemsid.Clear();
+
+        var playerObj = GameObject.Find("Player");
+        if (playerObj == null)
+        {
+            return;
+        }
+
+        int ownerFlag = 0;
+        if (playerObj.GetComponent<User_A>())
+        {
+            ownerFlag = 1;
+        }
+        else if (playerObj.GetComponent<User_B>())
+        {
+            ownerFlag = 2;
+        }
+        else
+        {
+            return;
+        }
+
+        var all = ItemDataBase.Entity.GetDataAll();
+        for (int i = 0; i < all.Length; i++)
+        {
+            if (ItemDataBase.Entity.GetData(i).OwnerFlag == ownerFlag)
+            {
+                itemsid.Add(i);
+            }
+        }
     }
 }

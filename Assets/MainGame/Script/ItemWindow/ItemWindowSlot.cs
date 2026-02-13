@@ -49,7 +49,34 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
 
         transform.GetChild(0).gameObject.SetActive(true);
 
-        this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>();
+        var image = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = icon;
+            image.preserveAspect = true;
+            if (icon != null)
+            {
+                const float max = 200f;
+                float w = icon.rect.width;
+                float h = icon.rect.height;
+                if (w >= h)
+                {
+                    float height = max * (h / w);
+                    image.rectTransform.sizeDelta = new Vector2(max, height);
+                }
+                else
+                {
+                    float width = max * (w / h);
+                    image.rectTransform.sizeDelta = new Vector2(width, max);
+                }
+            }
+        }
+
+        var drag = this.gameObject.transform.GetChild(0).GetComponent<ItemDragDrop>();
+        if (drag == null)
+        {
+            this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>();
+        }
     }
 
     public void ClearSlot()
@@ -59,7 +86,11 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
 
         //Debug.Log("クリアスロット");
 
-        Destroy(this.gameObject.transform.GetChild(0).gameObject.AddComponent<ItemDragDrop>());
+        var drag = this.gameObject.transform.GetChild(0).GetComponent<ItemDragDrop>();
+        if (drag != null)
+        {
+            Destroy(drag);
+        }
 
         transform.GetChild(0).gameObject.SetActive(false);
     }

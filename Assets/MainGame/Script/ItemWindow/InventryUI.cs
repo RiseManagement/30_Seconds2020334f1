@@ -10,8 +10,7 @@ public class InventryUI : MonoBehaviour
 
     private void Start()
     {
-       
-        slots = slotsParent.GetComponentsInChildren<ItemWindowSlot>();
+        InitializeSlots();
     }
 
     /// <summary>
@@ -19,6 +18,16 @@ public class InventryUI : MonoBehaviour
     /// </summary>
     public void UpdateUI()
     {
+        if (slots == null || slots.Length == 0)
+        {
+            InitializeSlots();
+        }
+
+        if (slots == null || slots.Length == 0)
+        {
+            return;
+        }
+
        for(int i=0; i<slots.Length; i++)
         {
             if (i < Inventry.instance.itemsid.Count)
@@ -28,5 +37,16 @@ public class InventryUI : MonoBehaviour
             else
                 slots[i].ClearSlot();
         }
+    }
+
+    private void InitializeSlots()
+    {
+        if (slotsParent == null)
+        {
+            Debug.LogWarning("InventryUI.slotsParent が設定されていません");
+            return;
+        }
+
+        slots = slotsParent.GetComponentsInChildren<ItemWindowSlot>();
     }
 }

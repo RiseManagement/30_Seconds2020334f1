@@ -34,7 +34,28 @@ public class PassSlot : MonoBehaviour
         itemid = selectitemid;  
         icon= itemdata.Image;
 
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+        var image = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = icon;
+            image.preserveAspect = true;
+            if (icon != null)
+            {
+                const float max = 200f;
+                float w = icon.rect.width;
+                float h = icon.rect.height;
+                if (w >= h)
+                {
+                    float height = max * (h / w);
+                    image.rectTransform.sizeDelta = new Vector2(max, height);
+                }
+                else
+                {
+                    float width = max * (w / h);
+                    image.rectTransform.sizeDelta = new Vector2(width, max);
+                }
+            }
+        }
     }
 
     /// <summary>

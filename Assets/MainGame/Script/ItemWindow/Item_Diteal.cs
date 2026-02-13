@@ -40,7 +40,25 @@ public class Item_Diteal : MonoBehaviour
         Debug.Log(gameObject);
         Debug.Log("Item_Diteal");
         //アイテム画像
-        itemditeal.transform.GetChild(1).GetChild(1).GetComponent<Image>().sprite=sprite;
+        var image = itemditeal.transform.GetChild(1).GetChild(1).GetComponent<Image>();
+        image.sprite = sprite;
+        image.preserveAspect = true;
+        if (sprite != null)
+        {
+            const float max = 350f;
+            float w = sprite.rect.width;
+            float h = sprite.rect.height;
+            if (w >= h)
+            {
+                float height = max * (h / w);
+                image.rectTransform.sizeDelta = new Vector2(max, height);
+            }
+            else
+            {
+                float width = max * (w / h);
+                image.rectTransform.sizeDelta = new Vector2(width, max);
+            }
+        }
         itemditeal.transform.GetChild(1).GetChild(2).GetChild(0).GetComponent<Text>().text=diteal;
         //ItemDitealDisplaySwitch(itemditeal, isDiteal=true);
         

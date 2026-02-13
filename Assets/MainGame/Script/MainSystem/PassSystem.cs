@@ -26,6 +26,8 @@ public class PassSystem : MonoBehaviour
 
         if (passitemid == -1) return;
 
+        int passedItemId = passitemid;
+
         if (playerobj.GetComponent<User_A>())
         {
             //Debug.Log("Bに渡す");
@@ -42,5 +44,12 @@ public class PassSystem : MonoBehaviour
         {
             return;
         }
+
+        if (Inventry.instance != null)
+        {
+            Inventry.instance.Removed(passedItemId);
+        }
+
+        passitemid = -1;
     }
 }

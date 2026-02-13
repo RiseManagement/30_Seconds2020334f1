@@ -14,6 +14,7 @@ public class LampManager : MonoBehaviour
     List<GameObject> AnwserObjList = new List<GameObject>();
 
     Gimmick[] LampGimmickList = new Gimmick[3];
+    bool[] lastGimmickFlags = new bool[3];
 
     //水抜きスイッチ
     public GameObject WaterSwitchObj;
@@ -60,17 +61,17 @@ public class LampManager : MonoBehaviour
     /// </summary>
     void LampLightUpStore()
     {
-        if (LampGimmickList[0].gimmmickFlag)
+        for (int i = 0; i < LampGimmickList.Length; i++)
         {
-            AnwserObjList.Add(LampObjList[0]);
-        }
-        if (LampGimmickList[1].gimmmickFlag)
-        {
-            AnwserObjList.Add(LampObjList[1]);
-        }
-        if (LampGimmickList[2].gimmmickFlag)
-        {
-            AnwserObjList.Add(LampObjList[2]);
+            var gimmick = LampGimmickList[i];
+            if (gimmick == null) continue;
+
+            bool current = gimmick.gimmmickFlag;
+            if (current && !lastGimmickFlags[i])
+            {
+                AnwserObjList.Add(LampObjList[i]);
+            }
+            lastGimmickFlags[i] = current;
         }
     }
 

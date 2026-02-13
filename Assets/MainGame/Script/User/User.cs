@@ -26,16 +26,27 @@ public class User : MonoBehaviour
 
     protected void GetItem(GameObject playerobj)
     {
-        int count = 0; // 番目を表示するためのもの
         var parent = GameObject.Find("InventryPalent");
+        if (parent == null)
+        {
+            Debug.LogError("InventryPalent が見つかりません");
+            return;
+        }
+
+        if (itemWinowSlot == null)
+        {
+            itemWinowSlot = new List<ItemWindowSlot>();
+        }
+        else
+        {
+            itemWinowSlot.Clear();
+        }
 
         //Debug.Log(parent);
 
         foreach (Transform child in parent.transform)
         {
-            itemWinowSlot.Add(itemWinowSlot[count]);
-            itemWinowSlot[count] = child.GetComponent<ItemWindowSlot>(); // 順番に子オブジェクトを取得
-            count++;
+            itemWinowSlot.Add(child.GetComponent<ItemWindowSlot>()); // 順番に子オブジェクトを取得
         }
 
         GameObject.Find("Inventry").SetActive(false); 

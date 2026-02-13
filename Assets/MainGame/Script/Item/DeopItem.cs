@@ -18,6 +18,27 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
     {
         itemslot = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
         camera = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        HideIfAlreadyOwned();
+    }
+
+    private void OnEnable()
+    {
+        HideIfAlreadyOwned();
+    }
+
+    private void HideIfAlreadyOwned()
+    {
+        if (!int.TryParse(gameObject.name, out var id))
+        {
+            return;
+        }
+
+        var data = ItemDataBase.Entity.GetData(id);
+        if (data.EnabletakeFlag == 1 &&
+            (data.OwnerFlag == 1 || data.OwnerFlag == 2 || data.InteractFlag == 1))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -28,6 +49,10 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
     {
         //Debug.Log($"オブジェクト {name} がクリックされたよ！");
         GetStageItemTapObjectInfo();
+        if (stageitemobj == null)
+        {
+            return;
+        }
 
         //Debug.Log(eventData.pointerCurrentRaycast.gameObject.name);
 
@@ -103,6 +128,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
             {
                 Debug.Log("フォーカスではない");
                 //フォーカス
+                Debug.Log("フォーカス対象アイテム：" + stageitemobj.name);
                 camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), ItemDataBase.Entity.GetData(stageitemNumber).FocusPower);
             }
             else
@@ -276,6 +302,10 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         if (hit2d)
         {
             stageitemobj = hit2d.transform.gameObject;
+        }
+        if (stageitemobj == null)
+        {
+            return;
         }
         if (!stageitemobj.name.Contains("_"))
         {

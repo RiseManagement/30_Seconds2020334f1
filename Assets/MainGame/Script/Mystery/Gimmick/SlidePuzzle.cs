@@ -242,7 +242,7 @@ public class SlidePuzzle : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
         int layerMask = LayerMask.GetMask("Puzzle");
-        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, layerMask);
+        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, Mathf.Infinity, layerMask);
 
         if (hit2d)
         {
