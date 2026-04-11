@@ -427,6 +427,15 @@ MonoBehaviour:
     enabletake: 0
     focuspower: 1
     clearcheck: 0
+  - id: 46
+    name: "\u30C0\u30DF\u30FC"
+    explanation: 
+    image: {fileID: 0}
+    ownerflag: 0
+    interactflag: 0
+    enabletake: 0
+    focuspower: 0
+    clearcheck: 0
   - id: 47
     name: "\u6C34\u629C\u304D\u30B9\u30A4\u30C3\u30C1\uFF08\u30AA\u30F3\uFF09"
     explanation: "\u6C34\u3092\u629C\u304F\u305F\u3081\u306E\u30B9\u30A4\u30C3\u30C1\u3060\u3000\u3082\u3046\u7528\u306F\u306A\u3044"

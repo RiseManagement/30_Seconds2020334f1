@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 
 public class TreasureChest : MonoBehaviour
 {
@@ -8,9 +8,21 @@ public class TreasureChest : MonoBehaviour
 
     MysteryManager mysteryManager;
 
+    // パフォーマンス: 子 SpriteRenderer のキャッシュ、直前に反映したランプ番号を保持
+    SpriteRenderer lampSpriteRenderer;
+    int lastAppliedLamp = -1;
+
     // Start is called before the first frame update
     void Start()
     {
+        if (transform.childCount > 1)
+        {
+            lampSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        }
+        if (lampSpriteRenderer == null)
+        {
+            Debug.LogWarning("[TreasureChest] ランプ用 SpriteRenderer が取得できませんでした。");
+        }
     }
 
     // Update is called once per frame
@@ -47,29 +59,26 @@ public class TreasureChest : MonoBehaviour
     /// <summary>
     /// ランプ画像更新
     /// </summary>
-    /// <param name="misteryLampnum"></param>
+    /// <param name="misteryLampnum">0〜(LampSprites.Length-1)のランプ番号</param>
     public void SpriteLampUpdate(int misteryLampnum)
     {
-        switch (misteryLampnum)
+        // 配列範囲チェック
+        if (LampSprites == null || misteryLampnum < 0 || misteryLampnum >= LampSprites.Length)
         {
-            case 0:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[0];
-                break;
-            case 1:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[1];
-                break;
-            case 2:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[2];
-                break;
-            case 3:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[3];
-                break;
-            case 4:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[4];
-                break;
-            case 5:
-                this.gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>().sprite = LampSprites[5];
-                break;
+            Debug.LogWarning("[TreasureChest] 無効なランプ番号: " + misteryLampnum);
+            return;
         }
+
+        // 値が変わっていない場合は再描画を避ける（GC削減＋ダーティフラグ抑制）
+        if (lastAppliedLamp == misteryLampnum) return;
+
+        if (lampSpriteRenderer == null && transform.childCount > 1)
+        {
+            lampSpriteRenderer = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        }
+        if (lampSpriteRenderer == null) return;
+
+        lampSpriteRenderer.sprite = LampSprites[misteryLampnum];
+        lastAppliedLamp = misteryLampnum;
     }
 }

@@ -23,10 +23,23 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
         }
     }
 
+    // パフォーマンス: 子オブジェクトの Image をキャッシュし、sprite の再代入も値変化時のみに
+    Image cachedChildImage;
+    GameObject cachedChildGameObject;
+    Sprite lastAppliedSprite;
 
     private void Start()
     {
+        CacheChildReferences();
+    }
 
+    void CacheChildReferences()
+    {
+        if (cachedChildImage != null) return;
+        if (transform.childCount == 0) return;
+        var child = transform.GetChild(0);
+        cachedChildGameObject = child.gameObject;
+        cachedChildImage = child.GetComponent<Image>();
     }
 
     private void Update()
@@ -35,7 +48,17 @@ public class ItemWindowSlot :MonoBehaviour, IPointerClickHandler
         {
             DataReset();
         }
-        this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = icon;
+
+        if (cachedChildImage == null)
+        {
+            CacheChildReferences();
+        }
+        // sprite が変わった時のみ代入（毎フレームの Image.sprite 代入を避ける）
+        if (cachedChildImage != null && cachedChildImage.sprite != icon)
+        {
+            cachedChildImage.sprite = icon;
+            lastAppliedSprite = icon;
+        }
     }
 
     public void AddItem(int itemID)

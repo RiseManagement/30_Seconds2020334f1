@@ -34,23 +34,29 @@ public class Door : MonoBehaviour
     void endAnime()
     {
         Debug.Log("アニメ終了");
-        
+
         //プロセス変更
 
-        GameObject playerObj = GameObject.Find("Player").gameObject;
+        GameObject playerObj = GameObject.Find("Player");
+        if (playerObj == null)
+        {
+            Debug.LogWarning("[Door] Playerオブジェクトが見つかりません。クリアフラグを立てずに遷移します。");
+            MainGameProgress.gameStatus = MainGameProgress.GameStatus.ClearCheckNow;
+            return;
+        }
 
-        //所有者設定
+        //所有者設定 (AとBは排他のため else if にする)
         if (playerObj.GetComponent<User_A>())
         {
             MainGameManager.isClearUserA = true;
             //Debug.Log("Aが取得");
         }
-        if (playerObj.GetComponent<User_B>())
+        else if (playerObj.GetComponent<User_B>())
         {
             //Debug.Log("Bが取得");
             MainGameManager.isClearUserB = true;
         }
-        MainGameProgress.gameStaus = MainGameProgress.GameStaus.ClearCheckNow;
+        MainGameProgress.gameStatus = MainGameProgress.GameStatus.ClearCheckNow;
     }
 
 }

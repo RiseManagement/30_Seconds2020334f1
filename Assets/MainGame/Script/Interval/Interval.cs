@@ -50,7 +50,7 @@ public class Interval :MonoBehaviour
     public void OnClickStartTurnButton()
     {
         MainGameSceneChange();
-        ChangeGameStausWaitToPlayerTurn();
+        ChangeGameStatusWaitToPlayerTurn();
     }
 
     /// <summary>
@@ -71,9 +71,9 @@ public class Interval :MonoBehaviour
     /// <summary>
     /// ゲームステータス待ちからプレイヤーターンに遷移
     /// </summary>
-    void ChangeGameStausWaitToPlayerTurn()
+    void ChangeGameStatusWaitToPlayerTurn()
     {
-        if (MainGameProgress.gameStaus == MainGameProgress.GameStaus.IntervalEnd)
-            MainGameProgress.gameStaus = MainGameProgress.GameStaus.ResetTurn;
+        if (MainGameProgress.gameStatus == MainGameProgress.GameStatus.IntervalEnd)
+            MainGameProgress.gameStatus = MainGameProgress.GameStatus.ResetTurn;
     }
 }

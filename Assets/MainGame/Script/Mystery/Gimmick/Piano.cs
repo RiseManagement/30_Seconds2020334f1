@@ -14,17 +14,30 @@ public class Piano : MonoBehaviour
 
     CameraManager cameraManager;
 
+    // WaitForSeconds キャッシュ（GC抑制）
+    static readonly WaitForSeconds _wait1_5 = new WaitForSeconds(1.5f);
+
     // Start is called before the first frame update
     void Start()
     {
-        successFlg = false; 
+        successFlg = false;
         pianoplaycount = 0;
-        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+
+        var mainCameraObj = GameObject.Find("Main Camera");
+        if (mainCameraObj != null)
+        {
+            cameraManager = mainCameraObj.GetComponent<CameraManager>();
+        }
+        if (cameraManager == null)
+        {
+            Debug.LogWarning("[Piano] CameraManager が取得できませんでした。");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (cameraManager == null) return;
         if (cameraManager.Focusflg)
         {
             PianoPlay();
@@ -117,7 +130,7 @@ public class Piano : MonoBehaviour
             Debug.Log("確認：" + this.gameObject.transform.parent.name);
 
             ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).ClearCheck = 2;
-            this.gameObject.transform.parent.GetComponent<Gimmick>().GimmmickFlag = true;
+            this.gameObject.transform.parent.GetComponent<Gimmick>().GimmickFlag = true;
         }
     }
 
@@ -146,8 +159,11 @@ public class Piano : MonoBehaviour
 
     IEnumerator FocusCancel()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return _wait1_5;
 
-        cameraManager.FocusCancel();
+        if (cameraManager != null)
+        {
+            cameraManager.FocusCancel();
+        }
     }
 }

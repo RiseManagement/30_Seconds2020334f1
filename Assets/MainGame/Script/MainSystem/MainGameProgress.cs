@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class MainGameProgress :MonoBehaviour
 {
-    public static GameStaus gameStaus = GameStaus.GameStrat;
+    public static GameStatus gameStatus = GameStatus.GameStart;
     static public MainGameProgress instance;
     [SerializeField] GameObject playerObj;
 
 
-    public enum GameStaus
+    public enum GameStatus
     {
-        GameStrat,      //ゲーム開始
+        GameStart,      //ゲーム開始
         ResetTurn,      //リセットターン
         PlayerTurn,     //プレイヤーターン
         IntervalStart,  //インターバル開始
@@ -45,39 +45,39 @@ public class MainGameProgress :MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log("プロセス：" + gameStaus);
+        //Debug.Log("プロセス：" + gameStatus);
 
-        switch (gameStaus)
+        switch (gameStatus)
         {
-            case GameStaus.GameStrat:
+            case GameStatus.GameStart:
             GameStartProgress();
             break;
 
-            case GameStaus.ResetTurn:
+            case GameStatus.ResetTurn:
             ResetTurnProgress();
             break;
 
-            case GameStaus.PlayerTurn:
+            case GameStatus.PlayerTurn:
             PlayerTurnProgress();
             break;
 
-            case GameStaus.IntervalStart:
+            case GameStatus.IntervalStart:
             IntervalStartProgress();
             break;
 
-            case GameStaus.IntervalEnd:
+            case GameStatus.IntervalEnd:
             IntervalEndProgress();
             break;
 
-            case GameStaus.ClearCheckNow:
+            case GameStatus.ClearCheckNow:
             ClearCheckNowProgress();
             break;
             
-            case GameStaus.GameClear:
+            case GameStatus.GameClear:
             GameClearProgress();
             break;
 
-            case GameStaus.GameOver:
+            case GameStatus.GameOver:
             GameOverProgress();
             break;
 
@@ -93,7 +93,7 @@ public class MainGameProgress :MonoBehaviour
         //変更予定
         //if (Input.GetMouseButtonDown(1))
         {
-            gameStaus = GameStaus.ResetTurn;
+            gameStatus = GameStatus.ResetTurn;
         }
     }
 
@@ -105,12 +105,19 @@ public class MainGameProgress :MonoBehaviour
         //アイテムidをどこから入れる？
         if (playerObj == null)
         {
-            playerObj = GameObject.Find("Player").gameObject;
+            var foundPlayer = GameObject.Find("Player");
+            if (foundPlayer == null)
+            {
+                Debug.LogWarning("[MainGameProgress] Playerオブジェクトが見つかりません。パス処理をスキップします。");
+                gameStatus = GameStatus.PlayerTurn;
+                return;
+            }
+            playerObj = foundPlayer;
         }
         PassSystem.ItemPass(playerObj);//パス実行
 
         //変更予定
-        gameStaus = GameStaus.PlayerTurn;
+        gameStatus = GameStatus.PlayerTurn;
     }
 
     void PlayerTurnProgress()
@@ -121,12 +128,12 @@ public class MainGameProgress :MonoBehaviour
         //変更予定
         //if (Input.GetMouseButtonDown(1))//
         //{
-        //    gameStaus = GameStaus.GameClear;
+        //    gameStatus = GameStatus.GameClear;
         //    SceneManager.SceneLaod(SceneManager.SceneName.ENDING);
         //}
         //if (Input.GetMouseButtonDown(2))
         //{
-        //    gameStaus = GameStaus.GameOver;
+        //    gameStatus = GameStatus.GameOver;
         //}
     }
 
@@ -134,7 +141,7 @@ public class MainGameProgress :MonoBehaviour
     {
         Debug.Log("【進行】インターバル開始");
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.INTERVAL);
-        gameStaus = GameStaus.IntervalEnd;
+        gameStatus = GameStatus.IntervalEnd;
     }
     void IntervalEndProgress()
     {
@@ -147,17 +154,32 @@ public class MainGameProgress :MonoBehaviour
 
         if(TurnManager.nowTurn % 2 == 0) { //Bターン（偶数）の場合
             //先行と後攻のフラグによって遷移するシーンが変わる
+            // AB両方脱出ルート／AorB脱出ルートで条件が重複しないように else if で判定する
             if(MainGameManager.isClearUserA && MainGameManager.isClearUserB)//AB脱出ルート
-                gameStaus = GameStaus.GameClear;
-            if(MainGameManager.isClearUserA || MainGameManager.isClearUserB) //AorB脱出ルート
-                gameStaus = GameStaus.GameClear;
+            {
+                gameStatus = GameStatus.GameClear;
+            }
+            else if(MainGameManager.isClearUserA || MainGameManager.isClearUserB) //AorB脱出ルート
+            {
+                gameStatus = GameStatus.GameClear;
+            }
+            else if(TurnManager.nowTurn >= TurnManager.maxTurn)//16ターン超えた場合
+            {
+                gameStatus = GameStatus.GameOver;
+            }
             else
-                gameStaus = GameStaus.IntervalStart;
+            {
+                gameStatus = GameStatus.IntervalStart;
+            }
         }
         else if(TurnManager.nowTurn >= TurnManager.maxTurn)//16ターン超えた場合
-            gameStaus = GameStaus.GameOver;
+        {
+            gameStatus = GameStatus.GameOver;
+        }
         else
-            gameStaus = GameStaus.IntervalStart;
+        {
+            gameStatus = GameStatus.IntervalStart;
+        }
 
     }
 
@@ -166,7 +188,7 @@ public class MainGameProgress :MonoBehaviour
         Debug.Log("【進行】ゲームクリア");
 
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
-        gameStaus = GameStaus.GameStrat;
+        gameStatus = GameStatus.GameStart;
     }
 
     void GameOverProgress()
@@ -174,7 +196,7 @@ public class MainGameProgress :MonoBehaviour
         Debug.Log("【進行】ゲームオーバ");
 
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
-        gameStaus = GameStaus.GameStrat;
+        gameStatus = GameStatus.GameStart;
 
     }
 }

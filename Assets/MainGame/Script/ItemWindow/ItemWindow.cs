@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class ItemWindow : MonoBehaviour, IPointerClickHandler
 {
-    public GameObject Inventry;
+    public GameObject Inventory;
 
     private void Start()
     {
@@ -16,7 +16,7 @@ public class ItemWindow : MonoBehaviour, IPointerClickHandler
     /// </summary>
     void ItemWindowOpen()
     {
-        Inventry.SetActive(true);
+        Inventory.SetActive(true);
     }
 
     /// <summary>
@@ -24,7 +24,7 @@ public class ItemWindow : MonoBehaviour, IPointerClickHandler
     /// </summary>
     void ItemWindowClose()
     {
-        Inventry.SetActive(false);
+        Inventory.SetActive(false);
     }
 
     /// <summary>
@@ -33,7 +33,7 @@ public class ItemWindow : MonoBehaviour, IPointerClickHandler
     /// <param name="eventData"></param>
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (Inventry.activeSelf)
+        if (Inventory.activeSelf)
             ItemWindowClose();
         else
             ItemWindowOpen();

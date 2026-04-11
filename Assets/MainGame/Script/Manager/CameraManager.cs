@@ -10,6 +10,9 @@ public class CameraManager : MonoBehaviour
     private SpriteRenderer[] stageWalls;
     private float defaultOrthoSize;
     public bool Focusflg; //true:フォーカス中、false：フォーカスではない
+    // 現在カメラがフォーカスしている対象オブジェクト。
+    // ギミック側が「自分にフォーカスしているときだけ動く」判定に使う。
+    public Transform CurrentFocusTarget { get; private set; }
     [SerializeField] GameObject FocusCancelButton;
     [SerializeField] GameObject LButtonActive;
     [SerializeField] GameObject RButtonActive;
@@ -83,7 +86,17 @@ public class CameraManager : MonoBehaviour
     /// <param name="size">フォーカスサイズ</param>
     public void ItemFocus(Vector2 vector2,int size)//フォーカス機能＋フォーカスボタン表示
     {
+        ItemFocus(vector2, size, null);
+    }
+
+    /// <summary>
+    /// アイテムフォーカス(対象オブジェクト付き)。呼び出し元が対象の Transform を渡すことで、
+    /// 各ギミックが「自分自身にフォーカスしているか」を CurrentFocusTarget で識別できる。
+    /// </summary>
+    public void ItemFocus(Vector2 vector2, int size, Transform target)
+    {
         Focusflg = true;
+        CurrentFocusTarget = target;
         if (stageWalls == null || stageWalls.Length == 0)
         {
             ResolveStageWalls();
@@ -95,7 +108,7 @@ public class CameraManager : MonoBehaviour
         LButtonActive.SetActive(false);
         RButtonActive.SetActive(false);
 
-        Debug.Log("アイテムフォーカス");
+        Debug.Log("アイテムフォーカス: " + (target != null ? target.name : "(no target)"));
     }
 
     /// <summary>
@@ -141,6 +154,7 @@ public class CameraManager : MonoBehaviour
         mainCam.transform.position = cameraPos;
         SetFocusSize(0);
         Focusflg = false;
+        CurrentFocusTarget = null;
         FocusCancelButton.SetActive(false);
         LButtonActive.SetActive(true);
         RButtonActive.SetActive(true);

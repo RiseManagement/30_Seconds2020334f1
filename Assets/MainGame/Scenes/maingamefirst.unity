@@ -525,7 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2964ef5f7d6115e479857f3ed0d98b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmmickFlag: 0
+  gimmickFlag: 0
 --- !u!1 &467633844
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2964ef5f7d6115e479857f3ed0d98b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmmickFlag: 0
+  gimmickFlag: 0
 --- !u!114 &648974419 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2099436491867460061, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
@@ -914,7 +914,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2964ef5f7d6115e479857f3ed0d98b9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gimmmickFlag: 0
+  gimmickFlag: 0
 --- !u!1001 &1168846782
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1049,7 +1049,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838704, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Name
-      value: ItemDiteal_Canvas
+      value: ItemDetail_Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838704, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_IsActive
@@ -1161,7 +1161,7 @@ PrefabInstance:
       objectReference: {fileID: 1796530974}
     - target: {fileID: 3151146576432333955, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ItemDitealOff
+      value: ItemDetailOff
       objectReference: {fileID: 0}
     - target: {fileID: 7682388375596413405, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Name
@@ -1752,7 +1752,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948838309917738400, guid: 42a1631301712844babd323dc5c0331f, type: 3}
       propertyPath: m_Name
-      value: ItemDitealController
+      value: ItemDetailController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a1631301712844babd323dc5c0331f, type: 3}
@@ -2412,7 +2412,7 @@ PrefabInstance:
       value: -710.25
       objectReference: {fileID: 0}
     - target: {fileID: 7649636106996012509, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
-      propertyPath: Inventry
+      propertyPath: Inventory
       value: 
       objectReference: {fileID: 1522409243}
     - target: {fileID: 7897482832065416682, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
@@ -2624,7 +2624,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7752458543810128961, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
-      propertyPath: Inventry
+      propertyPath: Inventory
       value: 
       objectReference: {fileID: 1522409243}
     - target: {fileID: 8525099851522857737, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}

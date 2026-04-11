@@ -369,7 +369,7 @@ PrefabInstance:
       value: BStage_North
       objectReference: {fileID: 0}
     - target: {fileID: 4822389144953900937, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
-      propertyPath: gimmmickFlag
+      propertyPath: gimmickFlag
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4922503024271802755, guid: 0f6e13d7cb288f94dbf6365fd72dcb1d, type: 3}
@@ -723,7 +723,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8948838309917738400, guid: 42a1631301712844babd323dc5c0331f, type: 3}
       propertyPath: m_Name
-      value: ItemDitealController
+      value: ItemDetailController
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42a1631301712844babd323dc5c0331f, type: 3}
@@ -2531,7 +2531,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7649636106996012509, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
-      propertyPath: Inventry
+      propertyPath: Inventory
       value: 
       objectReference: {fileID: 902781238}
     - target: {fileID: 7897482832065416682, guid: b3ad7e0d2fd232944a781226cc97c33c, type: 3}
@@ -2673,7 +2673,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1503113193180838704, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Name
-      value: ItemDiteal_Canvas
+      value: ItemDetail_Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 1503113193180838708, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_Pivot.x
@@ -2781,7 +2781,7 @@ PrefabInstance:
       objectReference: {fileID: 964318238}
     - target: {fileID: 3151146576432333955, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ItemDitealOff
+      value: ItemDetailOff
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d4b8a2797db6da244838e6183d93b0a7, type: 3}
@@ -2955,7 +2955,7 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 902781238}
     - target: {fileID: 7752458543810128961, guid: c77b97d497b5f5b4db775bba497a7dca, type: 3}
-      propertyPath: Inventry
+      propertyPath: Inventory
       value: 
       objectReference: {fileID: 902781238}
     m_RemovedComponents: []

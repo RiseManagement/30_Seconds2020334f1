@@ -26,10 +26,10 @@ public class User : MonoBehaviour
 
     protected void GetItem(GameObject playerobj)
     {
-        var parent = GameObject.Find("InventryPalent");
+        var parent = GameObject.Find("InventoryParent");
         if (parent == null)
         {
-            Debug.LogError("InventryPalent が見つかりません");
+            Debug.LogError("InventoryParent が見つかりません");
             return;
         }
 
@@ -49,7 +49,7 @@ public class User : MonoBehaviour
             itemWinowSlot.Add(child.GetComponent<ItemWindowSlot>()); // 順番に子オブジェクトを取得
         }
 
-        GameObject.Find("Inventry").SetActive(false); 
+        GameObject.Find("Inventory").SetActive(false);
 
         int id = 0;
 

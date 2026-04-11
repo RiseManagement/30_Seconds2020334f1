@@ -24,13 +24,25 @@ public class SlidePuzzle : MonoBehaviour
 
     CameraManager cameraManager;
 
+    // WaitForSeconds を使い回すためのキャッシュ（GC抑制）
+    static readonly WaitForSeconds _waitOne = new WaitForSeconds(1f);
+
     // Start is called before the first frame update
     void Start()
     {
         successFlag = false;
         clearFlag = false;
         centerObj = this.gameObject.transform.GetChild(0).gameObject;
-        cameraManager = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+
+        var mainCameraObj = GameObject.Find("Main Camera");
+        if (mainCameraObj != null)
+        {
+            cameraManager = mainCameraObj.GetComponent<CameraManager>();
+        }
+        if (cameraManager == null)
+        {
+            Debug.LogWarning("[SlidePuzzle] CameraManager が取得できませんでした。");
+        }
 
         for(int i=0;i < puzzleObj.Length; i++){
             puzzleObj[i] = transform.GetChild(i).gameObject;
@@ -48,7 +60,17 @@ public class SlidePuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (cameraManager.Focusflg)
+        if (cameraManager == null) return;
+
+        // パズルにフォーカスしているときのみ動作させる。
+        // SlidePuzzle スクリプトは "4_SildePuzzle" に付いており、その親が ID "4" (パズル本体) なので、
+        // CameraManager.CurrentFocusTarget が自分の親と一致する場合だけ操作可能にする。
+        // (机(ID2)など他オブジェクトにフォーカスしている間は誤作動しないようにするため)
+        bool focusedOnThis = cameraManager.Focusflg
+                             && cameraManager.CurrentFocusTarget != null
+                             && cameraManager.CurrentFocusTarget == transform.parent;
+
+        if (focusedOnThis)
         {
             for (int i = 0; i < puzzleObj.Length; i++)
                 puzzleObj[i].SetActive(true);
@@ -58,51 +80,20 @@ public class SlidePuzzle : MonoBehaviour
         {
             for (int i = 0; i < puzzleObj.Length; i++)
                 puzzleObj[i].SetActive(false);
-            Debug.Log("フォーカスリセット");
         }
     }
 
     void SlidePuzzlePlay()
     {
-        int northNo = 0;
-        int eastNo = 0;
-        int westNo = 0;
-        int southNo = 0;
-
-        //上下左右にRayを飛ばす。
-        RaycastHit2D hitUp = Physics2D.Raycast(centerObj.transform.position + Vector3.up, Vector2.up, 0.1f);
-        RaycastHit2D hitDown = Physics2D.Raycast(centerObj.transform.position + Vector3.down, Vector2.down, 0.1f);
-        RaycastHit2D hitRight = Physics2D.Raycast(centerObj.transform.position + Vector3.right, Vector2.right, 0.1f);
-        RaycastHit2D hitLeft = Physics2D.Raycast(centerObj.transform.position + Vector3.left, Vector2.left, 0.1f);
-        if (hitUp)
+        //空白のピースの配列インデックス取得
+        var centerNo = -1;
+        for (int i = 0; i < puzzleObj.Length; i++)
         {
-            if (hitUp.transform.gameObject.name.Contains("Puzzle"))
-                northNo = int.Parse(hitUp.transform.gameObject.name.Substring(7, 1));
-        }
-        if (hitDown)
-        {
-            if (hitDown.transform.gameObject.name.Contains("Puzzle"))
-                southNo = int.Parse(hitDown.transform.gameObject.name.Substring(7, 1));
-        }
-        if (hitRight)
-        {
-            if (hitRight.transform.gameObject.name.Contains("Puzzle"))
-                eastNo = int.Parse(hitRight.transform.gameObject.name.Substring(7, 1));
-        }
-        if (hitLeft)
-        {
-            if (hitLeft.transform.gameObject.name.Contains("Puzzle"))
-                westNo = int.Parse(hitLeft.transform.gameObject.name.Substring(7, 1));
-        }
-        //Debug.Log(northNo + "," + southNo + "," + eastNo + "," + westNo);
-
-
-        //空白のピースの位置を取得する
-        var centerNo = 0;
-        for(int i = 0; i < puzzleObj.Length; i++)
-        {
-            if (puzzleObj[i].gameObject.name.Contains(centerObj.name))
+            if (puzzleObj[i] == centerObj)
+            {
                 centerNo = i;
+                break;
+            }
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -112,28 +103,33 @@ public class SlidePuzzle : MonoBehaviour
             if (!tapObjFlag) return;
             Debug.Log("パズル移動開始");
 
-            var tapNo = 0;
+            var tapNo = -1;
             for (int i = 0; i < puzzleObj.Length; i++)
             {
-                if (puzzleObj[i].gameObject.name.Contains(tapObj.name))
+                if (puzzleObj[i] == tapObj)
+                {
                     tapNo = i;
+                    break;
+                }
             }
+            if (tapNo < 0 || centerNo < 0) return;
+
             Debug.Log("センターNo：" + centerNo);
             Debug.Log("タップNo：" + tapNo);
 
-            //スライド式にするためにタップしたピースがどの位置かを判定する
-            if (//上下左右1マスのみ判定
-                (int.Parse(tapObj.name.Substring(7, 1)) == northNo ||
-                int.Parse(tapObj.name.Substring(7, 1)) == southNo ||
-                int.Parse(tapObj.name.Substring(7, 1)) == eastNo ||
-                int.Parse(tapObj.name.Substring(7, 1)) == westNo)
-                &&
-                //位置判定
-                (tapObj.transform.position.x < centerObj.transform.position.x ||
-               tapObj.transform.position.x > centerObj.transform.position.x ||
-               tapObj.transform.position.y < centerObj.transform.position.y ||
-               tapObj.transform.position.y > centerObj.transform.position.y)
-               )
+            // 親 "4" が大きな BoxCollider2D(3x3) を持っているため、
+            // Physics2D.Raycast での上下左右1マス判定は "4" のコライダに邪魔されて機能しない。
+            // そのため中央ピースとタップしたピースの localPosition 差が
+            // 上下左右 1 マス(=1 ユニット)以内かだけで隣接判定を行う。
+            Vector3 diff = tapObj.transform.localPosition - centerObj.transform.localPosition;
+            float absX = Mathf.Abs(diff.x);
+            float absY = Mathf.Abs(diff.y);
+            const float tolerance = 0.3f;
+            bool isAdjacent =
+                (absX < tolerance && Mathf.Abs(absY - 1f) < tolerance) ||
+                (absY < tolerance && Mathf.Abs(absX - 1f) < tolerance);
+
+            if (isAdjacent)
             {
                 //座標入れ替え
                 saveThisObjPosition = tapObj.transform.position;
@@ -238,27 +234,29 @@ public class SlidePuzzle : MonoBehaviour
     void GetStageItemTapObjectInfo()
     {
         tapObj = null;
+        tapObjFlag = false;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        // 2D シーンはオルソカメラ + z=0 平面に貼り付くスプライトなので、
+        // マウスのスクリーン座標をワールド座標に変換して OverlapPointAll で判定する。
+        if (Camera.main == null) return;
+        Vector3 mouseWorld = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mouse2D = new Vector2(mouseWorld.x, mouseWorld.y);
 
-        int layerMask = LayerMask.GetMask("Puzzle");
-        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction, Mathf.Infinity, layerMask);
-
-        if (hit2d)
+        // 親 "4" が大きな BoxCollider2D(3x3) を持っていて、OverlapPoint だと先にそちらが
+        // ヒットしてしまう。OverlapPointAll で全重なりを取得し、その中から "Puzzle_" 名の
+        // コライダのみを採用する。
+        Collider2D[] hits = Physics2D.OverlapPointAll(mouse2D);
+        foreach (var hit in hits)
         {
-            Debug.Log("パズルタップ:" + hit2d.transform.gameObject.name);
-            if (hit2d.transform.gameObject.name.Contains("Puzzle"))
+            if (hit == null) continue;
+            if (hit.gameObject.name.StartsWith("Puzzle_"))
             {
-                tapObj = hit2d.transform.gameObject;
+                tapObj = hit.gameObject;
                 tapObjFlag = true;
+                Debug.Log("パズルタップ可能:" + tapObj);
+                return;
             }
-            Debug.Log("パズルタップ可能:" + tapObj);
         }
-        else
-        {
-            tapObjFlag = false;
-        }
-
     }
 
     /// <summary>
@@ -284,7 +282,9 @@ public class SlidePuzzle : MonoBehaviour
         //ピース分をランダムにセット
         while (randompuzzlecount > 0)
         {
-            random = Random.Range(0, 8);
+            // Random.Range(int,int) は上限排他なので puzzleObj.Length(=9) を指定し、
+            // 最後のピース番号(8)もシャッフル対象に含める。
+            random = Random.Range(0, puzzleObj.Length);
             if (!puzzle[randompuzzlecount].gameObject.name.Contains(random.ToString()))
             {
                 //Debug.Log("ランダム数：" + random);
@@ -314,8 +314,11 @@ public class SlidePuzzle : MonoBehaviour
     /// <returns></returns>
     IEnumerator FocusCancel()
     {
-        yield return new WaitForSeconds(1);
+        yield return _waitOne;
 
-        cameraManager.FocusCancel();
+        if (cameraManager != null)
+        {
+            cameraManager.FocusCancel();
+        }
     }
 }

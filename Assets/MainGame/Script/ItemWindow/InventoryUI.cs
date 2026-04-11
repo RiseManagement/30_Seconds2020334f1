@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventryUI : MonoBehaviour
+public class InventoryUI : MonoBehaviour
 {
 
     public Transform slotsParent;
@@ -30,9 +30,9 @@ public class InventryUI : MonoBehaviour
 
        for(int i=0; i<slots.Length; i++)
         {
-            if (i < Inventry.instance.itemsid.Count)
+            if (i < Inventory.instance.itemsid.Count)
             {
-                slots[i].AddItem(Inventry.instance.itemsid[i]);
+                slots[i].AddItem(Inventory.instance.itemsid[i]);
             }
             else
                 slots[i].ClearSlot();
@@ -43,7 +43,7 @@ public class InventryUI : MonoBehaviour
     {
         if (slotsParent == null)
         {
-            Debug.LogWarning("InventryUI.slotsParent が設定されていません");
+            Debug.LogWarning("InventoryUI.slotsParent が設定されていません");
             return;
         }
 

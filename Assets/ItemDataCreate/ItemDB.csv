@@ -45,5 +45,6 @@
 43,赤ランプ(点灯),赤いランプがついている,Assets/MainGame/Resources/Item/RoomB/lamp_red_on.png,0,0,0,1,0,,,
 44,宝箱（クローズ）,箱を開けようとしたが開かない,Assets/MainGame/Resources/Item/RoomCommon/TreasureChest_Close.png,0,0,0,1,0,,,
 45,宝箱（オープン）,もう中には何もない,Assets/MainGame/Resources/Item/RoomCommon/TreasureChest_Open.png,0,0,0,1,0,,,
+46,ダミー,,,0,0,0,0,0,,,
 47,水抜きスイッチ（オン）,水を抜くためのスイッチだ　もう用はない,Assets/MainGame/Resources/Item/RoomB/switch_02.png,0,0,0,1,0,,,
 48,ダミー,,,0,0,0,0,0,,,

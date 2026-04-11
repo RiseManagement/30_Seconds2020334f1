@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1058610076329651768}
   - component: {fileID: 776529839135866363}
   m_Layer: 0
-  m_Name: ItemDitealController
+  m_Name: ItemDetailController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,4 +44,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlotcs: {fileID: 0}
-  isDiteal: 0
+  isDetail: 0

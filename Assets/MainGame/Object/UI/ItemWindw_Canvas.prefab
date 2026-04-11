@@ -788,7 +788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5993540db34c12b4c8694d12ea5decbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventry: {fileID: 0}
+  Inventory: {fileID: 0}
 --- !u!1 &2099436491631447252
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +893,7 @@ GameObject:
   - component: {fileID: 2099436491658510629}
   - component: {fileID: 2099436491658510626}
   m_Layer: 5
-  m_Name: InventryPalent
+  m_Name: InventoryParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2225,7 +2225,7 @@ GameObject:
   - component: {fileID: 2099436492779645959}
   - component: {fileID: 2099436492779645956}
   m_Layer: 5
-  m_Name: Inventry
+  m_Name: Inventory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

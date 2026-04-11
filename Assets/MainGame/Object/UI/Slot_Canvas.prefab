@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5993540db34c12b4c8694d12ea5decbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventry: {fileID: 0}
+  Inventory: {fileID: 0}
 --- !u!114 &4054872158879294125
 MonoBehaviour:
   m_ObjectHideFlags: 0

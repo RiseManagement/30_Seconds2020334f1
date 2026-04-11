@@ -1,10 +1,16 @@
-﻿using UnityEngine;
+using System;
+using UnityEngine;
 using GoogleMobileAds.Api;
 
 public class AdMobReward :MonoBehaviour
 {
 
     private RewardedAd rewardedAd;//RewardedAd型の変数 rewardedAdを宣言 この中にリワード広告の情報が入る
+
+    // ハンドラをデリゲートとして保持しておき、Destroy 時に解除する
+    private Action onAdOpenedHandler;
+    private Action onAdClosedHandler;
+    private Action<AdError> onAdFailedHandler;
 
     private string adUnitId;
 
@@ -23,6 +29,17 @@ public class AdMobReward :MonoBehaviour
         Debug.Log("Rewarded ad load start");
 
         LoadRewardedAd();//リワード広告読み込み
+    }
+
+    private void OnDestroy()
+    {
+        // 登録したハンドラを解除してから破棄する
+        UnregisterEventHandlers();
+        if (rewardedAd != null)
+        {
+            rewardedAd.Destroy();
+            rewardedAd = null;
+        }
     }
 
     //リワード広告を表示する関数
@@ -58,6 +75,8 @@ public class AdMobReward :MonoBehaviour
         //rewardedAdの中身が入っていた場合処理
         if (rewardedAd != null)
         {
+            // 古い広告のハンドラを解除してから破棄（メモリリーク防止）
+            UnregisterEventHandlers();
             //リワード広告は使い捨てなので一旦破棄
             rewardedAd.Destroy();
             rewardedAd = null;
@@ -89,7 +108,7 @@ public class AdMobReward :MonoBehaviour
         if (error != null || ad == null)
         {
             //リワード 読み込み失敗
-            Debug.LogError("Failed to load reward ad : " + error);//error:エラー内容 
+            Debug.LogError("Failed to load reward ad : " + error);//error:エラー内容
             return;//この時点でこの関数の実行は終了
         }
 
@@ -108,15 +127,13 @@ public class AdMobReward :MonoBehaviour
     //広告の 表示・表示終了・表示失敗 の内容
     private void RegisterEventHandlers(RewardedAd ad)
     {
-        //リワード広告が表示された時に起動する内容
-        ad.OnAdFullScreenContentOpened += () =>
+        // 解除できるようにハンドラを保持
+        onAdOpenedHandler = () =>
         {
             //リワード広告 表示
             Debug.Log("Rewarded ad full screen content opened.");
         };
-
-        //リワード広告が表示終了 となった時に起動する内容
-        ad.OnAdFullScreenContentClosed += () =>
+        onAdClosedHandler = () =>
         {
             //リワード広告 表示終了
             Debug.Log("Rewarded ad full screen content closed.");
@@ -124,9 +141,7 @@ public class AdMobReward :MonoBehaviour
             //リワード 再読み込み
             LoadRewardedAd();
         };
-
-        //リワード広告の表示失敗 となった時に起動する内容
-        ad.OnAdFullScreenContentFailed += (AdError error) =>
+        onAdFailedHandler = (AdError error) =>
         {
             //エラー表示
             Debug.LogError("Rewarded ad failed to open full screen content with error : " + error);
@@ -134,5 +149,20 @@ public class AdMobReward :MonoBehaviour
             //リワード 再読み込み
             LoadRewardedAd();
         };
+
+        ad.OnAdFullScreenContentOpened += onAdOpenedHandler;
+        ad.OnAdFullScreenContentClosed += onAdClosedHandler;
+        ad.OnAdFullScreenContentFailed += onAdFailedHandler;
+    }
+
+    private void UnregisterEventHandlers()
+    {
+        if (rewardedAd == null) return;
+        if (onAdOpenedHandler != null) rewardedAd.OnAdFullScreenContentOpened -= onAdOpenedHandler;
+        if (onAdClosedHandler != null) rewardedAd.OnAdFullScreenContentClosed -= onAdClosedHandler;
+        if (onAdFailedHandler != null) rewardedAd.OnAdFullScreenContentFailed -= onAdFailedHandler;
+        onAdOpenedHandler = null;
+        onAdClosedHandler = null;
+        onAdFailedHandler = null;
     }
 }

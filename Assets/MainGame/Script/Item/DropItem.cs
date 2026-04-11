@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DeopItem : MonoBehaviour, IPointerClickHandler
+public class DropItem : MonoBehaviour, IPointerClickHandler
 {
     ItemSlot itemslot;
 
@@ -16,8 +16,26 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
 
     private void Start()
     {
-        itemslot = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
-        camera = GameObject.Find("Main Camera").GetComponent<CameraManager>();
+        var itemSlotObj = GameObject.Find("ItemSlot");
+        if (itemSlotObj != null)
+        {
+            itemslot = itemSlotObj.GetComponent<ItemSlot>();
+        }
+        if (itemslot == null)
+        {
+            Debug.LogWarning("[DropItem] ItemSlot が見つかりません。");
+        }
+
+        var mainCameraObj = GameObject.Find("Main Camera");
+        if (mainCameraObj != null)
+        {
+            camera = mainCameraObj.GetComponent<CameraManager>();
+        }
+        if (camera == null)
+        {
+            Debug.LogWarning("[DropItem] Main Camera の CameraManager が見つかりません。");
+        }
+
         HideIfAlreadyOwned();
     }
 
@@ -77,26 +95,41 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
 
             //イベントり追加
             //アイテムの詳細画面の表示非表示をObject名を参照して行う
-            //ここにitem_Ditealの関数を書く
-            Item_Diteal item_Diteal=null;
-            item_Diteal = GameObject.Find("ItemDitealController").GetComponent<Item_Diteal>();
-            item_Diteal.ItemDropDiteal(stageitemNumber);
-            
-            //イベントリ追加
-            Inventry.instance.Add(stageitemNumber);
-            GameObject playerObj = GameObject.Find("Player").gameObject;
-
-            //所有者設定
-            if (playerObj.GetComponent<User_A>())
+            //ここにitem_Detailの関数を書く
+            var itemDetailObj = GameObject.Find("ItemDetailController");
+            if (itemDetailObj != null)
             {
-                //Debug.Log("Aが取得");
-                ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
-
+                var itemDetail = itemDetailObj.GetComponent<Item_Detail>();
+                if (itemDetail != null)
+                {
+                    itemDetail.ItemDropDetail(stageitemNumber);
+                }
             }
-            else if (playerObj.GetComponent<User_B>())
+
+            //イベントリ追加
+            if (Inventory.instance != null)
             {
-                //Debug.Log("Bが取得");
-                ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
+                Inventory.instance.Add(stageitemNumber);
+            }
+
+            GameObject playerObj = GameObject.Find("Player");
+            if (playerObj != null)
+            {
+                //所有者設定
+                if (playerObj.GetComponent<User_A>())
+                {
+                    //Debug.Log("Aが取得");
+                    ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
+                }
+                else if (playerObj.GetComponent<User_B>())
+                {
+                    //Debug.Log("Bが取得");
+                    ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
+                }
+            }
+            else
+            {
+                Debug.LogWarning("[DropItem] Playerオブジェクトが見つかりません。所有者設定をスキップ。");
             }
 
             //ステージ上のアイテム変化
@@ -123,13 +156,19 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
         }
         else
         {
+            if (camera == null)
+            {
+                Debug.LogWarning("[DropItem] CameraManager 参照が null のため処理を中断します。");
+                return;
+            }
+
             //フォーカス対象＋カメラフォーカスではない
             if (ItemDataBase.Entity.GetData(stageitemNumber).FocusPower > 0 && !camera.Focusflg)
             {
                 Debug.Log("フォーカスではない");
                 //フォーカス
                 Debug.Log("フォーカス対象アイテム：" + stageitemobj.name);
-                camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), ItemDataBase.Entity.GetData(stageitemNumber).FocusPower);
+                camera.ItemFocus(new Vector2(stageitemobj.transform.position.x, stageitemobj.transform.position.y), ItemDataBase.Entity.GetData(stageitemNumber).FocusPower, stageitemobj.transform);
             }
             else
             {
@@ -140,7 +179,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         if (itemslot.itemid == 12)//アイテム使用側
                         {
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
 
                             //アイテム選択側は使用済み更新
@@ -161,7 +200,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         if (itemslot.itemid == 21)//アイテム使用側
                         {
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
 
                             //アイテム選択側は使用済み更新
@@ -183,26 +222,38 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                         }
                         break;
-                    case 15://台座(物乗っけてる)
+                    case 15://台座(物乗っけてる) → 台座ボタン(ID13) 押下と見做す
                         StageItemGimmickOn();
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                        ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
+                        // 仕様書(ギミック発動詳細化一覧.xlsx 行5):
+                        // 「アイテムID15の状態でアイテムID13(台座ボタン)に触れる。謎1クリア。」
+                        // シーン上の GameObject は "15" のまま（FiledObjChange で名前が 14→15 に変わる）だが、
+                        // データ層では ID13 の InteractFlag/ClearCheck を立て、Gimmick.MysteryCler() の
+                        // ID13 経由ディスパッチで NAZO1 をクリアする。
+                        ItemDataBase.Entity.GetData(13).InteractFlag = 1;
+                        ItemDataBase.Entity.GetData(13).ClearCheck = 2;
                         break;
                     case 17://水槽空
                         if (itemslot.itemid == 11)//シリンダー
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                             ItemDataBase.Entity.GetData(itemslot.itemid).OwnerFlag = 0;
                             ItemDataBase.Entity.GetData(itemslot.itemid).ClearCheck = 2;
+                            // 仕様書 (ギミック発動詳細化一覧.xlsx 行14):
+                            // 「アイテムID19→20（水槽の穴）。アイテムID17→18（水槽）。謎4Aクリア。」
+                            // 水槽の穴(19) にも InteractFlag を立てて Gimmick.case 19 経由で 19→20 に遷移させ、
+                            // 水槽(17) の ClearCheck を 2 にして Gimmick.MysteryCler() 経由で NAZO4A をクリアする。
+                            ItemDataBase.Entity.GetData(19).InteractFlag = 1;
+                            ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
                         }
                         break;
                     case 22://Ｂ絵画
@@ -210,7 +261,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                             ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
@@ -227,7 +278,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         if (itemslot.itemid == 30)//アイテム使用側
                         {
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
 
                             //アイテム選択側は使用済み更新
@@ -239,10 +290,16 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                             ItemDataBase.Entity.GetData(stageitemNumber + 1).InteractFlag = 1;
+                            // 仕様書 (ギミック発動詳細化一覧.xlsx 行15/16):
+                            // 「花瓶（着色後）入手後アイテムID22→35」
+                            // 染色後 (ID29) をプレイヤーが拾えるように EnabletakeFlag を立てる。
+                            // Gimmick.case 28 の FiledObjChange で名前が "29" になった後、
+                            // 上部分岐 (EnabletakeFlag==1) 経由で Inventory に加わり、B絵画(22) に使用可能。
+                            ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
                         }
                         break;
                     case 31://青ランプ(消灯)
@@ -270,7 +327,7 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventry.instance.Removed(itemslot.itemid);
+                            Inventory.instance.Removed(itemslot.itemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                             ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
@@ -321,7 +378,12 @@ public class DeopItem : MonoBehaviour, IPointerClickHandler
     /// </summary>
     void StageItemGimmickOn()
     {
-        stageitemobj.GetComponent<Gimmick>().GimmmickFlag = true;
+        if (stageitemobj == null) return;
+        var gimmick = stageitemobj.GetComponent<Gimmick>();
+        if (gimmick != null)
+        {
+            gimmick.GimmickFlag = true;
+        }
     }
 
 }

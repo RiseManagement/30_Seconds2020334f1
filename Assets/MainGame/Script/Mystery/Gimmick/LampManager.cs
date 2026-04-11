@@ -38,6 +38,12 @@ public class LampManager : MonoBehaviour
 
     private void FixedUpdate()
     {
+        // すでに謎3Bクリア済みなら以降の判定は不要
+        if (MysteryManager.MysteryList[(int)MysteryManager.MysteryType.NAZO3B])
+        {
+            return;
+        }
+
         if (AnwserObjList.Count >= 3)
         {
             if (AnwserObjList[0].name == "43" && AnwserObjList[1].name == "38" && AnwserObjList[2].name == "32")
@@ -46,6 +52,15 @@ public class LampManager : MonoBehaviour
 
                 //スイッチ出現
                 WaterSwitchObj.SetActive(true);
+
+                // 仕様書 (ギミック発動詳細化一覧.xlsx 行9):
+                // 「正しい点灯ならB部屋にアイテムID33出現。謎3Bクリア。」
+                // ランプヒント紙(ID36) は EnableTake=1 で取得後に SetActive(false) されるため、
+                // Gimmick.case 36 経由の発火経路は 36 の取得状態に依存してしまう。
+                // ここでは ID36 のデータ反映と合わせて NAZO3B を直接クリアする。
+                ItemDataBase.Entity.GetData(36).InteractFlag = 1;
+                ItemDataBase.Entity.GetData(36).ClearCheck = 2;
+                MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3B);
             }
             else
             {
@@ -66,7 +81,7 @@ public class LampManager : MonoBehaviour
             var gimmick = LampGimmickList[i];
             if (gimmick == null) continue;
 
-            bool current = gimmick.gimmmickFlag;
+            bool current = gimmick.gimmickFlag;
             if (current && !lastGimmickFlags[i])
             {
                 AnwserObjList.Add(LampObjList[i]);

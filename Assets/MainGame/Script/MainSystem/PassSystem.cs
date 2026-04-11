@@ -45,9 +45,9 @@ public class PassSystem : MonoBehaviour
             return;
         }
 
-        if (Inventry.instance != null)
+        if (Inventory.instance != null)
         {
-            Inventry.instance.Removed(passedItemId);
+            Inventory.instance.Removed(passedItemId);
         }
 
         passitemid = -1;

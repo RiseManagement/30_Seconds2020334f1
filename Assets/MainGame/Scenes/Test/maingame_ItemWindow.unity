@@ -1434,7 +1434,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1033193622}
-        m_TargetAssemblyTypeName: DeopItem, Assembly-CSharp
+        m_TargetAssemblyTypeName: DropItem, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 1
         m_Arguments:
@@ -1968,7 +1968,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1588941495}
-        m_TargetAssemblyTypeName: DeopItem, Assembly-CSharp
+        m_TargetAssemblyTypeName: DropItem, Assembly-CSharp
         m_MethodName: Pickup
         m_Mode: 1
         m_Arguments:

@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Inventry :MonoBehaviour
+public class Inventory :MonoBehaviour
 {
-    public static Inventry instance;
-    InventryUI InventryUI;
+    public static Inventory instance;
+    InventoryUI InventoryUI;
     [SerializeField] Text explanationText;
 
     private void Awake()
@@ -22,14 +22,14 @@ public class Inventry :MonoBehaviour
     private void Start()
     {
         //gameObject.SetActive(false);
-        InventryUI = GetComponent<InventryUI>();
-        if (InventryUI == null)
+        InventoryUI = GetComponent<InventoryUI>();
+        if (InventoryUI == null)
         {
-            Debug.LogError("InventryUI が見つかりません");
+            Debug.LogError("InventoryUI が見つかりません");
             return;
         }
         RefreshForCurrentPlayer();
-        InventryUI.UpdateUI();
+        InventoryUI.UpdateUI();
 
     }
 
@@ -37,14 +37,14 @@ public class Inventry :MonoBehaviour
 
     private void OnEnable()
     {
-        if (InventryUI == null)
+        if (InventoryUI == null)
         {
-            InventryUI = GetComponent<InventryUI>();
+            InventoryUI = GetComponent<InventoryUI>();
         }
         RefreshForCurrentPlayer();
-        if (InventryUI != null)
+        if (InventoryUI != null)
         {
-            InventryUI.UpdateUI();
+            InventoryUI.UpdateUI();
         }
     }
 
@@ -57,7 +57,7 @@ public class Inventry :MonoBehaviour
         if (!itemsid.Contains(itemid))
         {
             itemsid.Add(itemid);
-            InventryUI.UpdateUI();
+            InventoryUI.UpdateUI();
         }
     }
 
@@ -69,7 +69,7 @@ public class Inventry :MonoBehaviour
     {
         if (itemsid.Remove(itemid))
         {
-            InventryUI.UpdateUI();
+            InventoryUI.UpdateUI();
         }
     }
 

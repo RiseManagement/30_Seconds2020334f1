@@ -14,9 +14,24 @@ public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     private void Awake()
     {
-        itemSlotcs = GameObject.Find("ItemSlot").GetComponent<ItemSlot>();
-        passSlotcs = GameObject.Find("PassSlot").GetComponent<PassSlot>();
-        itemwindowSlot = gameObject.transform.parent.GetComponent<ItemWindowSlot>();
+        var itemSlotObj = GameObject.Find("ItemSlot");
+        if (itemSlotObj != null) itemSlotcs = itemSlotObj.GetComponent<ItemSlot>();
+
+        var passSlotObj = GameObject.Find("PassSlot");
+        if (passSlotObj != null) passSlotcs = passSlotObj.GetComponent<PassSlot>();
+
+        if (transform.parent != null)
+        {
+            itemwindowSlot = transform.parent.GetComponent<ItemWindowSlot>();
+        }
+
+        if (itemSlotcs == null || passSlotcs == null || itemwindowSlot == null)
+        {
+            Debug.LogWarning("[ItemDragDrop] 必要な参照が取得できませんでした。" +
+                " itemSlotcs=" + (itemSlotcs != null) +
+                ", passSlotcs=" + (passSlotcs != null) +
+                ", itemwindowSlot=" + (itemwindowSlot != null));
+        }
     }
 
     /// <summary>
@@ -26,7 +41,10 @@ public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
     public void OnBeginDrag(PointerEventData eventData)
     {
         prevPosition = transform.position;
-        Inventry.instance.SetExplanationText(itemwindowSlot.explanation);
+        if (Inventory.instance != null && itemwindowSlot != null)
+        {
+            Inventory.instance.SetExplanationText(itemwindowSlot.explanation);
+        }
     }
 
     /// <summary>
@@ -49,14 +67,22 @@ public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
         foreach (var hit in raycastResults)
         {
+            if (itemwindowSlot == null) break;
+
             if (hit.gameObject.CompareTag("ItemSlot"))
             {
-                itemSlotcs.SelectItem(itemwindowSlot.itemid);
+                if (itemSlotcs != null)
+                {
+                    itemSlotcs.SelectItem(itemwindowSlot.itemid);
+                }
             }
             else if (hit.gameObject.CompareTag("PassSlot"))
             {
                 //Debug.Log("パススロットセット");
-                passSlotcs.SelectItem(itemwindowSlot.itemid);
+                if (passSlotcs != null)
+                {
+                    passSlotcs.SelectItem(itemwindowSlot.itemid);
+                }
                 PassSystem.passitemid = itemwindowSlot.itemid;
             }
         }
