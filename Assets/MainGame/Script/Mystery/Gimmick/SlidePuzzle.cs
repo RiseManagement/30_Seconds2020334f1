@@ -48,12 +48,18 @@ public class SlidePuzzle : MonoBehaviour
             puzzleObj[i] = transform.GetChild(i).gameObject;
             answerpuzzleObj[i] = transform.GetChild(i).gameObject;
         }
-        PuzzleReset();
 
-        if (!PuzzleClearCkeck())
+        // 解ける配置になるまでシャッフルを繰り返す（最大50回・通常は数回以内で成立）
+        int shuffleSafety = 0;
+        do
         {
             PuzzleReset();
-            Debug.Log("やり直し");
+            shuffleSafety++;
+        } while (!PuzzleClearCkeck() && shuffleSafety < 50);
+
+        if (shuffleSafety >= 50)
+        {
+            Debug.LogWarning("[SlidePuzzle] 解ける盤面の生成に失敗しました（safety limit到達）");
         }
     }
 
@@ -179,53 +185,43 @@ public class SlidePuzzle : MonoBehaviour
     /// <summary>
     /// クリア可能か確認
     /// </summary>
+    /// <remarks>
+    /// 3x3スライドパズル(8-puzzle)の解法可能性は数学的に判定できる。
+    /// 奇数幅(3,5,...)の盤面では「空白を除いたピース列の転倒数(inversions)」が
+    /// 偶数のときに限り解ける、という標準定理を使用する。
+    /// 隣接スワップでは偶数置換しか作れないため、転倒数が奇数の盤面は
+    /// どう動かしても揃わない。
+    /// </remarks>
     bool PuzzleClearCkeck()
     {
-        bool isClear = false;
-        int movecount = 0;
-        List<GameObject> puzzle = new List<GameObject>();
+        if (puzzleObj == null || centerObj == null) return false;
 
-        //一時的ピースリストに追加
-        foreach (GameObject i in puzzleObj)
+        // 空白(centerObj)を除いたピース番号列を作る
+        List<int> seq = new List<int>(puzzleObj.Length - 1);
+        foreach (var go in puzzleObj)
         {
-            puzzle.Add(i);
+            if (go == null || go == centerObj) continue;
+
+            // "Puzzle_<n>" の <n> を取り出す
+            string n = go.name;
+            int underscore = n.LastIndexOf('_');
+            if (underscore < 0 || underscore + 1 >= n.Length) return false;
+            int pieceNo;
+            if (!int.TryParse(n.Substring(underscore + 1), out pieceNo)) return false;
+            seq.Add(pieceNo);
         }
 
-        for (int i = 0; i < puzzleObj.Length-1; i++)
+        // 転倒数を数える
+        int inversions = 0;
+        for (int i = 0; i < seq.Count; i++)
         {
-            bool match = false;
-            int index = 0;
-            //正解の位置確認
-            while(!match)
+            for (int j = i + 1; j < seq.Count; j++)
             {
-                //位置が正解の位置と同じ場合一度も移動してないならループ抜ける移動してるなら現在の位置と
-                if(puzzle[index] == answerpuzzleObj[i])
-                {
-                    if(index > 0)
-                    {
-                        //交換
-                        var w = puzzle[i];
-                        puzzle[i] = puzzle[index];
-                        puzzle[index] = w;
-                    }
-                    match = true;
-                }
-                else
-                {
-                    index++;
-                    //Debug.Log("移動数：" + movecount);
-                    movecount++;
-                }
+                if (seq[i] > seq[j]) inversions++;
             }
         }
 
-        //クリア可能か確認
-        if(movecount % 2 == 0)
-        {
-            isClear = true;
-        }
-
-        return isClear;
+        return (inversions % 2) == 0;
     }
 
     /// <summary>
