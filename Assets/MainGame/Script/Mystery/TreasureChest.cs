@@ -28,13 +28,13 @@ public class TreasureChest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MysteryClerSet();
+        MysteryClearSet();
     }
 
     /// <summary>
     /// 謎クリア判定のランプ更新呼出
     /// </summary>
-    public void MysteryClerSet()
+    public void MysteryClearSet()
     {
         if (MysteryManager.MysteryList[(int)MysteryManager.MysteryType.NAZO1])
         {

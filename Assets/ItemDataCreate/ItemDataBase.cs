@@ -17,7 +17,7 @@ public class ItemDataBase : ScriptableObject
     //MyScriptableObjectが保存してある場所のパス
     public const string PATH = "ItemDB";
 
-    //MyScriptableObjectの実体
+    //MyScriptableObjectの実体 (アセットそのものではなく、ランタイム専用のクローン)
     private static ItemDataBase _entity;
     public static ItemDataBase Entity
     {
@@ -26,16 +26,56 @@ public class ItemDataBase : ScriptableObject
             //初アクセス時にロードする
             if (_entity == null)
             {
-                _entity = Resources.Load<ItemDataBase>(PATH);
+                var asset = Resources.Load<ItemDataBase>(PATH);
 
                 //ロード出来なかった場合はエラーログを表示
-                if (_entity == null)
+                if (asset == null)
                 {
                     Debug.LogError(PATH + " not found");
+                    return null;
                 }
+
+                // アセットを直接使わずクローンを返す:
+                // ・ランタイム中のフラグ書き換えがエディタのアセットに永続化される汚染を防ぐ
+                // ・周回プレイ時は ResetRuntimeData() でクローンを破棄すれば初期状態に戻る
+                _entity = Instantiate(asset);
             }
             return _entity;
         }
+    }
+
+    /// <summary>
+    /// ランタイムデータを破棄し、次回アクセス時にアセットから再ロードさせる。
+    /// タイトルシーン読込時に自動で呼ばれる (周回プレイ対応)。
+    /// </summary>
+    public static void ResetRuntimeData()
+    {
+        if (_entity != null)
+        {
+            Destroy(_entity);
+            _entity = null;
+        }
+    }
+
+    static bool _autoResetRegistered;
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
+    static void RegisterAutoReset()
+    {
+        // Enter Play Mode Options (ドメインリロード無効) でも安全なように
+        // 起動時に必ずクリーンな状態から始め、二重購読も防ぐ
+        ResetRuntimeData();
+        if (_autoResetRegistered) return;
+        _autoResetRegistered = true;
+
+        UnityEngine.SceneManagement.SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            // タイトルに戻るたびに進行フラグを初期化する
+            if (scene.name.Equals("title", StringComparison.OrdinalIgnoreCase))
+            {
+                ResetRuntimeData();
+            }
+        };
     }
 
     /// <summary>
@@ -61,33 +101,33 @@ public class ItemDataBase : ScriptableObject
                     ItemDataBase cd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(assetfile);
                     if (cd == null)
                     {
-                        cd = new ItemDataBase();
+                        // ScriptableObject は new ではなく CreateInstance で生成する
+                        cd = ScriptableObject.CreateInstance<ItemDataBase>();
                         AssetDatabase.CreateAsset(cd, assetfile);
                     }
 
                     cd.datas = CSVSerializer.Deserialize<ItemData>(textasset.text);
                     EditorUtility.SetDirty(cd);
+
+                    // ゲームが実際にロードする Resources 側のアセットにも常に反映する
+                    // (従来は「存在しない時にコピー」のみで、CSV再インポートが反映されなかった)
+                    const string resPath = "Assets/MainGame/Resources/ItemDB.asset";
+                    var resCd = AssetDatabase.LoadAssetAtPath<ItemDataBase>(resPath);
+                    if (resCd == null)
+                    {
+                        if (AssetDatabase.CopyAsset(assetfile, resPath))
+                            Debug.Log("Resources/ItemDB.asset を新規作成");
+                        else
+                            Debug.LogError("Resources/ItemDB.asset のコピー失敗");
+                    }
+                    else
+                    {
+                        resCd.datas = CSVSerializer.Deserialize<ItemData>(textasset.text);
+                        EditorUtility.SetDirty(resCd);
+                        Debug.Log("Resources/ItemDB.asset を更新");
+                    }
                     AssetDatabase.SaveAssets();
                 }
-            }
-
-            //ファイル存在確認
-            var result = System.IO.File.Exists("Assets/MainGame/Resources/ItemDB.asset");
-            if (!result)
-            {
-                result = AssetDatabase.CopyAsset("Assets/ItemDataCreate/ItemDB.asset", "Assets/MainGame/Resources/ItemDB.asset");
-                if (result)
-                {
-                    //コピー成功
-                    Debug.Log("コピー成功");
-
-                }
-                else
-                {
-                    //コピー失敗
-                    Debug.Log("コピー失敗");
-                }
-                AssetDatabase.SaveAssets();
             }
         }
     }
@@ -98,8 +138,18 @@ public class ItemDataBase : ScriptableObject
     /// </summary>
     /// <param name="id">id</param>
     /// <returns>idのデータ</returns>
+    // 不正ID参照時に返すダミー (全フラグ0)。クラッシュさせずログで気付けるようにする
+    static ItemData _invalidData;
+
     public ItemData GetData(int id)
     {
+        if (datas == null || id < 0 || id >= datas.Length)
+        {
+            Debug.LogError("[ItemDataBase] 不正なアイテムID参照: " + id +
+                " (有効範囲: 0-" + ((datas != null ? datas.Length : 0) - 1) + ")");
+            if (_invalidData == null) _invalidData = new ItemData();
+            return _invalidData;
+        }
         return datas[id];
     }
 

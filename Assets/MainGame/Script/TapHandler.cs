@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -11,8 +11,8 @@ public class TapHandler : MonoBehaviour
 
     void Start()
     {
-        blinker = FindObjectOfType<Blinker>(); // Blinkerコンポーネントを取得
-        blinkerClock = FindObjectOfType<BlinkerClock>();
+        blinker = FindFirstObjectByType<Blinker>(); // Blinkerコンポーネントを取得
+        blinkerClock = FindFirstObjectByType<BlinkerClock>();
         if (SoundManager.instance != null)
         {
             SoundManager.instance.ChangeBGM(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name); // 現在のシーンに基づいてBGMを再生

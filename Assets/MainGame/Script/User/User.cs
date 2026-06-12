@@ -46,14 +46,20 @@ public class User : MonoBehaviour
 
         foreach (Transform child in parent.transform)
         {
-            itemWinowSlot.Add(child.GetComponent<ItemWindowSlot>()); // 順番に子オブジェクトを取得
+            var slot = child.GetComponent<ItemWindowSlot>();
+            if (slot != null)
+                itemWinowSlot.Add(slot); // 順番に子オブジェクトを取得 (Slot以外の子は除外)
         }
 
-        GameObject.Find("Inventory").SetActive(false);
+        // Findは非アクティブを検索できないため、2回目以降(既に非アクティブ)はnullになる → nullなら何もしない
+        var inventoryObj = GameObject.Find("Inventory");
+        if (inventoryObj != null)
+            inventoryObj.SetActive(false);
 
         int id = 0;
 
-        for (int i = 0; i < itemWinowSlot.Count - 1; i++)
+        // Count - 1 だと最後のスロットが復元されないオフバイワンだったため Count に修正
+        for (int i = 0; i < itemWinowSlot.Count; i++)
         {
             if (playerobj.GetComponent<User_A>())
             {

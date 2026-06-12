@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -164,7 +164,7 @@ public class CameraManager : MonoBehaviour
 
     private void ResolveStageWalls()
     {
-        var all = FindObjectsOfType<SpriteRenderer>();
+        var all = FindObjectsByType<SpriteRenderer>(FindObjectsSortMode.None);
         var list = new List<SpriteRenderer>();
         foreach (var sr in all)
         {

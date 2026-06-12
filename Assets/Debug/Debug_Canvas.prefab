@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 262454031180134540}
         m_TargetAssemblyTypeName: Debug_MysteryClear, Assembly-CSharp
-        m_MethodName: MysteryCler
+        m_MethodName: MysteryClear
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -349,7 +349,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 262454031601047098}
         m_TargetAssemblyTypeName: Debug_MysteryClear, Assembly-CSharp
-        m_MethodName: MysteryCler
+        m_MethodName: MysteryClear
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -495,7 +495,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 262454031622421130}
         m_TargetAssemblyTypeName: Debug_MysteryClear, Assembly-CSharp
-        m_MethodName: MysteryCler
+        m_MethodName: MysteryClear
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -759,7 +759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 262454032139837038}
         m_TargetAssemblyTypeName: Debug_MysteryClear, Assembly-CSharp
-        m_MethodName: MysteryCler
+        m_MethodName: MysteryClear
         m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -45,7 +45,7 @@ public class Gimmick : MonoBehaviour
             cameraManager = mainCameraObj.GetComponent<CameraManager>();
         }
 
-        // FiledObjChange 用に子オブジェクトの SpriteRenderer をキャッシュ
+        // FieldObjChange 用に子オブジェクトの SpriteRenderer をキャッシュ
         if (transform.childCount > 0)
         {
             cachedSpriteRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -56,14 +56,17 @@ public class Gimmick : MonoBehaviour
             case 0://Ａ絵画
                 // DeskOpen(case 2) と同じパターンに揃える。
                 // default 分岐に流すと gimmickFlag=true となり、frame 1 で
-                // GimmickActoin.case0 が走って FiledObjChange が暴発し、
+                // GimmickAction.case0 が走って FieldObjChange が暴発し、
                 // プレイヤー操作前に絵画が ID1(照射後) に切り替わってしまうので
                 // 明示的にここで break してフラグを初期値(false)のままにする。
                 break;
             case 2://袖机(中に絵具)
-                //FiledObjChange();
+                //FieldObjChange();
                 itemObj34 = GameObject.Find("34").gameObject;
                 itemObj34.SetActive(false);
+                // パズルクリア済み(シーン再入)なら机開放→絵具出現の連鎖を再適用する
+                if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+                    gimmickFlag = true;
                 break;
             case 6://Ａ出口ドア
                 gimmickFlag = false;
@@ -128,7 +131,7 @@ public class Gimmick : MonoBehaviour
         //画面以降後の反映状況の取得方法
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
-            GimmickActoin();
+            GimmickAction();
         }
 
         if(ItemDataBase.Entity.GetData(stageitemName).EnabletakeFlag == 1)
@@ -165,13 +168,13 @@ public class Gimmick : MonoBehaviour
     {
         if (!gimmickFlag) return;
 
-        GimmickActoin();
+        GimmickAction();
     }
 
     /// <summary>
     /// ギミック動作
     /// </summary>
-    void GimmickActoin()
+    void GimmickAction()
     {
         switch (stageitemName)
         {
@@ -181,7 +184,7 @@ public class Gimmick : MonoBehaviour
                 // DropItem.case0 で ID0.InteractFlag=1 が立てられた次フレーム以降に発火。
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
                 {
-                    FiledObjChange();
+                    FieldObjChange();
                     ObjChangeCheck();
                 }
                 break;
@@ -192,44 +195,50 @@ public class Gimmick : MonoBehaviour
                 //本体活性
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
                 {
-                    itemObj34.SetActive(true);
+                    // 取得済み・使用済みの絵具(34)はシーン再入時に復活させない
+                    if (itemObj34 != null &&
+                        ItemDataBase.Entity.GetData(MysteryIds.Paint).OwnerFlag == 0 &&
+                        ItemDataBase.Entity.GetData(MysteryIds.Paint).InteractFlag == 0)
+                    {
+                        itemObj34.SetActive(true);
+                    }
                     ObjChangeCheck();
                 }
                 break;
             case 5://パズル
-                PazzleClear();
-                MysteryCler();
+                PuzzleClear();
+                MysteryClear();
                 break;
             case 6://Ａ鍵差込口
                 this.gameObject.GetComponentInChildren<Door>().animeStart();
                 break;
             case 8://Ａ鍵差込口
-                FiledObjChange();
+                FieldObjChange();
                 break;
             case 10:
-                MysteryCler();
+                MysteryClear();
                 break;
             case 14://台座
-                FiledObjChange();
+                FieldObjChange();
                 break;
             case 15://謎1クリア
-                MysteryCler();
+                MysteryClear();
                 break;
             case 16://水槽(水あり)
                 if (ItemInteractFlagCheck(33))//スイッチがONの場合
                 {
-                    FiledObjChange();
-                    MysteryCler();
+                    FieldObjChange();
+                    MysteryClear();
                 }
                 break;
             case 17://水槽(水無し)
                 TankCylinderSet();
                 // まず NAZO4A クリア判定 (stageitemName==17 かつ ClearCheck(17)==2 で発火)
-                MysteryCler();
+                MysteryClear();
                 // 仕様書 (ギミック発動詳細化一覧.xlsx 行14): シリンダー挿入後 17→18 に遷移
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
                 {
-                    FiledObjChange(); // 17→18
+                    FieldObjChange(); // 17→18
                     ObjChangeCheck();
                 }
                 break;
@@ -238,38 +247,41 @@ public class Gimmick : MonoBehaviour
                 // InteractFlag(19) が立つまでは遷移しない (シーン開始直後の即時遷移を防ぐ)
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
                 {
-                    FiledObjChange();
+                    FieldObjChange();
                     ObjChangeCheck();
                 }
                 break;
             case 22://Ｂ絵画
-                FiledObjChange(2);
-                MysteryCler();
+                // 先に NAZO4B クリア判定 (stageitemName==22 かつ ClearCheck(22)==2 で発火)。
+                // FieldObjChange(2) が先だと stageitemName が 35 になり case 22 に到達しない (case 17 と同じ順序に統一)
+                MysteryClear();
+                FieldObjChange(2); // 22→35
+                ObjChangeCheck();
                 break;
             case 24://Ｂ鍵差込口
                 this.gameObject.GetComponentInChildren<Door>().animeStart();
                 break;
             case 26://Ｂ鍵差込口
-                FiledObjChange();
+                FieldObjChange();
                 break;
             case 28://花瓶
                 // 仕様書 (ギミック発動詳細化一覧.xlsx 行15): 絵具(34)使用で 28→29 (花瓶(染色後)) に遷移
                 if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
                 {
-                    FiledObjChange(); // 28→29
+                    FieldObjChange(); // 28→29
                     ObjChangeCheck();
                 }
                 break;
             case 31://青ランプ(消灯)  
-                FiledObjChange();
+                FieldObjChange();
                 ObjChangeCheck();
                 break;
             case 32://青ランプ(点灯)
-                FiledObjChange(1);
+                FieldObjChange(1);
                 ObjChangeCheck();
                 break;
             case 33://水抜き水抜きスイッチ
-                FiledObjChange(3);
+                FieldObjChange(3);
                 TankIsEmpty();
                 break;
             case 36:
@@ -280,26 +292,26 @@ public class Gimmick : MonoBehaviour
                     ItemDataBase.Entity.GetData(stageitemName).ClearCheck = 2;
 
                 }
-                MysteryCler();
+                MysteryClear();
                 break;
             case 37://黄ランプ(消灯)  
-                FiledObjChange();
+                FieldObjChange();
                 ObjChangeCheck();
                 break;
             case 38://黄ランプ(点灯)
-                FiledObjChange(1);
+                FieldObjChange(1);
                 ObjChangeCheck();
                 break;
             case 40://オルゴール
-                FiledObjChange();
+                FieldObjChange();
                 MusicBoxMusicStart();
                 break;
             case 42://赤ランプ(消灯)  
-                FiledObjChange();
+                FieldObjChange();
                 ObjChangeCheck();
                 break;
             case 43://赤ランプ(点灯)
-                FiledObjChange(1);
+                FieldObjChange(1);
                 ObjChangeCheck();
                 break;
         }
@@ -309,7 +321,7 @@ public class Gimmick : MonoBehaviour
     /// <summary>
     /// パズルクリア
     /// </summary>
-    void PazzleClear()
+    void PuzzleClear()
     {
         //アイテム5が使用済
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
@@ -327,8 +339,10 @@ public class Gimmick : MonoBehaviour
         if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
         {
             Debug.Log("デスクオープン");
-            FiledObjChange();
-            ObjChangeCheck();
+            FieldObjChange(); // 2→3 (リネーム+スプライト変更)
+            // ObjChangeCheck() は呼ばない:
+            // gimmickFlag を維持し、次フレームの case 3 (絵具出現) まで連鎖させる。
+            // フラグは case 3 側の ObjChangeCheck() で落ちる。
         }
     }
 
@@ -383,7 +397,7 @@ public class Gimmick : MonoBehaviour
     /// <summary>
     /// フィールド物の変化
     /// </summary>
-    public void FiledObjChange(int updwon = 0)
+    public void FieldObjChange(int updwon = 0)
     {
         int dataname;
         switch (updwon)
@@ -422,7 +436,7 @@ public class Gimmick : MonoBehaviour
     /// <summary>
     /// 謎クリア
     /// </summary>
-    public void MysteryCler()
+    public void MysteryClear()
     {
         if (ItemDataBase.Entity.GetData(stageitemName).ClearCheck == 2)
         {
@@ -430,19 +444,19 @@ public class Gimmick : MonoBehaviour
             switch (stageitemName)
             {
                 case 5:
-                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3A);
+                    MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO3A);
                     break;
                 case 10:
-                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO2);
+                    MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO2);
                     break;
                 case 17:
-                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO4A);
+                    MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO4A);
                     break;
                 case 22:
-                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO4B);
+                    MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO4B);
                     break;
                 case 36:
-                    MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3B);
+                    MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO3B);
                     break;
             }
         }
@@ -455,7 +469,7 @@ public class Gimmick : MonoBehaviour
             ItemDataBase.Entity.GetData(13).ClearCheck == 2)
         {
             Debug.Log("謎1クリア (ID13台座ボタン経由)");
-            MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO1);
+            MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO1);
         }
     }
 

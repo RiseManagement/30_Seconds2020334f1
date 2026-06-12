@@ -78,13 +78,14 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
         if (ItemDataBase.Entity.GetData(stageitemNumber).EnabletakeFlag == 1)
         {
             //所持する前の操作
+            int tappedItemNumber = stageitemNumber; // 変化前のID退避 (case 41でstageitemNumberが11に書き換わるため)
             switch (stageitemNumber)
             {
                 case 21://A宝箱(A鍵)
-                    if (!MysteryManager.MysteryAllClerCheck()) return;
+                    if (!MysteryManager.MysteryAllClearCheck()) return;
                     break;
                 case 30://B宝箱（B鍵）
-                    if (!MysteryManager.MysteryAllClerCheck()) return;
+                    if (!MysteryManager.MysteryAllClearCheck()) return;
                     break;
                 case 41://オルゴール(シリンダーあり)
                     stageitemNumber = 11;
@@ -133,7 +134,8 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
             }
 
             //ステージ上のアイテム変化
-            switch (stageitemNumber)
+            // stageitemNumberはcase 41で11に書き換わるため、タップ時のIDで分岐する (旧コードはcase 41がデッドコードでオルゴールが消滅していた)
+            switch (tappedItemNumber)
             {
                 case 21://A宝箱(A鍵)
                     gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(45).Image;
@@ -232,8 +234,8 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
                         ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                         // 仕様書(ギミック発動詳細化一覧.xlsx 行5):
                         // 「アイテムID15の状態でアイテムID13(台座ボタン)に触れる。謎1クリア。」
-                        // シーン上の GameObject は "15" のまま（FiledObjChange で名前が 14→15 に変わる）だが、
-                        // データ層では ID13 の InteractFlag/ClearCheck を立て、Gimmick.MysteryCler() の
+                        // シーン上の GameObject は "15" のまま（FieldObjChange で名前が 14→15 に変わる）だが、
+                        // データ層では ID13 の InteractFlag/ClearCheck を立て、Gimmick.MysteryClear() の
                         // ID13 経由ディスパッチで NAZO1 をクリアする。
                         ItemDataBase.Entity.GetData(13).InteractFlag = 1;
                         ItemDataBase.Entity.GetData(13).ClearCheck = 2;
@@ -243,15 +245,16 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
                         {
                             //事象処理
                             StageItemGimmickOn();
-                            Inventory.instance.Removed(itemslot.itemid);
+                            int useditemid = itemslot.itemid;//ItemUse()でitemidが-1になる前に退避
+                            Inventory.instance.Removed(useditemid);
                             itemslot.ItemUse();
                             ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
-                            ItemDataBase.Entity.GetData(itemslot.itemid).OwnerFlag = 0;
-                            ItemDataBase.Entity.GetData(itemslot.itemid).ClearCheck = 2;
+                            ItemDataBase.Entity.GetData(useditemid).OwnerFlag = 0;
+                            ItemDataBase.Entity.GetData(useditemid).ClearCheck = 2;
                             // 仕様書 (ギミック発動詳細化一覧.xlsx 行14):
                             // 「アイテムID19→20（水槽の穴）。アイテムID17→18（水槽）。謎4Aクリア。」
                             // 水槽の穴(19) にも InteractFlag を立てて Gimmick.case 19 経由で 19→20 に遷移させ、
-                            // 水槽(17) の ClearCheck を 2 にして Gimmick.MysteryCler() 経由で NAZO4A をクリアする。
+                            // 水槽(17) の ClearCheck を 2 にして Gimmick.MysteryClear() 経由で NAZO4A をクリアする。
                             ItemDataBase.Entity.GetData(19).InteractFlag = 1;
                             ItemDataBase.Entity.GetData(stageitemNumber).ClearCheck = 2;
                         }
@@ -297,7 +300,7 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
                             // 仕様書 (ギミック発動詳細化一覧.xlsx 行15/16):
                             // 「花瓶（着色後）入手後アイテムID22→35」
                             // 染色後 (ID29) をプレイヤーが拾えるように EnabletakeFlag を立てる。
-                            // Gimmick.case 28 の FiledObjChange で名前が "29" になった後、
+                            // Gimmick.case 28 の FieldObjChange で名前が "29" になった後、
                             // 上部分岐 (EnabletakeFlag==1) 経由で Inventory に加わり、B絵画(22) に使用可能。
                             ItemDataBase.Entity.GetData(stageitemNumber + 1).EnabletakeFlag = 1;
                         }

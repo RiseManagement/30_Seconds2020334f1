@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class Piano : MonoBehaviour
 {
     [Header("アップライトピアノ")]
-    public Sprite[] keybord_sprite = new Sprite[8];
-    public GameObject[] keybord_obj = new GameObject[pianomaxCount];
+    [FormerlySerializedAs("keybord_sprite")]
+    public Sprite[] keyboardSprite = new Sprite[8];
+    [FormerlySerializedAs("keybord_obj")]
+    public GameObject[] keyboardObj = new GameObject[pianomaxCount];
     public int pianoplaycount;
     static int pianomaxCount = 6;
     public bool successFlg;
@@ -73,55 +76,55 @@ public class Piano : MonoBehaviour
                 switch (arr[1])
                 {
                     case "do":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[1];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[1];
                         break;
                     case "re":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[2];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[2];
                         break;
                     case "mi":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[3];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[3];
                         break;
                     case "fua":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[4];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[4];
                         break;
                     case "so":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[5];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[5];
                         break;
                     case "ra":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[6];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[6];
                         break;
                     case "si":
-                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keybord_sprite[7];
+                        hit.collider.transform.parent.GetComponent<SpriteRenderer>().sprite = keyboardSprite[7];
                         break;
                     default:
                         break;
                 }
-                keybord_obj[pianoplaycount] = hit.collider.gameObject;
+                keyboardObj[pianoplaycount] = hit.collider.gameObject;
                 //Debug.Log(hit.collider.gameObject);
                 pianoplaycount++;
         }
 
-        PianoGimmickSuccessCheack();
-        PianoGimmickFailureCheack();
+        PianoGimmickSuccessCheck();
+        PianoGimmickFailureCheck();
     }
 
     /// <summary>
     /// ピアノギミッククリアチェック
     /// </summary>
-    void PianoGimmickSuccessCheack()
+    void PianoGimmickSuccessCheck()
     {
         for(int i = 0; i < pianomaxCount; i++)
         {
-            if (keybord_obj[i] == null) return;
+            if (keyboardObj[i] == null) return;
         }
 
         //
-        if(keybord_obj[0].gameObject.name == "keyboard_do" &&
-           keybord_obj[1].gameObject.name == "keyboard_do" && 
-           keybord_obj[2].gameObject.name == "keyboard_mi" && 
-           keybord_obj[3].gameObject.name == "keyboard_mi" && 
-           keybord_obj[4].gameObject.name == "keyboard_so" && 
-           keybord_obj[5].gameObject.name == "keyboard_do")
+        if(keyboardObj[0].gameObject.name == "keyboard_do" &&
+           keyboardObj[1].gameObject.name == "keyboard_do" && 
+           keyboardObj[2].gameObject.name == "keyboard_mi" && 
+           keyboardObj[3].gameObject.name == "keyboard_mi" && 
+           keyboardObj[4].gameObject.name == "keyboard_so" && 
+           keyboardObj[5].gameObject.name == "keyboard_do")
         {
             successFlg = true;
             Debug.Log("ピアノギミック成功");
@@ -134,7 +137,7 @@ public class Piano : MonoBehaviour
         }
     }
 
-    void PianoGimmickFailureCheack()
+    void PianoGimmickFailureCheck()
     {
         if(pianoplaycount >= pianomaxCount && !successFlg)
         {
@@ -151,9 +154,9 @@ public class Piano : MonoBehaviour
     {
         for (int i = 0; i < pianomaxCount; i++)
         {
-            keybord_obj[i] = null;
+            keyboardObj[i] = null;
         }
-        this.transform.GetComponent<SpriteRenderer>().sprite = keybord_sprite[0];
+        this.transform.GetComponent<SpriteRenderer>().sprite = keyboardSprite[0];
         pianoplaycount = 0;
     }
 

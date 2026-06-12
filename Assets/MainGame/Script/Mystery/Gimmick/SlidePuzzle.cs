@@ -55,7 +55,7 @@ public class SlidePuzzle : MonoBehaviour
         {
             PuzzleReset();
             shuffleSafety++;
-        } while (!PuzzleClearCkeck() && shuffleSafety < 50);
+        } while (!PuzzleClearCheck() && shuffleSafety < 50);
 
         if (shuffleSafety >= 50)
         {
@@ -176,9 +176,16 @@ public class SlidePuzzle : MonoBehaviour
             //クリア判定
             ItemDataBase.Entity.GetData(int.Parse(this.gameObject.transform.parent.name)).ClearCheck = 2;
             
-            //机は中身情報に変更
-            gameObject.transform.root.Find("2").gameObject.name = "3";
-            ItemDataBase.Entity.GetData(3).InteractFlag = 1;
+            //机は引き出し開放へ (リネームとスプライト変更は Gimmick.DeskOpen() に一本化)
+            ItemDataBase.Entity.GetData(MysteryIds.DeskClosed).InteractFlag = 1;//DeskOpenの発火条件。シーン再入時の再適用にも使用
+            ItemDataBase.Entity.GetData(MysteryIds.DeskOpen).InteractFlag = 1;//case 3 (絵具出現) の発火条件
+            var deskTr = gameObject.transform.root.Find("2");
+            if (deskTr != null)
+            {
+                var deskGimmick = deskTr.GetComponent<Gimmick>();
+                if (deskGimmick != null)
+                    deskGimmick.GimmickFlag = true;//次フレームの DeskOpen → 絵具出現の連鎖を開始
+            }
         }
     }
 
@@ -192,7 +199,7 @@ public class SlidePuzzle : MonoBehaviour
     /// 隣接スワップでは偶数置換しか作れないため、転倒数が奇数の盤面は
     /// どう動かしても揃わない。
     /// </remarks>
-    bool PuzzleClearCkeck()
+    bool PuzzleClearCheck()
     {
         if (puzzleObj == null || centerObj == null) return false;
 

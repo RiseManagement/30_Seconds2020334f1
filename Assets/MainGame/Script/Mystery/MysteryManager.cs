@@ -32,60 +32,50 @@ public class MysteryManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        // デバッグ用: F1で全謎クリア (製品ビルドには含めない)
         if (Input.GetKeyDown(KeyCode.F1))
         {
             Debug.Log("デバック_クリアフラグON");
-            MysteryClerSet(MysteryType.NAZO1);
-            MysteryClerSet(MysteryType.NAZO2);
-            MysteryClerSet(MysteryType.NAZO3A);
-            MysteryClerSet(MysteryType.NAZO3B);
-            MysteryClerSet(MysteryType.NAZO4A);
-            MysteryClerSet(MysteryType.NAZO4B);
+            MysteryClearSet(MysteryType.NAZO1);
+            MysteryClearSet(MysteryType.NAZO2);
+            MysteryClearSet(MysteryType.NAZO3A);
+            MysteryClearSet(MysteryType.NAZO3B);
+            MysteryClearSet(MysteryType.NAZO4A);
+            MysteryClearSet(MysteryType.NAZO4B);
         }
+#endif
     }
 
-    //謎クリアセット
-    public static void MysteryClerSet(MysteryType misterynum)
+    /// <summary>
+    /// 謎クリアフラグを立てる。
+    /// (旧実装は switch で 6 分岐していたが、全分岐が同一処理だったので 1 行に集約)
+    /// </summary>
+    public static void MysteryClearSet(MysteryType type)
     {
-        switch (misterynum)
+        mysterylist[(int)type] = true;
+    }
+
+    /// <summary>
+    /// 全謎クリアフラグを初期化 (周回プレイ用、GameStateReset から呼ばれる)
+    /// </summary>
+    public static void ResetAll()
+    {
+        for (int i = 0; i < mysterylist.Length; i++)
         {
-            case MysteryType.NAZO1:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO1] = true;
-                break;
-            case MysteryType.NAZO2:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO2] = true;
-                break;
-            case MysteryType.NAZO3A:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO3A] = true;
-                break;
-            case MysteryType.NAZO3B:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO3B] = true;
-                break;
-            case MysteryType.NAZO4A:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO4A] = true;
-                break;
-            case MysteryType.NAZO4B:
-                mysterylist[(int)MysteryManager.MysteryType.NAZO4B] = true;
-                break;
+            mysterylist[i] = false;
         }
     }
 
     /// <summary>
     /// 全謎クリアチェック
     /// </summary>
-    /// <returns></returns>
-    public static bool MysteryAllClerCheck()
+    public static bool MysteryAllClearCheck()
     {
-        if(mysterylist[(int)MysteryManager.MysteryType.NAZO1] &&
-            mysterylist[(int)MysteryManager.MysteryType.NAZO2] &&
-            mysterylist[(int)MysteryManager.MysteryType.NAZO3A] &&
-            mysterylist[(int)MysteryManager.MysteryType.NAZO3B] &&
-            mysterylist[(int)MysteryManager.MysteryType.NAZO4A] &&
-            mysterylist[(int)MysteryManager.MysteryType.NAZO4B])
+        for (int i = 0; i < (int)MysteryType.NAZOTYPEMAX; i++)
         {
-            return true;
+            if (!mysterylist[i]) return false;
         }
-
-        return false;
+        return true;
     }
 }

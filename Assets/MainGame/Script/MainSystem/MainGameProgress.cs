@@ -20,6 +20,7 @@ public class MainGameProgress :MonoBehaviour
         ClearCheckNow,  //クリアチェック中
         GameClear,      //ゲームクリア
         GameOver,       //ゲームオーバー
+        Ending,         //エンディング表示中 (進行停止。タイトル帰還時にGameStateResetがGameStartへ戻す)
     }
 
     void Awake()
@@ -79,6 +80,10 @@ public class MainGameProgress :MonoBehaviour
 
             case GameStatus.GameOver:
             GameOverProgress();
+            break;
+
+            case GameStatus.Ending:
+            //エンディング表示中は何もしない (タイマー減算・パス処理・シーン再ロードを止める)
             break;
 
         }
@@ -188,7 +193,9 @@ public class MainGameProgress :MonoBehaviour
         Debug.Log("【進行】ゲームクリア");
 
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
-        gameStatus = GameStatus.GameStart;
+        // GameStart に戻すとエンディング中も進行が回り続け、約30秒ごとに
+        // ENDING が再ロードされるため、停止ステートで待機する
+        gameStatus = GameStatus.Ending;
     }
 
     void GameOverProgress()
@@ -196,7 +203,7 @@ public class MainGameProgress :MonoBehaviour
         Debug.Log("【進行】ゲームオーバ");
 
         SceneTransitions.SceneLaod(SceneTransitions.SceneName.ENDING);
-        gameStatus = GameStatus.GameStart;
+        gameStatus = GameStatus.Ending;
 
     }
 }

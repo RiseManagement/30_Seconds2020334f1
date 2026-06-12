@@ -58,7 +58,8 @@ public class SceneTransitions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (MainGameProgress.gameStatus != MainGameProgress.GameStatus.IntervalStart ||
+        // インターバル中はシーン名を更新しない (|| だと恒真になり抑止が効かないため && に修正)
+        if (MainGameProgress.gameStatus != MainGameProgress.GameStatus.IntervalStart &&
             MainGameProgress.gameStatus != MainGameProgress.GameStatus.IntervalEnd)
             nowscenename = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
         //Debug.Log("現在のシーン:" + nowscenename);

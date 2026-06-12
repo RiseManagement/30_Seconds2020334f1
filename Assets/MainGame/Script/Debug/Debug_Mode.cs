@@ -13,6 +13,11 @@ public class Debug_Mode : MonoBehaviour
 
     void Start()
     {
+#if !UNITY_EDITOR && !DEVELOPMENT_BUILD
+        // 製品ビルドではデバッグUIを丸ごと破棄する (タイマー停止・謎クリア等の開放防止)
+        Destroy(gameObject);
+        return;
+#endif
         // Inspectorで未設定の場合のみ、子オブジェクトから自動収集する。
         // （手動設定時の重複登録を防ぐ）
         if (debugObjects == null || debugObjects.Count == 0)

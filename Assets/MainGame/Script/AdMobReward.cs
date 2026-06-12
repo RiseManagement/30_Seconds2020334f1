@@ -14,9 +14,17 @@ public class AdMobReward :MonoBehaviour
 
     private string adUnitId;
 
+    // SDK初期化はアプリ起動中1回でよい (シーン再入時の二重初期化防止)
+    private static bool sdkInitialized;
+
+    // ロード失敗時の再試行間隔 (失敗したまま放置すると以後広告が一切出なくなるため)
+    private const float RetryDelaySeconds = 30f;
+
     private void Start()
     {
 
+        // TODO: リリース前に必ず自分のAdMob管理画面の本番広告ユニットIDへ差し替えること
+        //       (現在はGoogle公式のテスト用IDのため、本番では収益が発生しない)
 #if UNITY_ANDROID
         adUnitId = "ca-app-pub-3940256099942544/5224354917";//ここにAndroidのリワード広告IDを入力
 #elif UNITY_IPHONE
@@ -25,10 +33,26 @@ public class AdMobReward :MonoBehaviour
         adUnitId = "unexpected_platform";
 #endif
 
-        //リワード 読み込み開始
-        Debug.Log("Rewarded ad load start");
+        // 広告イベントをUnityメインスレッドで発火させる
+        // (未設定だとコールバックが別スレッドで呼ばれ、UI操作やUnity API使用時にクラッシュし得る)
+        MobileAds.RaiseAdEventsOnUnityMainThread = true;
 
-        LoadRewardedAd();//リワード広告読み込み
+        if (!sdkInitialized)
+        {
+            // SDK初期化完了を待ってからロード開始 (初期化前のロードは推奨されない)
+            MobileAds.Initialize(initStatus =>
+            {
+                sdkInitialized = true;
+                Debug.Log("AdMob SDK initialized");
+                LoadRewardedAd();
+            });
+        }
+        else
+        {
+            //リワード 読み込み開始
+            Debug.Log("Rewarded ad load start");
+            LoadRewardedAd();//リワード広告読み込み
+        }
     }
 
     private void OnDestroy()
@@ -109,6 +133,9 @@ public class AdMobReward :MonoBehaviour
         {
             //リワード 読み込み失敗
             Debug.LogError("Failed to load reward ad : " + error);//error:エラー内容
+
+            // 一定時間後に再読み込みを試みる (放置すると以後このシーンでは広告が出なくなる)
+            Invoke(nameof(LoadRewardedAd), RetryDelaySeconds);
             return;//この時点でこの関数の実行は終了
         }
 

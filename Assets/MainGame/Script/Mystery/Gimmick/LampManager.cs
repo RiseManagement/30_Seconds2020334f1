@@ -11,7 +11,7 @@ public class LampManager : MonoBehaviour
     GameObject[] LightingObjList = new GameObject[3];
 
     //ランプ回答順リスト
-    List<GameObject> AnwserObjList = new List<GameObject>();
+    List<GameObject> AnswerObjList = new List<GameObject>();
 
     Gimmick[] LampGimmickList = new Gimmick[3];
     bool[] lastGimmickFlags = new bool[3];
@@ -44,9 +44,9 @@ public class LampManager : MonoBehaviour
             return;
         }
 
-        if (AnwserObjList.Count >= 3)
+        if (AnswerObjList.Count >= 3)
         {
-            if (AnwserObjList[0].name == "43" && AnwserObjList[1].name == "38" && AnwserObjList[2].name == "32")
+            if (AnswerObjList[0].name == "43" && AnswerObjList[1].name == "38" && AnswerObjList[2].name == "32")
             {
                 Debug.Log("スイッチ出現");
 
@@ -60,11 +60,11 @@ public class LampManager : MonoBehaviour
                 // ここでは ID36 のデータ反映と合わせて NAZO3B を直接クリアする。
                 ItemDataBase.Entity.GetData(36).InteractFlag = 1;
                 ItemDataBase.Entity.GetData(36).ClearCheck = 2;
-                MysteryManager.MysteryClerSet(MysteryManager.MysteryType.NAZO3B);
+                MysteryManager.MysteryClearSet(MysteryManager.MysteryType.NAZO3B);
             }
             else
             {
-                AnwserObjList.Clear();
+                AnswerObjList.Clear();
                 //Debug.Log("ランプ点灯リセット");
             }
         }
@@ -84,7 +84,7 @@ public class LampManager : MonoBehaviour
             bool current = gimmick.gimmickFlag;
             if (current && !lastGimmickFlags[i])
             {
-                AnwserObjList.Add(LampObjList[i]);
+                AnswerObjList.Add(LampObjList[i]);
             }
             lastGimmickFlags[i] = current;
         }
