@@ -73,17 +73,51 @@ public class ItemDragDrop :MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
             {
                 if (itemSlotcs != null)
                 {
-                    itemSlotcs.SelectItem(itemwindowSlot.itemid);
+                    int id = itemwindowSlot.itemid;
+
+                    // 増殖防止: パススロットと排他（同じアイテムがパススロットにあれば取り消す）
+                    if (PassSystem.passitemid == id)
+                    {
+                        PassSystem.passitemid = -1;
+                        if (passSlotcs != null)
+                        {
+                            passSlotcs.ClearSlot();
+                        }
+                    }
+
+                    itemSlotcs.SelectItem(id);
+
+                    // 増殖防止: 手持ちスロットへ移したらインベントリ表示から除外
+                    if (Inventory.instance != null)
+                    {
+                        Inventory.instance.Removed(id);
+                    }
                 }
+                break;
             }
             else if (hit.gameObject.CompareTag("PassSlot"))
             {
                 //Debug.Log("パススロットセット");
                 if (passSlotcs != null)
                 {
-                    passSlotcs.SelectItem(itemwindowSlot.itemid);
+                    int id = itemwindowSlot.itemid;
+
+                    // 増殖防止: 手持ちスロットと排他（同じアイテムが手持ちにあれば取り消す）
+                    if (itemSlotcs != null && itemSlotcs.ItemId == id)
+                    {
+                        itemSlotcs.ClearSlot();
+                    }
+
+                    passSlotcs.SelectItem(id);
+                    PassSystem.passitemid = id;
+
+                    // 増殖防止: パススロットへ移したらインベントリ表示から除外
+                    if (Inventory.instance != null)
+                    {
+                        Inventory.instance.Removed(id);
+                    }
                 }
-                PassSystem.passitemid = itemwindowSlot.itemid;
+                break;
             }
         }
         transform.position = prevPosition;

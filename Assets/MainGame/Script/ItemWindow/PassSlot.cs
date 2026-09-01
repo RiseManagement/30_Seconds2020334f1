@@ -15,7 +15,12 @@ public class PassSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // シーン再ロード時にパススロットの表示を復元する
+        // (以前は ItemSlot.Start が手持ちスロットに復元しており、増殖の原因だった)
+        if (PassSystem.passitemid != -1)
+        {
+            SelectItem(PassSystem.passitemid);
+        }
     }
 
     // Update is called once per frame
@@ -55,6 +60,20 @@ public class PassSlot : MonoBehaviour
                     image.rectTransform.sizeDelta = new Vector2(width, max);
                 }
             }
+        }
+    }
+
+    /// <summary>
+    /// スロットを空にする（アイテム増殖防止のスロット間排他用）
+    /// </summary>
+    public void ClearSlot()
+    {
+        itemid = -1;
+        icon = null;
+        var image = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = null;
         }
     }
 

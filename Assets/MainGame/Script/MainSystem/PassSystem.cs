@@ -51,5 +51,25 @@ public class PassSystem : MonoBehaviour
         }
 
         passitemid = -1;
+
+        // 増殖防止: 渡したアイテムがスロットUIに残らないようクリアする
+        var passSlotObj = GameObject.Find("PassSlot");
+        if (passSlotObj != null)
+        {
+            var passSlot = passSlotObj.GetComponent<PassSlot>();
+            if (passSlot != null && passSlot.ItemId == passedItemId)
+            {
+                passSlot.ClearSlot();
+            }
+        }
+        var itemSlotObj = GameObject.Find("ItemSlot");
+        if (itemSlotObj != null)
+        {
+            var itemSlot = itemSlotObj.GetComponent<ItemSlot>();
+            if (itemSlot != null && itemSlot.ItemId == passedItemId)
+            {
+                itemSlot.ClearSlot();
+            }
+        }
     }
 }

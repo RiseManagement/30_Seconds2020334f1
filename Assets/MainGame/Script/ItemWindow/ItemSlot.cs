@@ -17,14 +17,9 @@ public class ItemSlot : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var id = PassSystem.passitemid;
-
-        if(id != -1)
-        {
-            SelectItem(id);
-        }
-
-        //Debug.Log(id);
+        // 増殖バグ修正: 以前はここで PassSystem.passitemid を手持ちスロットに復元していたが、
+        // パス用アイテムが手持ちに複製される原因だったため削除。
+        // パススロットの表示復元は PassSlot.Start() が行う。
     }
 
     // Update is called once per frame
@@ -89,6 +84,20 @@ public class ItemSlot : MonoBehaviour
         this.gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
 
         //Debug.Log("アイテム使用済");
+    }
+
+    /// <summary>
+    /// スロットを空にする（アイテム増殖防止のスロット間排他用）
+    /// </summary>
+    public void ClearSlot()
+    {
+        itemid = -1;
+        icon = null;
+        var image = this.gameObject.transform.GetChild(0).GetComponent<Image>();
+        if (image != null)
+        {
+            image.sprite = null;
+        }
     }
 
     /// <summary>

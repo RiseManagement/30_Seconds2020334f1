@@ -352,28 +352,27 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
     /// <summary>
     /// タップしたステージアイテム情報取得
     /// </summary>
+    /// <remarks>
+    /// 増殖バグ修正: 以前は Camera.main からの Physics2D.Raycast で対象を取り直していたが、
+    /// コライダーが重なっていると「インベントリに追加されるアイテム(Raycastヒット先)」と
+    /// 「非表示になるオブジェクト(this.gameObject)」がズレて増殖する原因だった。
+    /// このメソッドは自分がタップされた時に呼ばれるので、対象は常に自分自身とする。
+    /// また名前が数値でない場合は stageitemNumber を前回値のまま使わず処理を中断する。
+    /// </remarks>
     void GetStageItemTapObjectInfo()
     {
         stageitemobj = null;
 
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit2d = Physics2D.Raycast((Vector2)ray.origin, (Vector2)ray.direction);
-
-        if (hit2d)
+        if (!int.TryParse(gameObject.name, out var id))
         {
-            stageitemobj = hit2d.transform.gameObject;
-        }
-        if (stageitemobj == null)
-        {
+            Debug.LogWarning($"[DropItem] オブジェクト名 '{gameObject.name}' がアイテムIDとして解釈できないため処理をスキップします。");
             return;
         }
-        if (!stageitemobj.name.Contains("_"))
-        {
-            //ステージ名取得
-            stageitemNumber = int.Parse(stageitemobj.name);
-        }
 
-        Debug.Log(stageitemobj);
+        stageitemobj = gameObject;
+        stageitemNumber = id;
+
+        //Debug.Log(stageitemobj);
     }
 
     /// <summary>

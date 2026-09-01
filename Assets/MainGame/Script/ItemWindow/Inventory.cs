@@ -106,9 +106,26 @@ public class Inventory :MonoBehaviour
             return;
         }
 
+        // 増殖防止: 手持ちスロット/パススロットにあるアイテムはインベントリ表示から除外する
+        // (OwnerFlagは所有者のままなので、除外しないと再表示されて二重に見える)
+        int handItemId = -1;
+        var itemSlotObj = GameObject.Find("ItemSlot");
+        if (itemSlotObj != null)
+        {
+            var slot = itemSlotObj.GetComponent<ItemSlot>();
+            if (slot != null)
+            {
+                handItemId = slot.ItemId;
+            }
+        }
+
         var all = ItemDataBase.Entity.GetDataAll();
         for (int i = 0; i < all.Length; i++)
         {
+            if (i == handItemId || i == PassSystem.passitemid)
+            {
+                continue;
+            }
             if (ItemDataBase.Entity.GetData(i).OwnerFlag == ownerFlag)
             {
                 itemsid.Add(i);
