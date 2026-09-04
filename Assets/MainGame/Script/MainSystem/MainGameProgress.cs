@@ -107,17 +107,15 @@ public class MainGameProgress :MonoBehaviour
         Debug.Log("【進行】リセットターン");
         Timer.CountReset();//タイマーリセット
 
-        //アイテムidをどこから入れる？
+        // 毎ターン現在の Player を取り直す。
+        // (このオブジェクトは DontDestroyOnLoad なので、以前のように一度キャッシュすると
+        //  初回ターンの Player(User_A) が固定され、B→A のパスが常に「Bに渡す」扱いになっていた)
+        playerObj = User.CurrentPlayer;
         if (playerObj == null)
         {
-            var foundPlayer = GameObject.Find("Player");
-            if (foundPlayer == null)
-            {
-                Debug.LogWarning("[MainGameProgress] Playerオブジェクトが見つかりません。パス処理をスキップします。");
-                gameStatus = GameStatus.PlayerTurn;
-                return;
-            }
-            playerObj = foundPlayer;
+            Debug.LogWarning("[MainGameProgress] Playerオブジェクトが見つかりません。パス処理をスキップします。");
+            gameStatus = GameStatus.PlayerTurn;
+            return;
         }
         PassSystem.ItemPass(playerObj);//パス実行
 

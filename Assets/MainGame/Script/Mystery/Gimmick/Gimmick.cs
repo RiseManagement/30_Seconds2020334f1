@@ -303,8 +303,15 @@ public class Gimmick : MonoBehaviour
                 ObjChangeCheck();
                 break;
             case 40://オルゴール
-                FieldObjChange();
-                MusicBoxMusicStart();
+                // シリンダー使用 (DropItem.case40 で InteractFlag(40)=1) 後にのみ 40→41 へ遷移する。
+                // 旧コードは FieldObjChange 後に 41 の InteractFlag を見ていたため gimmickFlag が永久に true のままで、
+                // シリンダー取り出しで名前が 40 に戻った瞬間に再び 41 へ変わっていた。
+                if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
+                {
+                    FieldObjChange(); // 40→41
+                    MusicBoxMusicStart();
+                }
+                ObjChangeCheck();
                 break;
             case 42://赤ランプ(消灯)  
                 FieldObjChange();
@@ -351,11 +358,8 @@ public class Gimmick : MonoBehaviour
     /// </summary>
     void MusicBoxMusicStart()
     {
-        if (ItemDataBase.Entity.GetData(stageitemName).InteractFlag == 1)
-        {
-            Debug.Log("音楽流れた");
-            ObjChangeCheck();
-        }
+        // 呼び出し元 (case 40) で InteractFlag 判定済み。stageitemName は既に 41 になっている。
+        Debug.Log("音楽流れた");
     }
 
     /// <summary>

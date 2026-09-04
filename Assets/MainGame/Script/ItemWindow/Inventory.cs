@@ -57,6 +57,23 @@ public class Inventory :MonoBehaviour
         if (!itemsid.Contains(itemid))
         {
             itemsid.Add(itemid);
+            RefreshUI();
+        }
+    }
+
+    /// <summary>
+    /// UI 更新。Inventory が非アクティブのまま Start() が走らなかった場合でも
+    /// (User.GetItem が Start 前に SetActive(false) することがある) null 参照で
+    /// 取得処理が途中で止まらないようにする。
+    /// </summary>
+    private void RefreshUI()
+    {
+        if (InventoryUI == null)
+        {
+            InventoryUI = GetComponent<InventoryUI>();
+        }
+        if (InventoryUI != null)
+        {
             InventoryUI.UpdateUI();
         }
     }
@@ -69,7 +86,7 @@ public class Inventory :MonoBehaviour
     {
         if (itemsid.Remove(itemid))
         {
-            InventoryUI.UpdateUI();
+            RefreshUI();
         }
     }
 
@@ -86,22 +103,9 @@ public class Inventory :MonoBehaviour
         }
         itemsid.Clear();
 
-        var playerObj = GameObject.Find("Player");
-        if (playerObj == null)
-        {
-            return;
-        }
-
-        int ownerFlag = 0;
-        if (playerObj.GetComponent<User_A>())
-        {
-            ownerFlag = 1;
-        }
-        else if (playerObj.GetComponent<User_B>())
-        {
-            ownerFlag = 2;
-        }
-        else
+        // 前ターンの Player を拾わないよう User.CurrentPlayer 経由で判定する
+        int ownerFlag = User.CurrentOwnerFlag;
+        if (ownerFlag == 0)
         {
             return;
         }

@@ -13,6 +13,35 @@ public class User : MonoBehaviour
 
     static public GameObject playerObj;
 
+    /// <summary>
+    /// 現在ターンのプレイヤーオブジェクト。
+    /// DontDestroyOnLoad で残った前ターンの Player を GameObject.Find("Player") が拾ってしまう
+    /// 問題を避けるため、各所ではこのプロパティ経由で取得する。
+    /// </summary>
+    public static GameObject CurrentPlayer
+    {
+        get
+        {
+            if (playerObj != null) return playerObj;
+            return GameObject.Find("Player");
+        }
+    }
+
+    /// <summary>
+    /// 現在ターンのプレイヤーの所有者フラグ (A=1, B=2, 不明=0)
+    /// </summary>
+    public static int CurrentOwnerFlag
+    {
+        get
+        {
+            var p = CurrentPlayer;
+            if (p == null) return 0;
+            if (p.GetComponent<User_A>()) return 1;
+            if (p.GetComponent<User_B>()) return 2;
+            return 0;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,14 +104,21 @@ public class User : MonoBehaviour
 
     protected void SceneSet(GameObject playerobj)
     {
-        //Debug.Log(playerObj);
-        if (SceneTransitions.OldSceneName == SceneTransitions.SceneName.INTERVAL.ToString().ToLower())
+        // 前ターンの Player (DontDestroyOnLoad で生存中) を必ず破棄する。
+        // 旧実装は「前シーン名 == interval」のときだけ破棄していたが、SceneTransitions が
+        // インターバル中はシーン名を更新しないため条件が成立せず、User_A / User_B が
+        // ターンごとに DontDestroyOnLoad に溜まり続けていた。
+        // その結果 GameObject.Find("Player") がどの Player を返すか不定になり、
+        // OwnerFlag の付与先・パス先・インベントリ表示が狂ってアイテムが増殖/消失していた。
+        if (playerObj != null && playerObj != playerobj)
         {
-            //Debug.Log("デストロイ解除");
-            UnityEngine.SceneManagement.SceneManager.MoveGameObjectToScene(playerObj,
-                UnityEngine.SceneManagement.SceneManager.GetActiveScene());
+            // Destroy はフレーム末まで遅延するため、同フレーム内の Find("Player") に拾われないよう
+            // 先に名前を変えて無効化しておく
+            playerObj.name = "Player_Old";
+            playerObj.SetActive(false);
             Destroy(playerObj);
         }
+        playerObj = playerobj;
         DontDestroyOnLoad(playerobj);
     }
 }

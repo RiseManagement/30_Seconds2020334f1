@@ -113,20 +113,11 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
                 Inventory.instance.Add(stageitemNumber);
             }
 
-            GameObject playerObj = GameObject.Find("Player");
-            if (playerObj != null)
+            //所有者設定 (前ターンの Player を Find で拾わないよう User.CurrentOwnerFlag を使う)
+            int ownerFlag = User.CurrentOwnerFlag;
+            if (ownerFlag != 0)
             {
-                //所有者設定
-                if (playerObj.GetComponent<User_A>())
-                {
-                    //Debug.Log("Aが取得");
-                    ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 1;
-                }
-                else if (playerObj.GetComponent<User_B>())
-                {
-                    //Debug.Log("Bが取得");
-                    ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = 2;
-                }
+                ItemDataBase.Entity.GetData(stageitemNumber).OwnerFlag = ownerFlag;
             }
             else
             {
@@ -147,9 +138,33 @@ public class DropItem : MonoBehaviour, IPointerClickHandler
                     this.gameObject.name = (45).ToString();
                     ItemDataBase.Entity.GetData(stageitemNumber).InteractFlag = 1;
                     break;
-                case 41://オルゴール(シリンダーあり)
-                    gameObject.transform.GetComponent<SpriteRenderer>().sprite = ItemDataBase.Entity.GetData(40).Image;
-                    this.gameObject.name = (40).ToString();
+                case 41://オルゴール(シリンダーあり) → シリンダーを取り出して 40 に戻す
+                    {
+                        // SpriteRenderer はルートではなく子オブジェクト側にある (Gimmick.FieldObjChange と同じ構造)。
+                        // 旧コードはルートを参照して MissingComponentException になり、シリンダーだけが
+                        // インベントリに入ってオルゴールは「シリンダーあり」のまま残っていた (無限に取れる)。
+                        var sr = GetComponentInChildren<SpriteRenderer>();
+                        if (sr != null)
+                        {
+                            sr.sprite = ItemDataBase.Entity.GetData(MysteryIds.MusicBoxEmpty).Image;
+                        }
+                        this.gameObject.name = MysteryIds.MusicBoxEmpty.ToString();
+
+                        // データ層も「シリンダーなし」に戻す。
+                        // これをしないとシーン再入時に Gimmick.Start が InteractFlag(40)==1 を見て 40→41 を再適用し、
+                        // 取り出したはずのシリンダーがオルゴールにも残って増殖する。
+                        ItemDataBase.Entity.GetData(MysteryIds.MusicBoxEmpty).InteractFlag = 0;
+                        ItemDataBase.Entity.GetData(MysteryIds.MusicBoxLoaded).EnabletakeFlag = 0;
+                        // 取り出したシリンダーは再使用可能 (ItemUse で立った使用済みフラグを戻す)
+                        ItemDataBase.Entity.GetData(MysteryIds.Cylinder).InteractFlag = 0;
+
+                        // Gimmick 側のフラグも落とす (残っていると次フレームで case 40 が再発火して 41 に戻る)
+                        var gimmick = GetComponent<Gimmick>();
+                        if (gimmick != null)
+                        {
+                            gimmick.ObjChangeCheck();
+                        }
+                    }
                     break;
                 default:
                     gameObject.SetActive(false);
